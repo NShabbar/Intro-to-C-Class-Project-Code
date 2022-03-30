@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=
+SOURCEFILES_QUOTED_IF_SPACED=BOARD.c part2.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=
-POSSIBLE_DEPFILES=
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/BOARD.o ${OBJECTDIR}/part2.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/BOARD.o.d ${OBJECTDIR}/part2.o.d
 
 # Object Files
-OBJECTFILES=
+OBJECTFILES=${OBJECTDIR}/BOARD.o ${OBJECTDIR}/part2.o
 
 # Source Files
-SOURCEFILES=
+SOURCEFILES=BOARD.c part2.c
 
 
 
@@ -107,7 +107,31 @@ endif
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: compile
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
+${OBJECTDIR}/BOARD.o: BOARD.c  .generated_files/flags/default/caf870215ea22515f6fd7acc190dbb580819fcfb .generated_files/flags/default/af031a62ccc0c18b099f063c5edfd8e7f9b606f2
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/BOARD.o.d 
+	@${RM} ${OBJECTDIR}/BOARD.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/BOARD.o.d" -o ${OBJECTDIR}/BOARD.o BOARD.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
+${OBJECTDIR}/part2.o: part2.c  .generated_files/flags/default/c1dcc239534b278e4b020e405055921bd55c786a .generated_files/flags/default/af031a62ccc0c18b099f063c5edfd8e7f9b606f2
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/part2.o.d 
+	@${RM} ${OBJECTDIR}/part2.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/part2.o.d" -o ${OBJECTDIR}/part2.o part2.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
 else
+${OBJECTDIR}/BOARD.o: BOARD.c  .generated_files/flags/default/f6555eb69816a1c1b3d474ddf1177e032cf8a1ae .generated_files/flags/default/af031a62ccc0c18b099f063c5edfd8e7f9b606f2
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/BOARD.o.d 
+	@${RM} ${OBJECTDIR}/BOARD.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/BOARD.o.d" -o ${OBJECTDIR}/BOARD.o BOARD.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
+${OBJECTDIR}/part2.o: part2.c  .generated_files/flags/default/3759fbd3a4ff5f4e40d5567dd86558da21365935 .generated_files/flags/default/af031a62ccc0c18b099f063c5edfd8e7f9b606f2
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/part2.o.d 
+	@${RM} ${OBJECTDIR}/part2.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/part2.o.d" -o ${OBJECTDIR}/part2.o part2.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
 endif
 
 # ------------------------------------------------------------------------------------
@@ -121,12 +145,12 @@ endif
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
 ${DISTDIR}/Lab1_part2.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}: ${OBJECTFILES}  nbproject/Makefile-${CND_CONF}.mk    
 	@${MKDIR} ${DISTDIR} 
-	${MP_CC} $(MP_EXTRA_LD_PRE) -g -mdebugger -D__MPLAB_DEBUGGER_SIMULATOR=1 -mprocessor=$(MP_PROCESSOR_OPTION)  -o ${DISTDIR}/Lab1_part2.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX} ${OBJECTFILES_QUOTED_IF_SPACED}          -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)      -Wl,--defsym=__MPLAB_BUILD=1$(MP_EXTRA_LD_POST)$(MP_LINKER_FILE_OPTION),--defsym=__MPLAB_DEBUG=1,--defsym=__DEBUG=1,-D=__DEBUG_D,--defsym=__MPLAB_DEBUGGER_SIMULATOR=1,--no-code-in-dinit,--no-dinit-in-serial-mem,-Map="${DISTDIR}/${PROJECTNAME}.${IMAGE_TYPE}.map",--memorysummary,${DISTDIR}/memoryfile.xml -mdfp="${DFP_DIR}"
+	${MP_CC} $(MP_EXTRA_LD_PRE) -g -mdebugger -D__MPLAB_DEBUGGER_SIMULATOR=1 -mprocessor=$(MP_PROCESSOR_OPTION)  -o ${DISTDIR}/Lab1_part2.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX} ${OBJECTFILES_QUOTED_IF_SPACED}          -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)      -Wl,--defsym=__MPLAB_BUILD=1$(MP_EXTRA_LD_POST)$(MP_LINKER_FILE_OPTION),--defsym=__MPLAB_DEBUG=1,--defsym=__DEBUG=1,-D=__DEBUG_D,--defsym=__MPLAB_DEBUGGER_SIMULATOR=1,--defsym=_min_heap_size=256,--no-code-in-dinit,--no-dinit-in-serial-mem,-Map="${DISTDIR}/${PROJECTNAME}.${IMAGE_TYPE}.map",--memorysummary,${DISTDIR}/memoryfile.xml -mdfp="${DFP_DIR}"
 	
 else
 ${DISTDIR}/Lab1_part2.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}: ${OBJECTFILES}  nbproject/Makefile-${CND_CONF}.mk   
 	@${MKDIR} ${DISTDIR} 
-	${MP_CC} $(MP_EXTRA_LD_PRE)  -mprocessor=$(MP_PROCESSOR_OPTION)  -o ${DISTDIR}/Lab1_part2.X.${IMAGE_TYPE}.${DEBUGGABLE_SUFFIX} ${OBJECTFILES_QUOTED_IF_SPACED}          -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -Wl,--defsym=__MPLAB_BUILD=1$(MP_EXTRA_LD_POST)$(MP_LINKER_FILE_OPTION),--no-code-in-dinit,--no-dinit-in-serial-mem,-Map="${DISTDIR}/${PROJECTNAME}.${IMAGE_TYPE}.map",--memorysummary,${DISTDIR}/memoryfile.xml -mdfp="${DFP_DIR}"
+	${MP_CC} $(MP_EXTRA_LD_PRE)  -mprocessor=$(MP_PROCESSOR_OPTION)  -o ${DISTDIR}/Lab1_part2.X.${IMAGE_TYPE}.${DEBUGGABLE_SUFFIX} ${OBJECTFILES_QUOTED_IF_SPACED}          -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -Wl,--defsym=__MPLAB_BUILD=1$(MP_EXTRA_LD_POST)$(MP_LINKER_FILE_OPTION),--defsym=_min_heap_size=256,--no-code-in-dinit,--no-dinit-in-serial-mem,-Map="${DISTDIR}/${PROJECTNAME}.${IMAGE_TYPE}.map",--memorysummary,${DISTDIR}/memoryfile.xml -mdfp="${DFP_DIR}"
 	${MP_CC_DIR}\\xc32-bin2hex ${DISTDIR}/Lab1_part2.X.${IMAGE_TYPE}.${DEBUGGABLE_SUFFIX} 
 endif
 

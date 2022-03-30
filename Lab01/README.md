@@ -44,3 +44,8 @@ Note:
 I think I actually had to run this 5 times in
 order to get my program to reach the point where the
 breakpoint is not reached anymore.
+
+Part 1 Note:
+The lines that were changed between the formatting
+changes were:
+Lines 12-15, Line 17, Lines 23 and 24, Line 31, Line 36
