@@ -26,6 +26,7 @@ int main(void) {
     fahr = lower;
 
     //print out table
+    printf("%5s %5s\n", "F", "C");
     while (fahr <= upper) {
         celsius = (5.0 / 9.0)*(fahr - 32.0);
         printf("%7.1f %04.0f\n", (double) fahr, (double) celsius);
