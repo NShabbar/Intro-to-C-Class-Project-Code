@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=
+SOURCEFILES_QUOTED_IF_SPACED=Ascii.c BOARD.c OledDriver.c Oled.c part3.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=
-POSSIBLE_DEPFILES=
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/Ascii.o ${OBJECTDIR}/BOARD.o ${OBJECTDIR}/OledDriver.o ${OBJECTDIR}/Oled.o ${OBJECTDIR}/part3.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/Ascii.o.d ${OBJECTDIR}/BOARD.o.d ${OBJECTDIR}/OledDriver.o.d ${OBJECTDIR}/Oled.o.d ${OBJECTDIR}/part3.o.d
 
 # Object Files
-OBJECTFILES=
+OBJECTFILES=${OBJECTDIR}/Ascii.o ${OBJECTDIR}/BOARD.o ${OBJECTDIR}/OledDriver.o ${OBJECTDIR}/Oled.o ${OBJECTDIR}/part3.o
 
 # Source Files
-SOURCEFILES=
+SOURCEFILES=Ascii.c BOARD.c OledDriver.c Oled.c part3.c
 
 
 
@@ -107,7 +107,67 @@ endif
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: compile
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
+${OBJECTDIR}/Ascii.o: Ascii.c  .generated_files/flags/default/bddef17a95934b45c1be954f8cb81ec2ba01c2ec .generated_files/flags/default/af031a62ccc0c18b099f063c5edfd8e7f9b606f2
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/Ascii.o.d 
+	@${RM} ${OBJECTDIR}/Ascii.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/Ascii.o.d" -o ${OBJECTDIR}/Ascii.o Ascii.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
+${OBJECTDIR}/BOARD.o: BOARD.c  .generated_files/flags/default/6e5ca791d2c5746137d36320653557bb3820cd0d .generated_files/flags/default/af031a62ccc0c18b099f063c5edfd8e7f9b606f2
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/BOARD.o.d 
+	@${RM} ${OBJECTDIR}/BOARD.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/BOARD.o.d" -o ${OBJECTDIR}/BOARD.o BOARD.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
+${OBJECTDIR}/OledDriver.o: OledDriver.c  .generated_files/flags/default/77ed066259792a43661b6a98161aee99ab4d44e5 .generated_files/flags/default/af031a62ccc0c18b099f063c5edfd8e7f9b606f2
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/OledDriver.o.d 
+	@${RM} ${OBJECTDIR}/OledDriver.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/OledDriver.o.d" -o ${OBJECTDIR}/OledDriver.o OledDriver.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
+${OBJECTDIR}/Oled.o: Oled.c  .generated_files/flags/default/53da222dbde0b52723afc5f2350095516e127605 .generated_files/flags/default/af031a62ccc0c18b099f063c5edfd8e7f9b606f2
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/Oled.o.d 
+	@${RM} ${OBJECTDIR}/Oled.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/Oled.o.d" -o ${OBJECTDIR}/Oled.o Oled.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
+${OBJECTDIR}/part3.o: part3.c  .generated_files/flags/default/f776e05b7d1a0d3f75915c8adb4693e1b5043bf6 .generated_files/flags/default/af031a62ccc0c18b099f063c5edfd8e7f9b606f2
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/part3.o.d 
+	@${RM} ${OBJECTDIR}/part3.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/part3.o.d" -o ${OBJECTDIR}/part3.o part3.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
 else
+${OBJECTDIR}/Ascii.o: Ascii.c  .generated_files/flags/default/c471e9da5fa297e4bece39277b9a4b346609e6ee .generated_files/flags/default/af031a62ccc0c18b099f063c5edfd8e7f9b606f2
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/Ascii.o.d 
+	@${RM} ${OBJECTDIR}/Ascii.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/Ascii.o.d" -o ${OBJECTDIR}/Ascii.o Ascii.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
+${OBJECTDIR}/BOARD.o: BOARD.c  .generated_files/flags/default/4b8a6848344dea4baa14b32df03c1fb14a7ac2f4 .generated_files/flags/default/af031a62ccc0c18b099f063c5edfd8e7f9b606f2
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/BOARD.o.d 
+	@${RM} ${OBJECTDIR}/BOARD.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/BOARD.o.d" -o ${OBJECTDIR}/BOARD.o BOARD.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
+${OBJECTDIR}/OledDriver.o: OledDriver.c  .generated_files/flags/default/6888456d0a10e47e404e3132e9d6fe378282324b .generated_files/flags/default/af031a62ccc0c18b099f063c5edfd8e7f9b606f2
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/OledDriver.o.d 
+	@${RM} ${OBJECTDIR}/OledDriver.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/OledDriver.o.d" -o ${OBJECTDIR}/OledDriver.o OledDriver.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
+${OBJECTDIR}/Oled.o: Oled.c  .generated_files/flags/default/497eb025ca6d61cc831adacc7dec4f34858d3b67 .generated_files/flags/default/af031a62ccc0c18b099f063c5edfd8e7f9b606f2
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/Oled.o.d 
+	@${RM} ${OBJECTDIR}/Oled.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/Oled.o.d" -o ${OBJECTDIR}/Oled.o Oled.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
+${OBJECTDIR}/part3.o: part3.c  .generated_files/flags/default/c3ff65d99caf2ccff6211cd557e3b4219fd0dd5b .generated_files/flags/default/af031a62ccc0c18b099f063c5edfd8e7f9b606f2
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/part3.o.d 
+	@${RM} ${OBJECTDIR}/part3.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/part3.o.d" -o ${OBJECTDIR}/part3.o part3.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
 endif
 
 # ------------------------------------------------------------------------------------
