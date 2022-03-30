@@ -23,7 +23,7 @@ int main(void) {
     lower = 0; // lower limit of temperature
     upper = 300; // upper limit
     step = 20; //step size
-    float kelv = lower;
+    float kelvin = lower;
  
 
     //print out table
@@ -36,10 +36,10 @@ int main(void) {
    
     printf("\n");
     printf("%5s %5s\n", "K", "F");
-    while (kelv <= upper) {
-        fahr = ((1.8*(kelv -273)) + 32);
-        printf("%03.3f %5f\n", (double) kelv, (double) fahr);
-        kelv = kelv + step;
+    while (kelvin <= upper) {
+        fahr = ((1.8*(kelvin -273)) + 32);
+        printf("%03.3f %5f\n", (double) kelvin, (double) fahr);
+        kelvin = kelvin + step;
     }
     /***************************************************************************************************
      * Your code goes in between this comment and the preceding one with asterisks.
