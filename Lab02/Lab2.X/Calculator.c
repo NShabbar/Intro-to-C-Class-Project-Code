@@ -34,31 +34,92 @@ void CalculatorRun(void) {
     printf("\n\nWelcome to NAME's calculator program! Compiled at %s %s\n", __DATE__, __TIME__);
     printf("Enter a mathematical operation to perform (*,/,+,-,m,a,c,f,t,q,r): ");
     scanf(" %s", &sel);
-    if (sel == *) {
+    if (sel == '*') {
         printf("Enter the first operand: ");
         scanf(" %s", &operand1);
         printf("Enter the second operand: ");
         scanf(" %s", &operand2);
         double answer = Multiply(operand1, operand2);
-        printf("Result of %lf * %lf: %lf", operand1, operand2, result);
+        printf("Result of %lf * %lf: %lf", operand1, operand2, answer);
     }
-    else if(sel == /)
+    else if(sel == '/')
     {
         printf("Enter the first operand: ");
         scanf(" %s", &operand1);
         printf("Enter the second operand: ");
         scanf(" %s", &operand2);
         double answer = Divide(operand1, operand2);
-        printf("Result of %lf / %lf: %lf", operand1, operand2, result);
+        printf("Result of %lf / %lf: %lf", operand1, operand2, answer);
     }
-    else if(sel == +)
+    else if(sel == '+')
     {
         printf("Enter the first operand: ");
         scanf(" %s", &operand1);
         printf("Enter the second operand: ");
         scanf(" %s", &operand2);
         double answer = Add(operand1, operand2);
-        printf("Result of %lf + %lf: %lf", operand1, operand2, result);
+        printf("Result of %lf + %lf: %lf", operand1, operand2, answer);
+    }
+    else if(sel == '-')
+    {
+        printf("Enter the first operand: ");
+        scanf(" %s", &operand1);
+        printf("Enter the second operand: ");
+        scanf(" %s", &operand2);
+        double answer = Subtract(operand1, operand2);
+        printf("Result of %lf - %lf: %lf", operand1, operand2, answer);
+    }
+    else if(sel == 'm')
+    {
+        printf("Enter the first operand: ");
+        scanf(" %s", &operand1);
+        printf("Enter the second operand: ");
+        scanf(" %s", &operand2);
+        double answer = Average(operand1, operand2);
+        printf("Result of (%lf + %lf)/2: %lf", operand1, operand2, answer);
+    }
+    else if(sel == 'a')
+    {
+        printf("Enter an operand: ");
+        scanf(" %s", &operand);
+        double answer = AbsoluteValue(operand);
+        printf("Result of |%lf|: %lf", operand, answer);
+    }
+    else if(sel == 'c')
+    {
+        printf("Enter an operand: ");
+        scanf(" %s", &operand);
+        double answer = FahrenheitToCelsius(operand);
+        printf("Result of (%lf - 32)*0.5556: %lf", operand, answer);
+    }
+    else if(sel == 'f')
+    {
+        printf("Enter an operand: ");
+        scanf(" %s", &operand);
+        double answer = CelsiusToFahrenheit(operand);
+        printf("Result of (%lf * 1.8) + 32: %lf", operand, answer);
+    }
+    else if(sel == 't')
+    {
+        printf("Enter an operand: ");
+        scanf(" %s", &operand);
+        double answer = Tangent(operand);
+        printf("Result of Tan(%lf): %lf", operand, answer);
+    }
+    else if(sel == 'q')
+    {
+        return;
+    }
+    else if(sel == 'r')
+    {
+        printf("Enter an operand: ");
+        scanf(" %s", &operand);
+        double answer = Round(operand);
+        printf("Result of ~%lf: %lf", operand, answer);
+    }
+    else
+    {
+        printf("The input was not valid. Please try another input");
     }
     // Your code here
     BOARD_End();
@@ -113,7 +174,7 @@ double AbsoluteValue(double operand) {
  * Define the Fahrenheit to Celsius function here.
  ********************************************************************************/
 double FahrenheitToCelsius(double operand) {
-    double result = (operand * 1.8) + 32;
+    double result = (operand - 32)*0.5556;
     return result;
 }
 
@@ -121,7 +182,7 @@ double FahrenheitToCelsius(double operand) {
  * Define the Celsius to Fahrenheit function here.
  ********************************************************************************/
 double CelsiusToFahrenheit(double operand) {
-    double result = (operand - 32)*0.5556;
+    double result =(operand * 1.8) + 32;
     return result;
 }
 
