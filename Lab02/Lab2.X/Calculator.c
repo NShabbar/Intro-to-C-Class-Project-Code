@@ -14,7 +14,9 @@
 
 // **** Declare function prototypes ****
 double Add(double operand1, double operand2);
+double Subtract(double operand1, double operand2);
 double Multiply(double operand1, double operand2);
+double Divide(double operand1, double operand2);
 double AbsoluteValue(double operand);
 double FahrenheitToCelsius(double operand);
 double Tangent(double operand);
@@ -39,6 +41,24 @@ void CalculatorRun(void) {
         scanf(" %s", &operand2);
         double answer = Multiply(operand1, operand2);
         printf("Result of %lf * %lf: %lf", operand1, operand2, result);
+    }
+    else if(sel == /)
+    {
+        printf("Enter the first operand: ");
+        scanf(" %s", &operand1);
+        printf("Enter the second operand: ");
+        scanf(" %s", &operand2);
+        double answer = Divide(operand1, operand2);
+        printf("Result of %lf / %lf: %lf", operand1, operand2, result);
+    }
+    else if(sel == +)
+    {
+        printf("Enter the first operand: ");
+        scanf(" %s", &operand1);
+        printf("Enter the second operand: ");
+        scanf(" %s", &operand2);
+        double answer = Add(operand1, operand2);
+        printf("Result of %lf + %lf: %lf", operand1, operand2, result);
     }
     // Your code here
     BOARD_End();
