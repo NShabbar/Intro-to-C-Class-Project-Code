@@ -21,6 +21,7 @@ double Tangent(double operand);
 double CelsiusToFahrenheit(double operand);
 double Average(double operand1, double operand2);
 double Tangent(double operand);
+double Round(double operand);
 //add more prototypes here
 
 
@@ -127,7 +128,17 @@ double Tangent(double operand)
  ********************************************************************************/
 double Round(double operand)
 {
-
+    double doub_op= operand;
+    int integer_op= operand;
+    if(doub_op-integer_op>0.5)
+    {
+        double result = integer_op+1;
+        return result;
+    }
+    else
+        {
+            return integer_op;
+        }
 }
 
 
