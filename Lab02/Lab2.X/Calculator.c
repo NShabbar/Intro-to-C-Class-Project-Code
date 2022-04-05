@@ -100,10 +100,10 @@ void CalculatorRun(void) {
         } else {
             printf("The input was not valid. Please try another input");
         }
-        // Your code here
-        BOARD_End();
-        while (1);
     }
+    // Your code here
+    BOARD_End();
+    while (1);
 }
 
 /********************************************************************************
@@ -191,7 +191,7 @@ double Tangent(double operand) {
 double Round(double operand) {
     double doub_op = operand;
     int integer_op = operand;
-    if (doub_op - integer_op > 0.5) {
+    if (doub_op - integer_op >= 0.5) {
         double result = integer_op + 1;
         return result;
     } else {
