@@ -50,7 +50,7 @@ void MatrixMultiply(float mat1[3][3], float mat2[3][3], float result[3][3]) {
     }
 }
 
-void MatrixScalarAdd(float x, float mat[3][3], float result[3][3]){
+void MatrixScalarAdd(float x, float mat[3][3], float result[3][3]) {
     for (a = 0; a < DIM; a++) {
         for (b = 0; b < DIM; b++) {
             result[a][b] = mat[a][b] + x;
@@ -58,7 +58,7 @@ void MatrixScalarAdd(float x, float mat[3][3], float result[3][3]){
     }
 }
 
-void MatrixScalarMultiply(float x, float mat[3][3], float result[3][3]){
+void MatrixScalarMultiply(float x, float mat[3][3], float result[3][3]) {
     for (a = 0; a < DIM; a++) {
         for (b = 0; b < DIM; b++) {
             result[a][b] = mat[a][b] * x;
@@ -66,17 +66,17 @@ void MatrixScalarMultiply(float x, float mat[3][3], float result[3][3]){
     }
 }
 
-float MatrixTrace(float mat[3][3]){
-  for (a = 0; a < DIM; a++) {
+float MatrixTrace(float mat[3][3]) {
+    for (a = 0; a < DIM; a++) {
         for (b = 0; b < DIM; b++) {
-            if(a==b){
+            if (a == b) {
                 float trace = mat[a][b] + trace;
             }
         }
-    }  
+    }
 }
 
-void MatrixTranspose(float mat[3][3], float result[3][3]){
+void MatrixTranspose(float mat[3][3], float result[3][3]) {
     for (a = 0; a < DIM; a++) {
         for (b = 0; b < DIM; b++) {
             result[a][b] = mat[b][a];
@@ -84,6 +84,24 @@ void MatrixTranspose(float mat[3][3], float result[3][3]){
     }
 }
 
-void MatrixSubmatrix(int i, int j, float mat[3][3], float result[2][2]){
-    
+void MatrixSubmatrix(int i, int j, float mat[3][3], float result[2][2]) {
+    int sub_row = 0;
+    int sub_column = 0;
+    for (a = 0; a < DIM; a++) {
+        if (a == i) {
+            continue;
+        }
+        for (b = 0; b < DIM; b++) {
+            if (b == j) {
+                continue;
+            }
+            result[sub_row][sub_column] = mat[i][j];
+            sub_column++;
+            if (sub_column == 2) {
+                sub_column = 0;
+                sub_row++;
+            }
+
+        }
+    }
 }
