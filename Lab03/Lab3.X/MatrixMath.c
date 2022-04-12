@@ -105,3 +105,26 @@ void MatrixSubmatrix(int i, int j, float mat[3][3], float result[2][2]) {
         }
     }
 }
+
+float MatrixDeterminant2x2(float mat[2][2]) {
+    for (a = 0; a < 2; a++) {
+        for (b = 0; b < 2; b++) {
+            float det = mat[1][1] - mat[2][2];
+        }
+    }
+}
+
+float MatrixDeterminant(float mat[3][3]) {
+    float submatrix[2][2];
+    int j;
+    for (a = 0; a < DIM; a++) {
+        MatrixSubmatrix(0, j, mat, submatrix);
+        float result = mat[0][0] * MatrixDeterminant2x2(submatrix) 
+        - mat[0][1] * MatrixDeterminant2x2(submatrix) 
+        + mat[0][2] * MatrixDeterminant2x2(submatrix);
+    }
+}
+
+//void MatrixInverse(float mat[3][3], float result[3][3]){
+    
+//}
