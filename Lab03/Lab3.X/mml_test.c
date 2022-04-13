@@ -118,7 +118,7 @@ int main() {
             equal_test += 1;
             ttest += 1;
         }
-        printf("%d tests of %d tests passed.", pass_test, equal_test);
+        printf("%d tests of %d Equal tests passed.", pass_test, equal_test);
         printf("\n");
     }
     { //Add Test Cases
@@ -144,37 +144,35 @@ int main() {
             {5, 5, 5},
             {5, 5, 5}
         };
-        
+
         MatrixAdd(m1, m2, result);
-        
+
         if (MatrixEquals(result, ex1)) {
             pass_test += 1;
             add_test += 1;
             ttest += 1;
-        }
-        else{
+        } else {
             printf("Add: Test 1 failed.");
             printf("\n");
             add_test += 1;
             ttest += 1;
         }
-        
+
         MatrixAdd(m2, ex1, result);
-        
+
         if (MatrixEquals(result, ex2)) {
             pass_test += 1;
             add_test += 1;
             ttest += 1;
-        }
-        else{
+        } else {
             printf("Add: Test 2 failed.");
             printf("\n");
             add_test += 1;
             ttest += 1;
         }
-        printf("%d of %d tests passed.", pass_test, add_test);
+        printf("%d of %d Add tests passed.", pass_test, add_test);
         printf("\n");
-     }
+    }
     {
         //Multiply Test Cases
         int mult_test = 0;
@@ -189,7 +187,7 @@ int main() {
             {2, 2, 2,},
             {2, 2, 2}
         };
-         float ex1[DIM][DIM] = {
+        float ex1[DIM][DIM] = {
             {6, 6, 6},
             {6, 6, 6},
             {6, 6, 6}
@@ -199,38 +197,36 @@ int main() {
             {36, 36, 36},
             {36, 36, 36}
         };
-        
+
         MatrixMultiply(m1, m2, result);
-        
+
         if (MatrixEquals(result, ex1)) {
             pass_test += 1;
             mult_test += 1;
             ttest += 1;
-        }
-        else{
+        } else {
             printf("Mult: Test 1 failed.");
             printf("\n");
             mult_test += 1;
             ttest += 1;
         }
-        
+
         MatrixMultiply(m2, ex1, result);
-        
+
         if (MatrixEquals(result, ex2)) {
             pass_test += 1;
             mult_test += 1;
             ttest += 1;
-        }
-        else{
+        } else {
             printf("Mult: Test 2 failed.");
             printf("\n");
             mult_test += 1;
             ttest += 1;
         }
-        printf("%d of %d tests passed.", pass_test, mult_test);
+        printf("%d of %d Multiply tests passed.", pass_test, mult_test);
         printf("\n");
     }
-     {
+    {
         //Scalar Add Test Cases
         int sadd_test = 0;
         int pass_test = 0;
@@ -244,42 +240,40 @@ int main() {
             {2, 2, 2,},
             {2, 2, 2}
         };
-         float ex1[DIM][DIM] = {
+        float ex1[DIM][DIM] = {
             {5, 5, 5},
             {5, 5, 5},
             {5, 5, 5}
         };
-        
+
         MatrixScalarAdd(4, m1, result);
-        
+
         if (MatrixEquals(result, ex1)) {
             pass_test += 1;
             sadd_test += 1;
             ttest += 1;
-        }
-        else{
+        } else {
             printf("Scalar Add: Test 1 failed.");
             printf("\n");
             sadd_test += 1;
             ttest += 1;
         }
-        
+
         MatrixScalarAdd(-3, ex1, result);
-        
+
         if (MatrixEquals(result, m2)) {
             pass_test += 1;
             sadd_test += 1;
             ttest += 1;
-        }
-        else{
+        } else {
             printf("Scalar Add: Test 2 failed.");
             printf("\n");
             sadd_test += 1;
             ttest += 1;
         }
-        printf("%d of %d tests passed.", pass_test, sadd_test);
+        printf("%d of %d Scalar Add tests passed.", pass_test, sadd_test);
         printf("\n");
-     }
+    }
     {
         //Scalar Multiply Test Cases
         int smult_test = 0;
@@ -294,7 +288,7 @@ int main() {
             {2, 2, 2,},
             {2, 2, 2}
         };
-         float ex1[DIM][DIM] = {
+        float ex1[DIM][DIM] = {
             {5, 5, 5},
             {5, 5, 5},
             {5, 5, 5}
@@ -304,35 +298,130 @@ int main() {
             {-8, -8, -8},
             {-8, -8, -8}
         };
-        
+
         MatrixScalarMultiply(5, m1, result);
-        
+
         if (MatrixEquals(result, ex1)) {
             pass_test += 1;
             smult_test += 1;
             ttest += 1;
-        }
-        else{
+        } else {
             printf("Scalar Mult: Test 1 failed.");
             printf("\n");
             smult_test += 1;
             ttest += 1;
         }
-        
+
         MatrixScalarMultiply(-4, m2, result);
-        
+
         if (MatrixEquals(result, ex2)) {
             pass_test += 1;
             smult_test += 1;
             ttest += 1;
-        }
-        else{
+        } else {
             printf("Scalar Mult: Test 2 failed.");
             printf("\n");
             smult_test += 1;
             ttest += 1;
         }
-        printf("%d of %d tests passed.", pass_test, smult_test);
+        printf("%d of %d Scalar Multiply tests passed.", pass_test, smult_test);
+        printf("\n");
+    }
+    {
+        //Trace Test Cases
+        int tr_test = 0;
+        int pass_test = 0;
+        float m1[DIM][DIM] = {
+            {1, 1, 1},
+            {1, 1, 1},
+            {1, 1, 1}
+        };
+        float m2[DIM][DIM] = {
+            {2, 2, 2},
+            {2, 2, 2,},
+            {2, 2, 2}
+        };
+
+        float test1 = MatrixTrace(m1);
+
+        if (test1 == 3) {
+            pass_test += 1;
+            tr_test += 1;
+            ttest += 1;
+        } else {
+            printf("Trace: Test 1 failed.");
+            printf("\n");
+            tr_test += 1;
+            ttest += 1;
+        }
+
+        float test2 = MatrixTrace(m2);
+
+        if (test2 == 6) {
+            pass_test += 1;
+            tr_test += 1;
+            ttest += 1;
+        } else {
+            printf("Trace: Test 2 failed.");
+            printf("\n");
+            tr_test += 1;
+            ttest += 1;
+        }
+
+        printf("%d of %d Trace tests passed.", pass_test, tr_test);
+        printf("\n");
+    }
+    {
+        //Transpose Test Cases
+        int tpose_test = 0;
+        int pass_test = 0;
+        float m1[DIM][DIM] = {
+            {1, 2, 3},
+            {1, 2, 3},
+            {1, 2, 3}
+        };
+        float m2[DIM][DIM] = {
+            {4, 5, 6},
+            {2, 2, 2},
+            {1, 2, 3}
+        };
+        float ex1[DIM][DIM] = {
+            {1, 1, 1},
+            {2, 2, 2},
+            {3, 3, 3}
+        };
+        float ex2[DIM][DIM] = {
+            {4, 2, 1},
+            {5, 2, 2},
+            {6, 2, 3}
+        };
+
+        MatrixTranspose(m1, result);
+
+        if (MatrixEquals(result, ex1)) {
+            pass_test += 1;
+            tpose_test += 1;
+            ttest += 1;
+        } else {
+            printf("Transpose: Test 1 failed.");
+            printf("\n");
+            tpose_test += 1;
+            ttest += 1;
+        }
+
+        MatrixTranspose(m2, result);
+
+        if (MatrixEquals(result, ex2)) {
+            pass_test += 1;
+            tpose_test += 1;
+            ttest += 1;
+        } else {
+            printf("Transpose: Test 2 failed.");
+            printf("\n");
+            tpose_test += 1;
+            ttest += 1;
+        }
+        printf("%d of %d Transpose tests passed.", pass_test, tpose_test);
         printf("\n");
     }
     printf("Total tests performed: %d", ttest);

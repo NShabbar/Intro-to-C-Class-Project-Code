@@ -84,11 +84,21 @@ void MatrixScalarMultiply(float x, float mat[3][3], float result[3][3]) {
 }
 
 float MatrixTrace(float mat[3][3]) {
+    float trace = 0;
     for (a = 0; a < DIM; a++) {
         for (b = 0; b < DIM; b++) {
             if (a == b) {
-                float trace = mat[a][b] + trace;
+                trace = mat[a][b] + trace;
             }
+        }
+    }
+    return trace;
+}
+
+void MatrixTranspose(float mat[3][3], float result[3][3]) {
+    for (a = 0; a < DIM; a++) {
+        for (b = 0; b < DIM; b++) {
+            result[a][b] = mat[b][a];
         }
     }
 }
