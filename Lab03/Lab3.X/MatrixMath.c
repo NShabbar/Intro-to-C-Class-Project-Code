@@ -66,3 +66,29 @@ void MatrixMultiply(float mat1[3][3], float mat2[3][3], float result[3][3]) {
         }
     }
 }
+
+void MatrixScalarAdd(float x, float mat[3][3], float result[3][3]) {
+    for (a = 0; a < DIM; a++) {
+        for (b = 0; b < DIM; b++) {
+            result[a][b] = mat[a][b] + x;
+        }
+    }
+}
+
+void MatrixScalarMultiply(float x, float mat[3][3], float result[3][3]) {
+    for (a = 0; a < DIM; a++) {
+        for (b = 0; b < DIM; b++) {
+            result[a][b] = mat[a][b] * x;
+        }
+    }
+}
+
+float MatrixTrace(float mat[3][3]) {
+    for (a = 0; a < DIM; a++) {
+        for (b = 0; b < DIM; b++) {
+            if (a == b) {
+                float trace = mat[a][b] + trace;
+            }
+        }
+    }
+}

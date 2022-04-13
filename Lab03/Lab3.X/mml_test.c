@@ -230,6 +230,111 @@ int main() {
         printf("%d of %d tests passed.", pass_test, mult_test);
         printf("\n");
     }
+     {
+        //Scalar Add Test Cases
+        int sadd_test = 0;
+        int pass_test = 0;
+        float m1[DIM][DIM] = {
+            {1, 1, 1},
+            {1, 1, 1},
+            {1, 1, 1}
+        };
+        float m2[DIM][DIM] = {
+            {2, 2, 2},
+            {2, 2, 2,},
+            {2, 2, 2}
+        };
+         float ex1[DIM][DIM] = {
+            {5, 5, 5},
+            {5, 5, 5},
+            {5, 5, 5}
+        };
+        
+        MatrixScalarAdd(4, m1, result);
+        
+        if (MatrixEquals(result, ex1)) {
+            pass_test += 1;
+            sadd_test += 1;
+            ttest += 1;
+        }
+        else{
+            printf("Scalar Add: Test 1 failed.");
+            printf("\n");
+            sadd_test += 1;
+            ttest += 1;
+        }
+        
+        MatrixScalarAdd(-3, ex1, result);
+        
+        if (MatrixEquals(result, m2)) {
+            pass_test += 1;
+            sadd_test += 1;
+            ttest += 1;
+        }
+        else{
+            printf("Scalar Add: Test 2 failed.");
+            printf("\n");
+            sadd_test += 1;
+            ttest += 1;
+        }
+        printf("%d of %d tests passed.", pass_test, sadd_test);
+        printf("\n");
+     }
+    {
+        //Scalar Multiply Test Cases
+        int smult_test = 0;
+        int pass_test = 0;
+        float m1[DIM][DIM] = {
+            {1, 1, 1},
+            {1, 1, 1},
+            {1, 1, 1}
+        };
+        float m2[DIM][DIM] = {
+            {2, 2, 2},
+            {2, 2, 2,},
+            {2, 2, 2}
+        };
+         float ex1[DIM][DIM] = {
+            {5, 5, 5},
+            {5, 5, 5},
+            {5, 5, 5}
+        };
+        float ex2[DIM][DIM] = {
+            {-8, -8, -8},
+            {-8, -8, -8},
+            {-8, -8, -8}
+        };
+        
+        MatrixScalarMultiply(5, m1, result);
+        
+        if (MatrixEquals(result, ex1)) {
+            pass_test += 1;
+            smult_test += 1;
+            ttest += 1;
+        }
+        else{
+            printf("Scalar Mult: Test 1 failed.");
+            printf("\n");
+            smult_test += 1;
+            ttest += 1;
+        }
+        
+        MatrixScalarMultiply(-4, m2, result);
+        
+        if (MatrixEquals(result, ex2)) {
+            pass_test += 1;
+            smult_test += 1;
+            ttest += 1;
+        }
+        else{
+            printf("Scalar Mult: Test 2 failed.");
+            printf("\n");
+            smult_test += 1;
+            ttest += 1;
+        }
+        printf("%d of %d tests passed.", pass_test, smult_test);
+        printf("\n");
+    }
     printf("Total tests performed: %d", ttest);
     printf("\n");
     BOARD_End();
