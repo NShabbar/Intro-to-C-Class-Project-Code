@@ -26,7 +26,7 @@ void MatrixPrint(float mat[3][3]) {
 int MatrixEquals(float mat1[3][3], float mat2[3][3]) {
     for (a = 0; a < DIM; a++) {
         for (b = 0; b < DIM; b++) {
-            if (abs(mat1[a][b] - mat2[a][b]) < FP_DELTA) {
+            if (abs(mat1[a][b] - mat2[a][b]) >= FP_DELTA) {
                 return 0;
             }
         }
