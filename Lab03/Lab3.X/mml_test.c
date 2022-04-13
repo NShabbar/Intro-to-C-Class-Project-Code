@@ -98,7 +98,6 @@ int main() {
             equal_test += 1;
             ttest += 1;
         }
-        printf("%d", test5);
         if (test5 == 0) {
             equal_test += 1;
             pass_test += 1;
@@ -176,6 +175,63 @@ int main() {
         printf("%d of %d tests passed.", pass_test, add_test);
         printf("\n");
      }
+    {
+        //Multiply Test Cases
+        int mult_test = 0;
+        int pass_test = 0;
+        float m1[DIM][DIM] = {
+            {1, 1, 1},
+            {1, 1, 1},
+            {1, 1, 1}
+        };
+        float m2[DIM][DIM] = {
+            {2, 2, 2},
+            {2, 2, 2,},
+            {2, 2, 2}
+        };
+         float ex1[DIM][DIM] = {
+            {6, 6, 6},
+            {6, 6, 6},
+            {6, 6, 6}
+        };
+        float ex2[DIM][DIM] = {
+            {36, 36, 36},
+            {36, 36, 36},
+            {36, 36, 36}
+        };
+        
+        MatrixMultiply(m1, m2, result);
+        
+        if (MatrixEquals(result, ex1)) {
+            pass_test += 1;
+            mult_test += 1;
+            ttest += 1;
+        }
+        else{
+            printf("Mult: Test 1 failed.");
+            printf("\n");
+            mult_test += 1;
+            ttest += 1;
+        }
+        
+        MatrixMultiply(m2, ex1, result);
+        
+        if (MatrixEquals(result, ex2)) {
+            pass_test += 1;
+            mult_test += 1;
+            ttest += 1;
+        }
+        else{
+            printf("Mult: Test 2 failed.");
+            printf("\n");
+            mult_test += 1;
+            ttest += 1;
+        }
+        printf("%d of %d tests passed.", pass_test, mult_test);
+        printf("\n");
+    }
+    printf("Total tests performed: %d", ttest);
+    printf("\n");
     BOARD_End();
     while (1);
 }

@@ -13,6 +13,16 @@
 #include "MatrixMath.h"
 int a;
 int b;
+int c;
+
+double AbsoluteValue(double operand) {
+    if (operand < 0) {
+        double result = operand*-1;
+        return result;
+    } else {
+        return operand;
+    }
+}
 
 void MatrixPrint(float mat[3][3]) {
     for (a = 0; a < DIM; a++) {
@@ -26,17 +36,33 @@ void MatrixPrint(float mat[3][3]) {
 int MatrixEquals(float mat1[3][3], float mat2[3][3]) {
     for (a = 0; a < DIM; a++) {
         for (b = 0; b < DIM; b++) {
-            if (abs(mat1[a][b] - mat2[a][b]) >= FP_DELTA) {
+            if (AbsoluteValue(mat1[a][b] - mat2[a][b]) >= FP_DELTA) {
                 return 0;
             }
         }
-    }return 1;
+    }
+    return 1;
 }
 
 void MatrixAdd(float mat1[3][3], float mat2[3][3], float result[3][3]) {
     for (a = 0; a < DIM; a++) {
         for (b = 0; b < DIM; b++) {
             result[a][b] = mat1[a][b] + mat2[a][b];
+        }
+    }
+}
+
+void MatrixMultiply(float mat1[3][3], float mat2[3][3], float result[3][3]) {
+    for (a = 0; a < DIM; a++) {
+        for (b = 0; b < DIM; b++) {
+            result[a][b] = 0;
+        }
+    }
+    for (a = 0; a < DIM; a++) {
+        for (b = 0; b < DIM; b++) {
+            for (c = 0; c < DIM; c++) {
+                result[a][b] += mat1[a][c] * mat2[c][b];
+            }
         }
     }
 }
