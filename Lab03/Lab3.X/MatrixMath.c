@@ -44,6 +44,17 @@ int MatrixEquals(float mat1[3][3], float mat2[3][3]) {
     return 1;
 }
 
+int Matrix_Sub_Equals(float mat1[2][2], float mat2[2][2]) {
+    for (a = 0; a < 2; a++) {
+        for (b = 0; b < 2; b++) {
+            if (AbsoluteValue(mat1[a][b] - mat2[a][b]) >= FP_DELTA) {
+                return 0;
+            }
+        }
+    }
+    return 1;
+}
+
 void MatrixAdd(float mat1[3][3], float mat2[3][3], float result[3][3]) {
     for (a = 0; a < DIM; a++) {
         for (b = 0; b < DIM; b++) {
@@ -101,4 +112,36 @@ void MatrixTranspose(float mat[3][3], float result[3][3]) {
             result[a][b] = mat[b][a];
         }
     }
+}
+
+void MatrixSubmatrix(int i, int j, float mat[3][3], float result[2][2]) {
+    int sub_row = 0;
+    int sub_column = 0;
+    for (int row = 0; row < DIM; row++) {
+        if (row == i) {
+            continue;
+        }
+        for (int col = 0; col < DIM; col++) {
+            if (col == j) {
+                continue;
+            }
+            result[sub_row][sub_column] = mat[i][j];
+            sub_column++;
+            if (sub_column == 2) {
+                sub_column = 0;
+                sub_row++;
+            }
+
+        }
+    }
+}
+
+float MatrixDeterminant2x2(float mat[2][2]) {
+    float det = 0;
+    for (a = 0; a < 2; a++) {
+        for (b = 0; b < 2; b++) {
+            det = (mat[1][1] * mat[2][2]) - (mat[1][2] * mat[2][1]);
+        }
+    }
+    return det;
 }

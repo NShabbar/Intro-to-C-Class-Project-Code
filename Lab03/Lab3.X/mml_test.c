@@ -22,6 +22,7 @@ float zero_matrix[3][3] = {
 };
 int ttest = 0;
 float result[DIM][DIM];
+float subresult[2][2];
 
 int main() {
     BOARD_Init();
@@ -422,6 +423,100 @@ int main() {
             ttest += 1;
         }
         printf("%d of %d Transpose tests passed.", pass_test, tpose_test);
+        printf("\n");
+    }
+    {
+        //SubMatrix Test Cases
+        int sm_test = 0;
+        int pass_test = 0;
+        float m1[DIM][DIM] = {
+            {1, 2, 3},
+            {1, 2, 3},
+            {1, 2, 3}
+        };
+        float m2[DIM][DIM] = {
+            {4, 5, 6},
+            {2, 2, 2},
+            {1, 2, 3}
+        };
+        float ex1[2][2] = {
+            {1, 2},
+            {1, 2}
+        };
+        float ex2[2][2] = {
+            {2, 2},
+            {2, 3}
+        };
+
+        MatrixSubmatrix(3, 3, m1, subresult);
+        
+        if (Matrix_Sub_Equals(subresult, ex1)) {
+            pass_test += 1;
+            sm_test += 1;
+            ttest += 1;
+        } else {
+            printf("SubMatrix: Test 1 failed.");
+            printf("\n");
+            sm_test += 1;
+            ttest += 1;
+        }
+
+        MatrixSubmatrix(1, 1, m2, subresult);
+    
+        if (Matrix_Sub_Equals(subresult, ex2)) {
+            pass_test += 1;
+            sm_test += 1;
+            ttest += 1;
+        } else {
+            printf("SubMatrix: Test 2 failed.");
+            printf("\n");
+            sm_test += 1;
+            ttest += 1;
+        }
+        printf("%d of %d SubMatrix tests passed.", pass_test, sm_test);
+        printf("\n");
+    }
+    {
+        //Determinant2x2 Test Cases
+        int d2_test = 0;
+        int pass_test = 0;
+        float m1[DIM][DIM] = {
+            {1, 2},
+            {1, 3}
+        };
+        float m2[DIM][DIM] = {
+            {4, 5},
+            {2, 2}
+        };
+       
+        float test1 = MatrixDeterminant2x2(m1);
+        printf("%f", test1);
+
+        if (test1 == 1) {
+            pass_test += 1;
+            d2_test += 1;
+            ttest += 1;
+        } else {
+            printf("Determinant2x2: Test 1 failed.");
+            printf("\n");
+            d2_test += 1;
+            ttest += 1;
+        }
+
+        float test2 = MatrixDeterminant2x2(m2);
+        printf("%f", test2);
+
+        if (test2 == -2) {
+            pass_test += 1;
+            d2_test += 1;
+            ttest += 1;
+        } else {
+            printf("Determinant2x2: Test 2 failed.");
+            printf("\n");
+            d2_test += 1;
+            ttest += 1;
+        }
+        printf("%d of %d Determinant2x2 tests passed.", pass_test, d2_test);
         printf("\n");
     }
     printf("Total tests performed: %d", ttest);
