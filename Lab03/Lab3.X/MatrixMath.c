@@ -14,6 +14,9 @@
 int a;
 int b;
 int c;
+double AbsoluteValue(double operand);
+int Matrix_Sub_Equals(float mat1[2][2], float mat2[2][2]);
+float MatrixDeterminant2x2(float mat[2][2]);
 
 double AbsoluteValue(double operand) {
     if (operand < 0) {
@@ -117,12 +120,12 @@ void MatrixTranspose(float mat[3][3], float result[3][3]) {
 void MatrixSubmatrix(int i, int j, float mat[3][3], float result[2][2]) {
     int sub_row = 0;
     int sub_column = 0;
-    for (int row = 0; row < DIM; row++) {
-        if (row == i) {
+    for (a = 0; a < DIM; a++) {
+        if (a == i) {
             continue;
         }
-        for (int col = 0; col < DIM; col++) {
-            if (col == j) {
+        for (b = 0; b < DIM; b++) {
+            if (b == j) {
                 continue;
             }
             result[sub_row][sub_column] = mat[i][j];
@@ -140,7 +143,7 @@ float MatrixDeterminant2x2(float mat[2][2]) {
     float det = 0;
     for (a = 0; a < 2; a++) {
         for (b = 0; b < 2; b++) {
-            det = (mat[1][1] * mat[2][2]) - (mat[1][2] * mat[2][1]);
+            det = (mat[0][0] * mat[1][1]) - (mat[0][1] * mat[1][0]);
         }
     }
     return det;
