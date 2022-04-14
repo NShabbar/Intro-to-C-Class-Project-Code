@@ -13,7 +13,8 @@
 // User libraries:
 #include "MatrixMath.h"
 
-
+//int Matrix_Sub_Equals(float mat1[2][2], float mat2[2][2]); used to test
+//void MatrixSubPrint(float mat[2][2]); used to test
 // Module-level variables:
 float zero_matrix[3][3] = {
     {},
@@ -426,7 +427,7 @@ int main() {
         printf("\n");
     }
     {
-        //SubMatrix Test Cases
+        /*SubMatrix Test Cases used for testing.
         int sm_test = 0;
         int pass_test = 0;
         float m1[DIM][DIM] = {
@@ -444,14 +445,14 @@ int main() {
             {1, 2}
         };
         float ex2[2][2] = {
-            {2, 2},
-            {2, 3}
+            {4, 6},
+            {1, 3}
         };
 
-        MatrixSubmatrix(3, 3, m1, subresult);
-        printf("%f", subresult);
+        MatrixSubmatrix(2, 2, m1, subresult);
+        
 
-        if (subresult == ex1) {
+        if (Matrix_Sub_Equals(subresult, ex1)) {
             pass_test += 1;
             sm_test += 1;
             ttest += 1;
@@ -463,9 +464,8 @@ int main() {
         }
 
         MatrixSubmatrix(1, 1, m2, subresult);
-        printf("%f", subresult);
 
-        if (subresult == ex2) {
+        if (Matrix_Sub_Equals(subresult, ex2)) {
             pass_test += 1;
             sm_test += 1;
             ttest += 1;
@@ -477,6 +477,101 @@ int main() {
         }
         printf("%d of %d SubMatrix tests passed.", pass_test, sm_test);
         printf("\n");
+    }*/
+        {
+            //Determinant Test Cases
+            int det_test = 0;
+            int pass_test = 0;
+            float m1[DIM][DIM] = {
+                {1, 2, 3},
+                {1, 2, 3},
+                {1, 2, 3}
+            };
+            float m2[DIM][DIM] = {
+                {4, 5, 6},
+                {2, 2, 2},
+                {1, 2, 3}
+            };
+
+            float test1 = MatrixDeterminant(m1);
+
+            if (test1 == 0) {
+                pass_test += 1;
+                det_test += 1;
+                ttest += 1;
+            } else {
+                printf("Determinant: Test 1 failed.");
+                printf("\n");
+                det_test += 1;
+                ttest += 1;
+            }
+
+            float test2 = MatrixDeterminant(m2);
+
+            if (test2 == 0) {
+                pass_test += 1;
+                det_test += 1;
+                ttest += 1;
+            } else {
+                printf("Determinant: Test 2 failed.");
+                printf("\n");
+                det_test += 1;
+                ttest += 1;
+            }
+            printf("%d of %d Determinant tests passed.", pass_test, det_test);
+            printf("\n");
+        }
+        //Inverse Test Cases
+        int in_test = 0;
+        int pass_test = 0;
+        float m1[DIM][DIM] = {
+            {5, 8, 9},
+            {1, 4, 5},
+            {3, 4, 4}
+        };
+        float m2[DIM][DIM] = {
+            {5, 8, 9},
+            {1, 4, 5},
+            {3, 4, -1}
+        };
+        float ex1[DIM][DIM] = {
+            {1, -1, -1},
+            {(-11.0 / 4.0), (7.0 / 4.0), 4},
+            {2, -1, -3}
+        };
+        float ex2[DIM][DIM] = {
+            {(3.0 / 8.0), (-11.0 / 16.0), (-1.0 / 16.0)},
+            {(-1.0 / 4.0), (1.0 / 2.0), (1.0 / 4.0)},
+            {(1.0 / 8.0), (-1.0 / 16.0), (-3.0 / 16.0)}
+        };
+
+        MatrixInverse(m1, result);
+
+        if (MatrixEquals(result, ex1)) {
+            pass_test += 1;
+            in_test += 1;
+            ttest += 1;
+        } else {
+            printf("Inverse: Test 1 failed.");
+            printf("\n");
+            in_test += 1;
+            ttest += 1;
+        }
+
+        MatrixInverse(m2, result);
+
+        if (MatrixEquals(result, ex2)) {
+            pass_test += 1;
+            in_test += 1;
+            ttest += 1;
+        } else {
+            printf("Inverse: Test 2 failed.");
+            printf("\n");
+            in_test += 1;
+            ttest += 1;
+        }
+        printf("%d of %d Inverse tests passed.", pass_test, in_test);
+        printf("\n");
     }
     {
 
@@ -486,3 +581,4 @@ int main() {
         while (1);
     }
 }
+
