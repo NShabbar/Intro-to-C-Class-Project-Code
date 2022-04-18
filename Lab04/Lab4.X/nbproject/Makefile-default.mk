@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=BOARD.c Lab04_main.c rpn_test.c stack_test.c stack.c
+SOURCEFILES_QUOTED_IF_SPACED=BOARD.c rpn_test.c stack_test.c Lab04_main.c stack.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/BOARD.o ${OBJECTDIR}/Lab04_main.o ${OBJECTDIR}/rpn_test.o ${OBJECTDIR}/stack_test.o ${OBJECTDIR}/stack.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/BOARD.o.d ${OBJECTDIR}/Lab04_main.o.d ${OBJECTDIR}/rpn_test.o.d ${OBJECTDIR}/stack_test.o.d ${OBJECTDIR}/stack.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/BOARD.o ${OBJECTDIR}/rpn_test.o ${OBJECTDIR}/stack_test.o ${OBJECTDIR}/Lab04_main.o ${OBJECTDIR}/stack.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/BOARD.o.d ${OBJECTDIR}/rpn_test.o.d ${OBJECTDIR}/stack_test.o.d ${OBJECTDIR}/Lab04_main.o.d ${OBJECTDIR}/stack.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/BOARD.o ${OBJECTDIR}/Lab04_main.o ${OBJECTDIR}/rpn_test.o ${OBJECTDIR}/stack_test.o ${OBJECTDIR}/stack.o
+OBJECTFILES=${OBJECTDIR}/BOARD.o ${OBJECTDIR}/rpn_test.o ${OBJECTDIR}/stack_test.o ${OBJECTDIR}/Lab04_main.o ${OBJECTDIR}/stack.o
 
 # Source Files
-SOURCEFILES=BOARD.c Lab04_main.c rpn_test.c stack_test.c stack.c
+SOURCEFILES=BOARD.c rpn_test.c stack_test.c Lab04_main.c stack.c
 
 
 
@@ -113,12 +113,6 @@ ${OBJECTDIR}/BOARD.o: BOARD.c  .generated_files/flags/default/3514a443ccb969a977
 	@${RM} ${OBJECTDIR}/BOARD.o 
 	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/BOARD.o.d" -o ${OBJECTDIR}/BOARD.o BOARD.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
 	
-${OBJECTDIR}/Lab04_main.o: Lab04_main.c  .generated_files/flags/default/666251c799e9c4d580187facfd1bc6cd78908eb5 .generated_files/flags/default/af031a62ccc0c18b099f063c5edfd8e7f9b606f2
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/Lab04_main.o.d 
-	@${RM} ${OBJECTDIR}/Lab04_main.o 
-	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/Lab04_main.o.d" -o ${OBJECTDIR}/Lab04_main.o Lab04_main.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
-	
 ${OBJECTDIR}/rpn_test.o: rpn_test.c  .generated_files/flags/default/38e9c36c1b5b768cac8cfbd0bc9d3029d740f381 .generated_files/flags/default/af031a62ccc0c18b099f063c5edfd8e7f9b606f2
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/rpn_test.o.d 
@@ -130,6 +124,12 @@ ${OBJECTDIR}/stack_test.o: stack_test.c  .generated_files/flags/default/691aa977
 	@${RM} ${OBJECTDIR}/stack_test.o.d 
 	@${RM} ${OBJECTDIR}/stack_test.o 
 	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/stack_test.o.d" -o ${OBJECTDIR}/stack_test.o stack_test.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
+${OBJECTDIR}/Lab04_main.o: Lab04_main.c  .generated_files/flags/default/666251c799e9c4d580187facfd1bc6cd78908eb5 .generated_files/flags/default/af031a62ccc0c18b099f063c5edfd8e7f9b606f2
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/Lab04_main.o.d 
+	@${RM} ${OBJECTDIR}/Lab04_main.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/Lab04_main.o.d" -o ${OBJECTDIR}/Lab04_main.o Lab04_main.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
 	
 ${OBJECTDIR}/stack.o: stack.c  .generated_files/flags/default/a7102c63e6365141ffb415f24b68b7846b7d7390 .generated_files/flags/default/af031a62ccc0c18b099f063c5edfd8e7f9b606f2
 	@${MKDIR} "${OBJECTDIR}" 
@@ -144,12 +144,6 @@ ${OBJECTDIR}/BOARD.o: BOARD.c  .generated_files/flags/default/c191434f2a0b886e5e
 	@${RM} ${OBJECTDIR}/BOARD.o 
 	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/BOARD.o.d" -o ${OBJECTDIR}/BOARD.o BOARD.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
 	
-${OBJECTDIR}/Lab04_main.o: Lab04_main.c  .generated_files/flags/default/b105f6d13d98cfe2c8efa3e9c05f9d0c45f1c78b .generated_files/flags/default/af031a62ccc0c18b099f063c5edfd8e7f9b606f2
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/Lab04_main.o.d 
-	@${RM} ${OBJECTDIR}/Lab04_main.o 
-	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/Lab04_main.o.d" -o ${OBJECTDIR}/Lab04_main.o Lab04_main.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
-	
 ${OBJECTDIR}/rpn_test.o: rpn_test.c  .generated_files/flags/default/4913927c1609dc1038e303b233ecc664cb4496f .generated_files/flags/default/af031a62ccc0c18b099f063c5edfd8e7f9b606f2
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/rpn_test.o.d 
@@ -161,6 +155,12 @@ ${OBJECTDIR}/stack_test.o: stack_test.c  .generated_files/flags/default/a80a89f6
 	@${RM} ${OBJECTDIR}/stack_test.o.d 
 	@${RM} ${OBJECTDIR}/stack_test.o 
 	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/stack_test.o.d" -o ${OBJECTDIR}/stack_test.o stack_test.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
+${OBJECTDIR}/Lab04_main.o: Lab04_main.c  .generated_files/flags/default/b105f6d13d98cfe2c8efa3e9c05f9d0c45f1c78b .generated_files/flags/default/af031a62ccc0c18b099f063c5edfd8e7f9b606f2
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/Lab04_main.o.d 
+	@${RM} ${OBJECTDIR}/Lab04_main.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/Lab04_main.o.d" -o ${OBJECTDIR}/Lab04_main.o Lab04_main.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
 	
 ${OBJECTDIR}/stack.o: stack.c  .generated_files/flags/default/446be7361aa1039e76428f973d139758a0f36065 .generated_files/flags/default/af031a62ccc0c18b099f063c5edfd8e7f9b606f2
 	@${MKDIR} "${OBJECTDIR}" 

@@ -13,7 +13,7 @@ int main()
 {
     BOARD_Init();
 
-    printf("\n###### Beginning CRUZID's stack test harness: ####\n\n");
+    printf("\n###### Beginning nshabbar's stack test harness: ####\n\n");
 
     //What follows is starter code.  You will need to modify it!
     
@@ -24,6 +24,14 @@ int main()
         printf("passed");
     } else {
         printf("failed");
+    }
+    
+    printf("Does StackPush() push to an empty stack appropriately?\n");
+    if (StackPush(%stack, 1) == SUCCESS && stack.initialized == TRUE){
+        printf("Test passed.\n");
+    }
+    else{
+        printf("Test failed.\n");
     }
 
     BOARD_End();
