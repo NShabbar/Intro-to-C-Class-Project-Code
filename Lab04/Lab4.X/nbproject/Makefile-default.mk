@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=BOARD.c rpn_test.c stack_test.c Lab04_main.c stack.c
+SOURCEFILES_QUOTED_IF_SPACED=BOARD.c rpn_test.c stack_test.c Lab04_main.c stack.c rpn.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/BOARD.o ${OBJECTDIR}/rpn_test.o ${OBJECTDIR}/stack_test.o ${OBJECTDIR}/Lab04_main.o ${OBJECTDIR}/stack.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/BOARD.o.d ${OBJECTDIR}/rpn_test.o.d ${OBJECTDIR}/stack_test.o.d ${OBJECTDIR}/Lab04_main.o.d ${OBJECTDIR}/stack.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/BOARD.o ${OBJECTDIR}/rpn_test.o ${OBJECTDIR}/stack_test.o ${OBJECTDIR}/Lab04_main.o ${OBJECTDIR}/stack.o ${OBJECTDIR}/rpn.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/BOARD.o.d ${OBJECTDIR}/rpn_test.o.d ${OBJECTDIR}/stack_test.o.d ${OBJECTDIR}/Lab04_main.o.d ${OBJECTDIR}/stack.o.d ${OBJECTDIR}/rpn.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/BOARD.o ${OBJECTDIR}/rpn_test.o ${OBJECTDIR}/stack_test.o ${OBJECTDIR}/Lab04_main.o ${OBJECTDIR}/stack.o
+OBJECTFILES=${OBJECTDIR}/BOARD.o ${OBJECTDIR}/rpn_test.o ${OBJECTDIR}/stack_test.o ${OBJECTDIR}/Lab04_main.o ${OBJECTDIR}/stack.o ${OBJECTDIR}/rpn.o
 
 # Source Files
-SOURCEFILES=BOARD.c rpn_test.c stack_test.c Lab04_main.c stack.c
+SOURCEFILES=BOARD.c rpn_test.c stack_test.c Lab04_main.c stack.c rpn.c
 
 
 
@@ -137,6 +137,12 @@ ${OBJECTDIR}/stack.o: stack.c  .generated_files/flags/default/a7102c63e6365141ff
 	@${RM} ${OBJECTDIR}/stack.o 
 	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/stack.o.d" -o ${OBJECTDIR}/stack.o stack.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
 	
+${OBJECTDIR}/rpn.o: rpn.c  .generated_files/flags/default/bfcbbd8838666e8af3b2afcc855332f7e7000549 .generated_files/flags/default/af031a62ccc0c18b099f063c5edfd8e7f9b606f2
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/rpn.o.d 
+	@${RM} ${OBJECTDIR}/rpn.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/rpn.o.d" -o ${OBJECTDIR}/rpn.o rpn.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
 else
 ${OBJECTDIR}/BOARD.o: BOARD.c  .generated_files/flags/default/c191434f2a0b886e5eb2013f634d6fc6ec6abad1 .generated_files/flags/default/af031a62ccc0c18b099f063c5edfd8e7f9b606f2
 	@${MKDIR} "${OBJECTDIR}" 
@@ -167,6 +173,12 @@ ${OBJECTDIR}/stack.o: stack.c  .generated_files/flags/default/446be7361aa1039e76
 	@${RM} ${OBJECTDIR}/stack.o.d 
 	@${RM} ${OBJECTDIR}/stack.o 
 	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/stack.o.d" -o ${OBJECTDIR}/stack.o stack.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
+${OBJECTDIR}/rpn.o: rpn.c  .generated_files/flags/default/3b1e83e6a40ada51a9323fcac3bf7bba39b0dc76 .generated_files/flags/default/af031a62ccc0c18b099f063c5edfd8e7f9b606f2
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/rpn.o.d 
+	@${RM} ${OBJECTDIR}/rpn.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/rpn.o.d" -o ${OBJECTDIR}/rpn.o rpn.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
 	
 endif
 
