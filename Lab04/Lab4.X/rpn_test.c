@@ -26,6 +26,7 @@ int main()
     double expected0 = 2;
     printf("Testing RPN_Evaluate with \"%s\"... \n ", test0);
     error = RPN_Evaluate(test0, &result0);
+    printf("%d", error);
     if (error) {
         printf("   Failed, RPN_Evaluate produced an error\n");
     } else if (result0 != expected0) {
