@@ -33,6 +33,19 @@ int main()
     } else {
         printf("   Success!\n");
     }
+    
+    char test1[] = "1 4 + 6 4 - * 8 /";
+    double result1;
+    double expected1 = 1.25;
+    printf("Testing RPN_Evaluate with \"%s\"... \n ", test1);
+    error = RPN_Evaluate(test1, &result1);
+    if (error) {
+        printf("   Failed, RPN_Evaluate produced an error\n");
+    } else if (result1 != expected1) {
+        printf("   Failed, expected = %f , result = %f\n", expected1, result1);
+    } else {
+        printf("   Success!\n");
+    }
 
     printf("Testing ProcessBackspaces:\n");
     char test_pb1[] = "123\b34";
