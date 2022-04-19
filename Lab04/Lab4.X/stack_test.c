@@ -33,7 +33,37 @@ int main()
     else{
         printf("Test failed.\n");
     }
-
+    
+    printf("Does StackPop() remove the last element appropriately?\n");
+    int test_count;
+    if (StackPop(&stack, &test_count) == SUCCESS && test_count == 1) {
+        printf("Test passed.\n");
+    }
+    else{
+        printf("Test failed.\n");
+    }
+    
+    printf("Does StackIsEmpty() work properly?");
+    if (StackIsEmpty(&stack) == SUCCESS){
+        printf("Test passed.\n");
+    }
+    else{
+        printf("Test failed.\n");
+    }
+    printf("Does StackIsFull work properly?");
+    if (StackIsFull(&stack) == SUCCESS){
+        printf("Test passed.\n");
+    }
+    else{
+        printf("Test failed.\n");
+    }
+    printf("Does StackGetSize() retrieve the value properly?");
+    if (StackGetSize(&stack) == SUCCESS && !stack.initialized == SIZE_ERROR){
+        printf("Test passed.\n");
+    }
+    else{
+        printf("Test failed.\n");
+    }
     BOARD_End();
     //test stackInit:
     while (1);
