@@ -12,11 +12,14 @@ int RPN_Evaluate(char * rpn_string, double * result) {
     StackInit(&stack);
 
     while (sstring != NULL) {
-        if (*sstring == '+') {
+        if (atof(sstring) != 0) {
+            StackPush(&stack, atof(sstring));
+        }
+        else if (*sstring == '+') {
             StackPop(&stack, &operand1);
             StackPop(&stack, &operand2);
             *result = operand1 + operand2;
-            StackPush(&stack, *result);            
+            StackPush(&stack, *result);
         } else if (*sstring == '-') {
             StackPop(&stack, &operand1);
             StackPop(&stack, &operand2);
@@ -35,11 +38,6 @@ int RPN_Evaluate(char * rpn_string, double * result) {
                 return RPN_ERROR_DIVIDE_BY_ZERO;
             }
             StackPush(&stack, *result);
-            } else {
-                return RPN_ERROR_INVALID_TOKEN;
-            }
-        } else if (atof(sstring) != 0) {
-            StackPush(&stack, atof(sstring));
         } else {
             if (StackIsFull(&stack)) {
                 return RPN_ERROR_STACK_OVERFLOW;
@@ -47,14 +45,15 @@ int RPN_Evaluate(char * rpn_string, double * result) {
                     || StackPop(&stack, &operand2) == STANDARD_ERROR) {
                 return RPN_ERROR_STACK_UNDERFLOW;
             } else {
-
                 return RPN_ERROR_INVALID_TOKEN;
             }
         }
         sstring = strtok(NULL, " ");
     }
+
     return RPN_NO_ERROR;
 }
+
 
 
 

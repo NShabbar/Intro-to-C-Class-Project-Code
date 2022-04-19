@@ -47,6 +47,32 @@ int main()
     } else {
         printf("   Success!\n");
     }
+    
+    char test2[] = "-1 4 + 6 -4 - * 8 /";
+    double result2;
+    double expected2 = 3.75;
+    printf("Testing RPN_Evaluate with \"%s\"... \n ", test2);
+    error = RPN_Evaluate(test2, &result2);
+    if (error) {
+        printf("   Failed, RPN_Evaluate produced an error\n");
+    } else if (result2 != expected2) {
+        printf("   Failed, expected = %f , result = %f\n", expected2, result2);
+    } else {
+        printf("   Success!\n");
+    }
+    
+    char test3[] = "10 10 - 8 /";
+    double result3;
+    double expected3 = RPN_ERROR_DIVIDE_BY_ZERO;
+    printf("Testing RPN_Evaluate with \"%s\"... \n ", test3);
+    error = RPN_Evaluate(test3, &result3);
+    if (error) {
+        printf("   Failed, RPN_Evaluate produced an error\n");
+    } else if (result3 != expected3) {
+        printf("   Failed, expected = %f , result = %f\n", expected3, result3);
+    } else {
+        printf("   Success!\n");
+    }
 
     printf("Testing ProcessBackspaces:\n");
     char test_pb1[] = "123\b34";
