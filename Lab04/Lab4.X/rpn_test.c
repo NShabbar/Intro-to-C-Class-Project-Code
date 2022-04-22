@@ -26,7 +26,6 @@ int main()
     double expected0 = 2;
     printf("Testing RPN_Evaluate with \"%s\"... \n ", test0);
     error = RPN_Evaluate(test0, &result0);
-    printf("%d", error);
     if (error) {
         printf("   Failed, RPN_Evaluate produced an error\n");
     } else if (result0 != expected0) {
@@ -57,19 +56,6 @@ int main()
         printf("   Failed, RPN_Evaluate produced an error\n");
     } else if (result2 != expected2) {
         printf("   Failed, expected = %f , result = %f\n", expected2, result2);
-    } else {
-        printf("   Success!\n");
-    }
-    
-    char test3[] = "10 10 - 8 /";
-    double result3;
-    double expected3 = RPN_ERROR_DIVIDE_BY_ZERO;
-    printf("Testing RPN_Evaluate with \"%s\"... \n ", test3);
-    error = RPN_Evaluate(test3, &result3);
-    if (error) {
-        printf("   Failed, RPN_Evaluate produced an error\n");
-    } else if (result3 != expected3) {
-        printf("   Failed, expected = %f , result = %f\n", expected3, result3);
     } else {
         printf("   Success!\n");
     }

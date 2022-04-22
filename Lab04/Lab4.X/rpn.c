@@ -34,7 +34,7 @@ int RPN_Evaluate(char * rpn_string, double * result) {
             StackPop(&stack, &operand1);
             StackPop(&stack, &operand2);
             *result = operand2 / operand1;
-            if (operand1 == 0) {
+            if (sstring == 0 && operand1 == 0) {
                 return RPN_ERROR_DIVIDE_BY_ZERO;
             }
             StackPush(&stack, *result);
