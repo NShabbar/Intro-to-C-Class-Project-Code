@@ -59,7 +59,7 @@ int main()
     } else {
         printf("   Success!\n");
     }
-
+   
     printf("Testing ProcessBackspaces:\n");
     char test_pb1[] = "123\b34";
     ProcessBackspaces(test_pb1);

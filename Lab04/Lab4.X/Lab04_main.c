@@ -23,8 +23,7 @@ int main() {
 
     char rpn_sentence[MAX_INPUT_LENGTH + 2];
     double result;
-
-    printf("Welcome to CRUZID'S RPN calculator.  Compiled on %s %s", __DATE__, __TIME__);
+    printf("Welcome to nshabbar'S RPN calculator.  Compiled on %s %s", __DATE__, __TIME__);
     while (1) {
 
         printf("Enter floats and + - / * in RPN format:\n");
@@ -34,7 +33,24 @@ int main() {
         RPN_Evaluate(rpn_sentence, &result);
 
         printf("result = %f\n", result);
-
+        
+        if (result == RPN_ERROR_STACK_OVERFLOW){
+            printf("No more room on stack.");
+        }
+        else if (result == RPN_ERROR_STACK_UNDERFLOW){
+            printf("Too few items in stack.");
+        }
+        else if (result == RPN_ERROR_INVALID_TOKEN){
+            printf("Invalid entry");
+        }
+        else if (result == RPN_ERROR_DIVIDE_BY_ZERO){
+            printf("Cannot divide by zero.");
+        }
+        else if (result == RPN_ERROR_TOO_FEW_ITEMS_REMAIN || 
+                RPN_ERROR_TOO_MANY_ITEMS_REMAIN){
+            printf("Invalid RPN calculation: more or less than "
+                    "one item in the stack.");
+        }
     }
 
     while (1);
