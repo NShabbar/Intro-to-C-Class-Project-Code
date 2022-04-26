@@ -17,10 +17,8 @@ ListItem *CreateUnsortedList(void); //this function has been written for you
 ListItem *SelectionSort(ListItem* list);
 ListItem *InsertionSort(ListItem* list);
 
-
 /* Students should not need to modify main! */
-int main(void)
-{
+int main(void) {
     BOARD_Init();
 
     printf("\n\nWelcome to nshabbar's sort.c, compiled on %s %s.\n", __DATE__, __TIME__);
@@ -60,9 +58,20 @@ int main(void)
  * 
  * This function does not print.
  */
-ListItem *SelectionSort(ListItem* list)
-{
-   //YOUR CODE GOES HERE!
+ListItem *SelectionSort(ListItem* list) {
+    //YOUR CODE GOES HERE!
+    struct ListItem *FU = LinkedListGetFirst(list);
+    while (FU->nextItem != NULL) {
+        struct ListItem *s = FU->nextItem;
+        while (s != NULL) {
+            if (strcmp(FU->data, s->data) > 0) {
+                LinkedListSwapData(FU, s);
+            }
+            s = s->nextItem;
+        }
+        FU = FU->nextItem;
+    }
+    return LinkedListGetFirst(FU);
 }
 
 /**
@@ -77,9 +86,27 @@ ListItem *SelectionSort(ListItem* list)
  * 
  * This function does not print.
  */
-ListItem *InsertionSort(ListItem* list)
-{
-   //YOUR CODE GOES HERE!
+ListItem *InsertionSort(ListItem* list) {
+    //YOUR CODE GOES HERE!
+    struct ListItem *FS = LinkedListGetLast(list);
+    while (FS->previousItem != NULL) {
+        struct ListItem *LU = FS->previousItem;
+        if (strcmp(LU->data, FS->data) < 0) {
+            FS = LU;
+        } else {
+            struct ListItem *s = FS;
+            while (s->nextItem != NULL) {
+                if (strcmp(s->nextItem->data, LU->data) > 0) {
+                    break;
+                } else {
+                    s = s->nextItem;
+                }
+            }
+            char *savepoint = LinkedListRemove(LU);
+            LinkedListCreateAfter(s, savepoint);
+        }
+    }
+    return LinkedListGetFirst(FS);
 }
 
 /* CreateUnsortedList() uses the functions in the LinkedList library to
@@ -94,15 +121,16 @@ ListItem *InsertionSort(ListItem* list)
 ListItem *CreateUnsortedList(void)
 /// <editor-fold defaultstate="collapsed" desc="CreateUnsortedList definition">
 {
- char* wordList[] = {
-        "decide",   "toothpaste",   "lowly",        "robin",        "reign",        "crowd",
-        "pies",     "reduce",       "tendency",     "surround",     "finger",       "rake", 
-        "alleged",  "hug",          "nest",         "punishment",   "eggnog",       "side", 
-        "beef",     "exuberant",    "sort",         "scream",       "zip",          "hair", 
-        "ragged",   "damage",       "thought",      "jump",         "frequent",     "substance",
-        "head",     "step",         "faithful",     "sidewalk",     "pig",          "raspy",
-        "juggle",   "shut",         "maddening",    "rock",         "telephone",    "selective",
-        NULL};
+    char* wordList[] = {
+        "decide", "toothpaste", "lowly", "robin", "reign", "crowd",
+        "pies", "reduce", "tendency", "surround", "finger", "rake",
+        "alleged", "hug", "nest", "punishment", "eggnog", "side",
+        "beef", "exuberant", "sort", "scream", "zip", "hair",
+        "ragged", "damage", "thought", "jump", "frequent", "substance",
+        "head", "step", "faithful", "sidewalk", "pig", "raspy",
+        "juggle", "shut", "maddening", "rock", "telephone", "selective",
+        NULL
+    };
     //  char* wordList[] = {"D", "A", "C", "E", "B", NULL};
 
 
@@ -111,7 +139,7 @@ ListItem *CreateUnsortedList(void)
     ListItem* tail = head;
     for (i = 1; wordList[i] != NULL; i++) {
         tail = LinkedListCreateAfter(tail, wordList[i]);
-        if(tail == NULL){
+        if (tail == NULL) {
             printf("ERROR:  Heap full! Please increase heap size.\n");
             FATAL_ERROR();
         }
