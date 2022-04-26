@@ -8,6 +8,12 @@
 
 int main(void) {
 
-    BOARD
+    BOARD_Init();
+    printf("\nWelcome to nshabbar's LinkedListTest.c, compiled on %s %s.\n\n", 
+            __DATE__, __TIME__);
+    
+    ListItem *head;
+    ListItem *tail;
+    
 }
 
