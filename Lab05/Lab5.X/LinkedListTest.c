@@ -1,18 +1,13 @@
-/* 
- * File:   LinkedListTest.c
- * Author: Nadia
- *
- * Created on April 25, 2022, 7:27 PM
- */
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include "LinkedList.h"
+#include "BOARD.h"
 
-/*
- * 
- */
-int main(int argc, char** argv) {
 
-    return (EXIT_SUCCESS);
+int main(void) {
+
+    BOARD
 }
 

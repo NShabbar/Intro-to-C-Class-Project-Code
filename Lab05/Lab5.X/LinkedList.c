@@ -50,10 +50,10 @@ char *LinkedListRemove(ListItem *item){
 
 int LinkedListSize(ListItem *list){
     int count = 0;
-    ListItem *start = LinkedListGetFirst(list);
-    while (start != NULL){
+    ListItem *head = LinkedListGetFirst(list);
+    while (head != NULL){
         count++;
-        start = start->nextItem;
+        head = head->nextItem;
     }
     return count;
 }
@@ -89,14 +89,14 @@ int LinkedListSwapData(ListItem *firstItem, ListItem *secondItem){
 }
 
 int LinkedListPrint(ListItem *list){
-    ListItem *start;
+    ListItem *head;
     if (list == NULL){
         return STANDARD_ERROR;
     }
     printf("[ ");
-    for (start = LinkedListGetFirst(list); start != NULL; 
-            start = start->nextItem){
-        printf("%s ", (start->data));
+    for (head = LinkedListGetFirst(list); head != NULL; 
+            head = head->nextItem){
+        printf("%s ", (head->data));
     }
     printf("]");
     return SUCCESS;
