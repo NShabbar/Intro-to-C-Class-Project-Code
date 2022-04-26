@@ -47,3 +47,57 @@ char *LinkedListRemove(ListItem *item){
         }
     }return data;
 }
+
+int LinkedListSize(ListItem *list){
+    int count = 0;
+    ListItem *start = LinkedListGetFirst(list);
+    while (start != NULL){
+        count++;
+        start = start->nextItem;
+    }
+    return count;
+}
+
+ListItem *LinkedListGetFirst(ListItem *list){
+    if (list == NULL){
+        return NULL;
+    }
+    while (list->previousItem != NULL){
+        list = list->previousItem;
+    }
+    return list;
+}
+
+ListItem *LinkedListGetLast(ListItem *list){
+    if (list == NULL){
+        return NULL;
+    }
+    while (list->nextItem != NULL){
+        list = list ->nextItem;
+    }
+    return list;
+}
+
+int LinkedListSwapData(ListItem *firstItem, ListItem *secondItem){
+    if (firstItem != NULL || secondItem != NULL){
+        char *swap = firstItem->data;
+        firstItem->data = secondItem->data;
+        secondItem-> = swap;
+        return SUCCESS;
+    }
+    return STANDARD_ERROR;
+}
+
+int LinkedListPrint(ListItem *list){
+    ListItem *start;
+    if (list == NULL){
+        return STANDARD_ERROR;
+    }
+    printf("[ ");
+    for (start = LinkedListGetFirst(list); start != NULL; 
+            start = start->nextItem){
+        printf("%s ", (start->data));
+    }
+    printf("]");
+    return SUCCESS;
+}

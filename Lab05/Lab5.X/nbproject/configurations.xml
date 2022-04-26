@@ -17,6 +17,7 @@
       <itemPath>BOARD.c</itemPath>
       <itemPath>sort.c</itemPath>
       <itemPath>LinkedList.c</itemPath>
+      <itemPath>LinkedListTest.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

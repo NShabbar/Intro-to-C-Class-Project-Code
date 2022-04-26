@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=BOARD.c sort.c LinkedList.c
+SOURCEFILES_QUOTED_IF_SPACED=BOARD.c sort.c LinkedList.c LinkedListTest.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/BOARD.o ${OBJECTDIR}/sort.o ${OBJECTDIR}/LinkedList.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/BOARD.o.d ${OBJECTDIR}/sort.o.d ${OBJECTDIR}/LinkedList.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/BOARD.o ${OBJECTDIR}/sort.o ${OBJECTDIR}/LinkedList.o ${OBJECTDIR}/LinkedListTest.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/BOARD.o.d ${OBJECTDIR}/sort.o.d ${OBJECTDIR}/LinkedList.o.d ${OBJECTDIR}/LinkedListTest.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/BOARD.o ${OBJECTDIR}/sort.o ${OBJECTDIR}/LinkedList.o
+OBJECTFILES=${OBJECTDIR}/BOARD.o ${OBJECTDIR}/sort.o ${OBJECTDIR}/LinkedList.o ${OBJECTDIR}/LinkedListTest.o
 
 # Source Files
-SOURCEFILES=BOARD.c sort.c LinkedList.c
+SOURCEFILES=BOARD.c sort.c LinkedList.c LinkedListTest.c
 
 
 
@@ -125,6 +125,12 @@ ${OBJECTDIR}/LinkedList.o: LinkedList.c  .generated_files/flags/default/a54a828a
 	@${RM} ${OBJECTDIR}/LinkedList.o 
 	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/LinkedList.o.d" -o ${OBJECTDIR}/LinkedList.o LinkedList.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
 	
+${OBJECTDIR}/LinkedListTest.o: LinkedListTest.c  .generated_files/flags/default/519f0df1f335d578263ffebfecc1bc8dff2e4447 .generated_files/flags/default/af031a62ccc0c18b099f063c5edfd8e7f9b606f2
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/LinkedListTest.o.d 
+	@${RM} ${OBJECTDIR}/LinkedListTest.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/LinkedListTest.o.d" -o ${OBJECTDIR}/LinkedListTest.o LinkedListTest.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
 else
 ${OBJECTDIR}/BOARD.o: BOARD.c  .generated_files/flags/default/12e8bbcf922f0959187bde77e9f5e610286b11ec .generated_files/flags/default/af031a62ccc0c18b099f063c5edfd8e7f9b606f2
 	@${MKDIR} "${OBJECTDIR}" 
@@ -143,6 +149,12 @@ ${OBJECTDIR}/LinkedList.o: LinkedList.c  .generated_files/flags/default/fbf359e6
 	@${RM} ${OBJECTDIR}/LinkedList.o.d 
 	@${RM} ${OBJECTDIR}/LinkedList.o 
 	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/LinkedList.o.d" -o ${OBJECTDIR}/LinkedList.o LinkedList.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
+${OBJECTDIR}/LinkedListTest.o: LinkedListTest.c  .generated_files/flags/default/766cd823020f44f91301e88bcf0e83c3779dcfe6 .generated_files/flags/default/af031a62ccc0c18b099f063c5edfd8e7f9b606f2
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/LinkedListTest.o.d 
+	@${RM} ${OBJECTDIR}/LinkedListTest.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/LinkedListTest.o.d" -o ${OBJECTDIR}/LinkedListTest.o LinkedListTest.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
 	
 endif
 
