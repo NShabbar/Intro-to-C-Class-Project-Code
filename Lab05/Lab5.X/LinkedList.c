@@ -49,7 +49,7 @@ char *LinkedListRemove(ListItem *item){
 }
 
 int LinkedListSize(ListItem *list){
-    int count = 0;
+    int count = 1;
     ListItem *head = LinkedListGetFirst(list);
     while (head != NULL){
         count++;
