@@ -23,7 +23,7 @@ int main(void)
 {
     BOARD_Init();
 
-    printf("\n\nWelcome to CRUZID's sort.c, compiled on %s %s.\n", __DATE__, __TIME__);
+    printf("\n\nWelcome to nshabbar's sort.c, compiled on %s %s.\n", __DATE__, __TIME__);
 
     ListItem* listToSort;
 
