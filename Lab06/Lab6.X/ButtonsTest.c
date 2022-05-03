@@ -9,6 +9,7 @@
 // Microchip libraries
 #include <xc.h>
 #include <sys/attribs.h>
+#include "Oled.h"
 
 // User libraries
 
@@ -17,11 +18,11 @@
 // **** Declare any datatypes here ****
 
 // **** Define global, module-level, or external variables here ****
+uint8_t Button;
 
 // **** Declare function prototypes ****
 
-int main(void)
-{
+int main(void) {
     BOARD_Init();
 
     // Configure Timer 1 using PBCLK as input. This default period will make the LEDs blink at a
@@ -40,11 +41,38 @@ int main(void)
     /***************************************************************************************************
      * Your code goes in between this comment and the following one with asterisks.
      **************************************************************************************************/
-    printf("Welcome to CRUZID's lab6 part4 (ButtonsTest).  Compiled on %s %s.\n", __TIME__, __DATE__);
+    printf("Welcome to nshabbar's lab6 part4 (ButtonsTest).  Compiled on %s %s.\n", __TIME__, __DATE__);
 
-    
+
     printf("Please press some buttons!\n");
-    
+    uint8_t status = BUTTON_EVENT_NONE;
+    ButtonsInit();
+    OledInit();
+    char string_2[100];
+
+    while (1) {
+        if (Button == status) {
+            sprintf(string_2, "Event:1--\nEVENT:2--EVENT:3--\nEVENT:4--");
+            OledDrawString(string_2);
+            OledUpdate();
+        } else if (Button && BUTTON_EVENT_1UP) {
+            sprintf(string_2, "Event:1--\nEVENT:2--EVENT:3--\nEVENT:4--");
+            OledDrawString(string_2);
+            OledUpdate();
+        } else if (Button && BUTTON_EVENT_1DOWN) {
+            sprintf(string_2, "Event:1--\nEVENT:2--EVENT:3--\nEVENT:4--");
+            OledDrawString(string_2);
+            OledUpdate();
+        } else if (Button && BUTTON_EVENT_2UP) {
+            sprintf(string_2, "Event:1--\nEVENT:2--EVENT:3--\nEVENT:4--");
+            OledDrawString(string_2);
+            OledUpdate();
+        } else if (Button && BUTTON_EVENT_2DOWN) {
+            sprintf(string_2, "Event:1--\nEVENT:2--EVENT:3--\nEVENT:4--");
+            OledDrawString(string_2);
+            OledUpdate();
+        }
+    }
 
     /***************************************************************************************************
      * Your code goes in between this comment and the preceding one with asterisks
@@ -59,8 +87,7 @@ int main(void)
  * 
  * You should not modify this function for ButtonsTest.c or bounce_buttons.c!
  */
-void __ISR(_TIMER_1_VECTOR, ipl4auto) Timer1Handler(void)
-{
+void __ISR(_TIMER_1_VECTOR, ipl4auto) Timer1Handler(void) {
     // Clear the interrupt flag.
     IFS0bits.T1IF = 0;
 
