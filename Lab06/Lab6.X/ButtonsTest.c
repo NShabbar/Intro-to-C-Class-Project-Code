@@ -1,6 +1,7 @@
 // **** Include libraries here ****
 // Standard libraries
 #include <stdio.h>
+#include <string.h>
 
 //CMPE13 Support Library
 #include "BOARD.h"
@@ -42,52 +43,31 @@ int main(void) {
      * Your code goes in between this comment and the following one with asterisks.
      **************************************************************************************************/
     printf("Welcome to nshabbar's lab6 part4 (ButtonsTest).  Compiled on %s %s.\n", __TIME__, __DATE__);
-
+    
 
     printf("Please press some buttons!\n");
     uint8_t status = BUTTON_EVENT_NONE;
     ButtonsInit();
-    OledInit();
-    char string_2[100];
+    char Butt1[20] = "----";
+    char Butt2[20] = "----";
+    char Butt3[20] = "----";
+    char Butt4[20] = "----";
 
     while (1) {
         if (Button == status) {
-            sprintf(string_2, "Event:1--\nEVENT:2--EVENT:3--\nEVENT:4--");
-            OledDrawString(string_2);
-            OledUpdate();
-        } else if (Button & BUTTON_EVENT_1UP) {
-            sprintf(string_2, "Button 1 is up.");
-            OledDrawString(string_2);
-            OledUpdate();
+            printf("Event: 4:%s 3:%s 2:%s 1:%s\n", Butt4, Butt3, Butt2, Butt1);
         } else if (Button & BUTTON_EVENT_1DOWN) {
-            sprintf(string_2, "Button 1 is down");
-            OledDrawString(string_2);
-            OledUpdate();
-        } else if (Button & BUTTON_EVENT_2UP) {
-            sprintf(string_2, "Button 2 is up.");
-            OledDrawString(string_2);
-            OledUpdate();
+            strcpy(Butt1,"DOWN");
+            printf("Event: 4:%s 3:%s 2:%s 1:%s\n", Butt4, Butt3, Butt2, Butt1);
+        } else if (Button & BUTTON_EVENT_2DOWN) {
+            strcpy(Butt2,"DOWN");
+            printf("Event: 4:%s 3:%s 2:%s 1:%s\n", Butt4, Butt3, Butt2, Butt1);
         } else if (Button & BUTTON_EVENT_3DOWN) {
-            sprintf(string_2, "Button 2 is down.");
-            OledDrawString(string_2);
-            OledUpdate();
-        } else if (Button & BUTTON_EVENT_2UP) {
-            sprintf(string_2, "Button 3 is up.");
-            OledDrawString(string_2);
-            OledUpdate();
-        } else if (Button & BUTTON_EVENT_3DOWN) {
-            sprintf(string_2, "Button 3 is down.");
-            OledDrawString(string_2);
-            OledUpdate();
-
-        } else if (Button & BUTTON_EVENT_4UP) {
-            sprintf(string_2, "Button 4 is up.");
-            OledDrawString(string_2);
-            OledUpdate();
+            strcpy(Butt3,"DOWN");
+            printf("Event: 4:%s 3:%s 2:%s 1:%s\n", Butt4, Butt3, Butt2, Butt1);
         } else if (Button & BUTTON_EVENT_4DOWN) {
-            sprintf(string_2, "Button 4 is down.");
-            OledDrawString(string_2);
-            OledUpdate();
+            strcpy(Butt4,"DOWN");
+            printf("Event: 4:%s 3:%s 2:%s 1:%s\n", Butt4, Butt3, Butt2, Butt1);
         }
     }
 

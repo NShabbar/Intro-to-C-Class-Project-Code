@@ -12,9 +12,17 @@
 #include <GenericTypeDefs.h>
 
 //Variables in use
-uint8_t prev_event = 0;
-uint8_t curr_event;
-uint8_t debounce;
+static uint8_t debounce;
+uint8_t temp_status;
+uint8_t prev;
+uint8_t curr;
+
+struct Buttons {
+    uint8_t Butt1;
+    uint8_t Butt2;
+    uint8_t Butt3;
+    uint8_t Butt4;
+} status;
 
 void ButtonsInit(void) {
     TRISD |= 0x00E0; //set to input
@@ -22,51 +30,34 @@ void ButtonsInit(void) {
 }
 
 uint8_t ButtonsCheckEvents(void) {
-    uint8_t button_status = BUTTON_EVENT_NONE;
-    curr_event = BUTTON_STATES(); // at 0x01
+    uint8_t buttonsState = BUTTON_STATES();
+    static uint8_t EVENT = 0;
+    if (debounce == BUTTONS_DEBOUNCE_PERIOD) {
+        if (buttonsState & BUTTON_STATE_1 ) {
+            status.Butt1 = BUTTON_EVENT_1DOWN;
+        }
+        if (buttonsState & BUTTON_STATE_2) {
+            status.Butt2 = BUTTON_EVENT_2DOWN;
+        } 
+        if (buttonsState & BUTTON_STATE_3) {
+            status.Butt3 = BUTTON_EVENT_3DOWN;
+        }
+        if (buttonsState & BUTTON_STATE_4) {
+            status.Butt4 = BUTTON_EVENT_4DOWN;
+        }
+        temp_status = status.Butt1 | status.Butt2;
+        temp_status |= status.Butt3;
+        temp_status |= status.Butt4;
+        if (temp_status == EVENT){
+            return BUTTON_EVENT_NONE;
+        }
+        else{
+            debounce = 0;
+        }
+    }
+    else{
+        debounce++;
+    }
 
-    if (debounce > 0) { //going through debounce
-        debounce--;
-        return button_status;
-    }
-    if (curr_event == prev_event) { //returns no event due to being equal
-        return button_status;
-    }
-    if (BUTTON_STATE_1 == curr_event) { //when button equal to state
-        button_status = BUTTON_EVENT_1DOWN; //no event on down
-        prev_event = button_status; //prev. event set to no event
-        return button_status;
-    }
-    if ((curr_event != BUTTON_STATE_1) & (prev_event == BUTTON_EVENT_1DOWN)) {
-        button_status == BUTTON_EVENT_1UP; //set button to up event
-        return button_status;
-    }
-    if (BUTTON_STATE_2 == curr_event) { //similar to state 1
-        button_status == BUTTON_EVENT_2DOWN; //similar to state 1
-        prev_event = button_status; //similar to state 1
-        return button_status; //similar to state 1
-    }
-    if ((curr_event != BUTTON_STATE_2) && (prev_event == BUTTON_EVENT_2DOWN)) {
-        button_status == BUTTON_EVENT_2UP; //similar to state 1
-        return button_status; //similar to state 1
-    }
-    if (BUTTON_STATE_3 == curr_event) {
-        button_status == BUTTON_EVENT_3DOWN; //similar to state 1
-        prev_event = button_status; //similar to state 1
-        return button_status; //similar to state 1
-    }
-    if ((curr_event != BUTTON_STATE_3) & (prev_event == BUTTON_EVENT_3DOWN)) {
-        button_status == BUTTON_EVENT_3UP; //similar to state 1
-        return button_status; //similar to state 1
-    }
-    if (BUTTON_STATE_4 == curr_event) {
-        button_status == BUTTON_EVENT_4DOWN; //similar to state 1
-        prev_event = button_status; //similar to state 1
-        return button_status; //similar to state 1
-    }
-    if ((curr_event != BUTTON_STATE_4) & (prev_event == BUTTON_EVENT_4DOWN)) {
-        button_status == BUTTON_EVENT_4UP; //similar to state 1
-        return button_status; //similar to state 1
-    }
 }
 

@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=Ascii.c BOARD.c Oled.c OledDriver.c Leds_Lab06.c
+SOURCEFILES_QUOTED_IF_SPACED=Ascii.c BOARD.c ButtonsTest.c Oled.c OledDriver.c Leds_Lab06.c Buttons.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/Ascii.o ${OBJECTDIR}/BOARD.o ${OBJECTDIR}/Oled.o ${OBJECTDIR}/OledDriver.o ${OBJECTDIR}/Leds_Lab06.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/Ascii.o.d ${OBJECTDIR}/BOARD.o.d ${OBJECTDIR}/Oled.o.d ${OBJECTDIR}/OledDriver.o.d ${OBJECTDIR}/Leds_Lab06.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/Ascii.o ${OBJECTDIR}/BOARD.o ${OBJECTDIR}/ButtonsTest.o ${OBJECTDIR}/Oled.o ${OBJECTDIR}/OledDriver.o ${OBJECTDIR}/Leds_Lab06.o ${OBJECTDIR}/Buttons.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/Ascii.o.d ${OBJECTDIR}/BOARD.o.d ${OBJECTDIR}/ButtonsTest.o.d ${OBJECTDIR}/Oled.o.d ${OBJECTDIR}/OledDriver.o.d ${OBJECTDIR}/Leds_Lab06.o.d ${OBJECTDIR}/Buttons.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/Ascii.o ${OBJECTDIR}/BOARD.o ${OBJECTDIR}/Oled.o ${OBJECTDIR}/OledDriver.o ${OBJECTDIR}/Leds_Lab06.o
+OBJECTFILES=${OBJECTDIR}/Ascii.o ${OBJECTDIR}/BOARD.o ${OBJECTDIR}/ButtonsTest.o ${OBJECTDIR}/Oled.o ${OBJECTDIR}/OledDriver.o ${OBJECTDIR}/Leds_Lab06.o ${OBJECTDIR}/Buttons.o
 
 # Source Files
-SOURCEFILES=Ascii.c BOARD.c Oled.c OledDriver.c Leds_Lab06.c
+SOURCEFILES=Ascii.c BOARD.c ButtonsTest.c Oled.c OledDriver.c Leds_Lab06.c Buttons.c
 
 
 
@@ -119,6 +119,12 @@ ${OBJECTDIR}/BOARD.o: BOARD.c  .generated_files/flags/default/d8b3936ed11d62e319
 	@${RM} ${OBJECTDIR}/BOARD.o 
 	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -Wall -MP -MMD -MF "${OBJECTDIR}/BOARD.o.d" -o ${OBJECTDIR}/BOARD.o BOARD.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
 	
+${OBJECTDIR}/ButtonsTest.o: ButtonsTest.c  .generated_files/flags/default/25c0531e6089d54f674fe76d1b8fd06550ae8619 .generated_files/flags/default/af031a62ccc0c18b099f063c5edfd8e7f9b606f2
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/ButtonsTest.o.d 
+	@${RM} ${OBJECTDIR}/ButtonsTest.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -Wall -MP -MMD -MF "${OBJECTDIR}/ButtonsTest.o.d" -o ${OBJECTDIR}/ButtonsTest.o ButtonsTest.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
 ${OBJECTDIR}/Oled.o: Oled.c  .generated_files/flags/default/5364f80235f441c5b0f67c28a741dc1d50a84350 .generated_files/flags/default/af031a62ccc0c18b099f063c5edfd8e7f9b606f2
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/Oled.o.d 
@@ -137,6 +143,12 @@ ${OBJECTDIR}/Leds_Lab06.o: Leds_Lab06.c  .generated_files/flags/default/c0a844cb
 	@${RM} ${OBJECTDIR}/Leds_Lab06.o 
 	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -Wall -MP -MMD -MF "${OBJECTDIR}/Leds_Lab06.o.d" -o ${OBJECTDIR}/Leds_Lab06.o Leds_Lab06.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
 	
+${OBJECTDIR}/Buttons.o: Buttons.c  .generated_files/flags/default/94f842365bfe2fa39b852ec867e9278c0cacc7e8 .generated_files/flags/default/af031a62ccc0c18b099f063c5edfd8e7f9b606f2
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/Buttons.o.d 
+	@${RM} ${OBJECTDIR}/Buttons.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -Wall -MP -MMD -MF "${OBJECTDIR}/Buttons.o.d" -o ${OBJECTDIR}/Buttons.o Buttons.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
 else
 ${OBJECTDIR}/Ascii.o: Ascii.c  .generated_files/flags/default/1f828cfe511ea75906db940cf63f1b4123981888 .generated_files/flags/default/af031a62ccc0c18b099f063c5edfd8e7f9b606f2
 	@${MKDIR} "${OBJECTDIR}" 
@@ -149,6 +161,12 @@ ${OBJECTDIR}/BOARD.o: BOARD.c  .generated_files/flags/default/7b87021926c1998fbe
 	@${RM} ${OBJECTDIR}/BOARD.o.d 
 	@${RM} ${OBJECTDIR}/BOARD.o 
 	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -Wall -MP -MMD -MF "${OBJECTDIR}/BOARD.o.d" -o ${OBJECTDIR}/BOARD.o BOARD.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
+${OBJECTDIR}/ButtonsTest.o: ButtonsTest.c  .generated_files/flags/default/fab850e2bf9022b0a3707b860958e3f66d31d3df .generated_files/flags/default/af031a62ccc0c18b099f063c5edfd8e7f9b606f2
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/ButtonsTest.o.d 
+	@${RM} ${OBJECTDIR}/ButtonsTest.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -Wall -MP -MMD -MF "${OBJECTDIR}/ButtonsTest.o.d" -o ${OBJECTDIR}/ButtonsTest.o ButtonsTest.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
 	
 ${OBJECTDIR}/Oled.o: Oled.c  .generated_files/flags/default/bc6a66050a56845d0990df692a9bbafc42c66685 .generated_files/flags/default/af031a62ccc0c18b099f063c5edfd8e7f9b606f2
 	@${MKDIR} "${OBJECTDIR}" 
@@ -167,6 +185,12 @@ ${OBJECTDIR}/Leds_Lab06.o: Leds_Lab06.c  .generated_files/flags/default/da24885d
 	@${RM} ${OBJECTDIR}/Leds_Lab06.o.d 
 	@${RM} ${OBJECTDIR}/Leds_Lab06.o 
 	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -Wall -MP -MMD -MF "${OBJECTDIR}/Leds_Lab06.o.d" -o ${OBJECTDIR}/Leds_Lab06.o Leds_Lab06.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
+${OBJECTDIR}/Buttons.o: Buttons.c  .generated_files/flags/default/1de592b54beba4a756daabe50ebbd0d165eea702 .generated_files/flags/default/af031a62ccc0c18b099f063c5edfd8e7f9b606f2
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/Buttons.o.d 
+	@${RM} ${OBJECTDIR}/Buttons.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -Wall -MP -MMD -MF "${OBJECTDIR}/Buttons.o.d" -o ${OBJECTDIR}/Buttons.o Buttons.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
 	
 endif
 
