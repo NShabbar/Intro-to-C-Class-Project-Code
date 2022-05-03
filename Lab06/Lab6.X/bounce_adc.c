@@ -26,11 +26,11 @@ static struct adc_result adc_res;
 // **** Define global, module-level, or external variables here ****
 #define WINDOW 5
 uint16_t avg;
-uint16_t percentage;
+float percentage;
 uint16_t voltage_data;
 uint16_t total;
 
-#define MAX 10;
+#define MAX 1023
 uint16_t maximum = 100;
 char string[100];
 
@@ -72,16 +72,14 @@ int main(void) {
 
     OledInit();
     while (1) {
-        if (adc_res.event == 1) {
-            percentage = (adc_res.voltage) / MAX; //dividing by 10
-            if (percentage > maximum) {
-                percentage = maximum;
-            }
-            sprintf(string, "The Potentiometer's Value is: \n%3d%%",
-                    adc_res.voltage, percentage);
+        if (adc_res.event == TRUE) {
+            float percentage_temp = adc_res.voltage; //converting to float.
+            percentage = (percentage_temp / MAX) * 100;
+            sprintf(string, "The Potentiometer's Value is:\n Volt: %d \n "
+                    "Percent: %3.1f ", adc_res.voltage, percentage);
             OledDrawString(string); //to show on the oled screen
             OledUpdate();
-            adc_res.event = 0; //makes event false
+            adc_res.event = FALSE; //makes event false
         }
     }
     /***************************************************************************************************

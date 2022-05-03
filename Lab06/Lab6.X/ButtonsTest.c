@@ -55,20 +55,37 @@ int main(void) {
             sprintf(string_2, "Event:1--\nEVENT:2--EVENT:3--\nEVENT:4--");
             OledDrawString(string_2);
             OledUpdate();
-        } else if (Button && BUTTON_EVENT_1UP) {
-            sprintf(string_2, "Event:1--\nEVENT:2--EVENT:3--\nEVENT:4--");
+        } else if (Button & BUTTON_EVENT_1UP) {
+            sprintf(string_2, "Button 1 is up.");
             OledDrawString(string_2);
             OledUpdate();
-        } else if (Button && BUTTON_EVENT_1DOWN) {
-            sprintf(string_2, "Event:1--\nEVENT:2--EVENT:3--\nEVENT:4--");
+        } else if (Button & BUTTON_EVENT_1DOWN) {
+            sprintf(string_2, "Button 1 is down");
             OledDrawString(string_2);
             OledUpdate();
-        } else if (Button && BUTTON_EVENT_2UP) {
-            sprintf(string_2, "Event:1--\nEVENT:2--EVENT:3--\nEVENT:4--");
+        } else if (Button & BUTTON_EVENT_2UP) {
+            sprintf(string_2, "Button 2 is up.");
             OledDrawString(string_2);
             OledUpdate();
-        } else if (Button && BUTTON_EVENT_2DOWN) {
-            sprintf(string_2, "Event:1--\nEVENT:2--EVENT:3--\nEVENT:4--");
+        } else if (Button & BUTTON_EVENT_3DOWN) {
+            sprintf(string_2, "Button 2 is down.");
+            OledDrawString(string_2);
+            OledUpdate();
+        } else if (Button & BUTTON_EVENT_2UP) {
+            sprintf(string_2, "Button 3 is up.");
+            OledDrawString(string_2);
+            OledUpdate();
+        } else if (Button & BUTTON_EVENT_3DOWN) {
+            sprintf(string_2, "Button 3 is down.");
+            OledDrawString(string_2);
+            OledUpdate();
+
+        } else if (Button & BUTTON_EVENT_4UP) {
+            sprintf(string_2, "Button 4 is up.");
+            OledDrawString(string_2);
+            OledUpdate();
+        } else if (Button & BUTTON_EVENT_4DOWN) {
+            sprintf(string_2, "Button 4 is down.");
             OledDrawString(string_2);
             OledUpdate();
         }
