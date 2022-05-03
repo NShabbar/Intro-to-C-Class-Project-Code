@@ -36,8 +36,7 @@ static struct Timer TimerC;
 
 // **** Declare function prototypes ****
 
-int main(void)
-{
+int main(void) {
     BOARD_Init();
 
     // Configure Timer 1 using PBCLK as input. This default period will make the LEDs blink at a
@@ -57,33 +56,33 @@ int main(void)
      * Your code goes in between this comment and the following one with asterisks.
      **************************************************************************************************/
     printf("Welcome to nshabbar's lab6 part1 (timers).  Compiled on %s %s.\n", __TIME__, __DATE__);
-    
+
     TimerA.timeRemaining = Timer_A;
     TimerB.timeRemaining = Timer_B;
     TimerC.timeRemaining = Timer_C;
-    
+
     LEDS_INIT();
-    
+
     while (1) {
         //poll timer A
-            //react to timer A events
-            //clear timer A event flag
+        //react to timer A events
+        //clear timer A event flag
         char set = LEDS_GET();
-        if (TimerA.event == TRUE){
+        if (TimerA.event == TRUE) {
             printf("A");
-            set^= LED1;
+            set ^= LED1;
             TimerA.event = FALSE;
             TimerA.timeRemaining = Timer_A;
         }
-        if (TimerB.event == TRUE){
+        if (TimerB.event == TRUE) {
             printf("B");
-            set^= LED2;
+            set ^= LED2;
             TimerB.event = FALSE;
             TimerB.timeRemaining = Timer_B;
         }
-        if (TimerC.event == TRUE){
+        if (TimerC.event == TRUE) {
             printf("C");
-            set^= LED3;
+            set ^= LED3;
             TimerC.event = FALSE;
             TimerC.timeRemaining = Timer_C;
         }
@@ -103,8 +102,7 @@ int main(void)
  * 
  * It should not be called, and should communicate with main code only by using module-level variables.
  */
-void __ISR(_TIMER_1_VECTOR, ipl4auto) Timer1Handler(void)
-{
+void __ISR(_TIMER_1_VECTOR, ipl4auto) Timer1Handler(void) {
     // Clear the interrupt flag.
     IFS0bits.T1IF = 0;
     /***************************************************************************************************
@@ -124,10 +122,10 @@ void __ISR(_TIMER_1_VECTOR, ipl4auto) Timer1Handler(void)
     }
     //update timerA
     //if timerA has counted down,
-        //generate timerA event
-        //reset timerA
-    
-    
+    //generate timerA event
+    //reset timerA
+
+
     /***************************************************************************************************
      * Your code goes in between this comment and the preceding one with asterisks
      **************************************************************************************************/

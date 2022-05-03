@@ -10,21 +10,36 @@
 #include <sys/attribs.h>
 
 // User libraries
-
+#include "Oled.h"
 
 // **** Set macros and preprocessor directives ****
 
 // **** Declare any datatypes here ****
 
+struct adc_result {
+    uint8_t event;
+    uint16_t voltage;
+};
+
+static struct adc_result adc_res;
+
 // **** Define global, module-level, or external variables here ****
+#define WINDOW 5
+uint16_t avg;
+uint16_t percentage;
+uint16_t voltage_data;
+uint16_t total;
+
+#define MAX 10;
+uint16_t maximum = 100;
+char string[100];
 
 // **** Declare function prototypes ****
 
-int main(void)
-{
+int main(void) {
     BOARD_Init();
 
-// Enable interrupts for the ADC
+    // Enable interrupts for the ADC
     IPC6bits.AD1IP = 2;
     IPC6bits.AD1IS = 0;
     IEC1bits.AD1IE = 1;
@@ -35,7 +50,7 @@ int main(void)
     // Configure and start the ADC
     AD1CHSbits.CH0SA = 2; // add B2 to the mux
     AD1PCFGbits.PCFG2 = 0; // add b2 to the ADC
-     AD1CSSLbits.CSSL2 = 1; // and add b2 to the scanner
+    AD1CSSLbits.CSSL2 = 1; // and add b2 to the scanner
 
     AD1CON1 = 0; // start with 0
     AD1CON1bits.SSRC = 0b111; // auto conversion
@@ -47,15 +62,28 @@ int main(void)
     AD1CON3 = 0; // start with 0
     AD1CON3bits.SAMC = 29; // long sample time
     AD1CON3bits.ADCS = 50; // long conversion time
-    
+
     AD1CON1bits.ADON = 1; // and finally turn it on
 
     /***************************************************************************************************
      * Your code goes in between this comment and the following one with asterisks.
      **************************************************************************************************/
-  printf("Welcome to CRUZID's lab6 part3 (bounce_adc).  Compiled on %s %s.\n",__TIME__,__DATE__);
+    printf("Welcome to nshabbar's lab6 part3 (bounce_adc).  Compiled on %s %s.\n", __TIME__, __DATE__);
 
-
+    OledInit();
+    while (1) {
+        if (adc_res.event == 1) {
+            percentage = (adc_res.voltage) / MAX;
+            if (percentage > maximum) {
+                percentage = maximum;
+            }
+            sprintf(string, "The Potentiometer's Value is: \n%3d%%",
+                    adc_res.voltage, percentage);
+            OledDrawString(string);
+            OledUpdate();
+            adc_res.event = 0;
+        }
+    }
     /***************************************************************************************************
      * Your code goes in between this comment and the preceding one with asterisks
      **************************************************************************************************/
@@ -69,10 +97,16 @@ int main(void)
  * 
  * It should not be called, and should communicate with main code only by using module-level variables.
  */
-void __ISR(_ADC_VECTOR, ipl2auto) AdcHandler(void)
-{
+void __ISR(_ADC_VECTOR, ipl2auto) AdcHandler(void) {
     // Clear the interrupt flag.
     IFS1bits.AD1IF = 0;
 
+    total = (ADC1BUF0 + ADC1BUF1 + ADC1BUF2 + ADC1BUF3 + ADC1BUF4
+            + ADC1BUF5 + ADC1BUF6 + ADC1BUF7);
+    avg = (total / 8);
 
+    if (avg - adc_res.voltage > WINDOW || adc_res.voltage - avg > WINDOW) {
+        adc_res.event = TRUE;
+        adc_res.voltage = avg;
+    }
 }
