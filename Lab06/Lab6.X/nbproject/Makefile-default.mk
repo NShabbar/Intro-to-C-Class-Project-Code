@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=Ascii.c BOARD.c bounce_adc.c bounce_buttons.c bounce_ec.c bounce_switch.c bounce_timers.c ButtonsTest.c Oled.c OledDriver.c
+SOURCEFILES_QUOTED_IF_SPACED=Ascii.c BOARD.c bounce_adc.c bounce_buttons.c bounce_ec.c bounce_switch.c bounce_timers.c ButtonsTest.c Oled.c OledDriver.c Leds_Lab06.c Buttons.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/Ascii.o ${OBJECTDIR}/BOARD.o ${OBJECTDIR}/bounce_adc.o ${OBJECTDIR}/bounce_buttons.o ${OBJECTDIR}/bounce_ec.o ${OBJECTDIR}/bounce_switch.o ${OBJECTDIR}/bounce_timers.o ${OBJECTDIR}/ButtonsTest.o ${OBJECTDIR}/Oled.o ${OBJECTDIR}/OledDriver.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/Ascii.o.d ${OBJECTDIR}/BOARD.o.d ${OBJECTDIR}/bounce_adc.o.d ${OBJECTDIR}/bounce_buttons.o.d ${OBJECTDIR}/bounce_ec.o.d ${OBJECTDIR}/bounce_switch.o.d ${OBJECTDIR}/bounce_timers.o.d ${OBJECTDIR}/ButtonsTest.o.d ${OBJECTDIR}/Oled.o.d ${OBJECTDIR}/OledDriver.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/Ascii.o ${OBJECTDIR}/BOARD.o ${OBJECTDIR}/bounce_adc.o ${OBJECTDIR}/bounce_buttons.o ${OBJECTDIR}/bounce_ec.o ${OBJECTDIR}/bounce_switch.o ${OBJECTDIR}/bounce_timers.o ${OBJECTDIR}/ButtonsTest.o ${OBJECTDIR}/Oled.o ${OBJECTDIR}/OledDriver.o ${OBJECTDIR}/Leds_Lab06.o ${OBJECTDIR}/Buttons.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/Ascii.o.d ${OBJECTDIR}/BOARD.o.d ${OBJECTDIR}/bounce_adc.o.d ${OBJECTDIR}/bounce_buttons.o.d ${OBJECTDIR}/bounce_ec.o.d ${OBJECTDIR}/bounce_switch.o.d ${OBJECTDIR}/bounce_timers.o.d ${OBJECTDIR}/ButtonsTest.o.d ${OBJECTDIR}/Oled.o.d ${OBJECTDIR}/OledDriver.o.d ${OBJECTDIR}/Leds_Lab06.o.d ${OBJECTDIR}/Buttons.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/Ascii.o ${OBJECTDIR}/BOARD.o ${OBJECTDIR}/bounce_adc.o ${OBJECTDIR}/bounce_buttons.o ${OBJECTDIR}/bounce_ec.o ${OBJECTDIR}/bounce_switch.o ${OBJECTDIR}/bounce_timers.o ${OBJECTDIR}/ButtonsTest.o ${OBJECTDIR}/Oled.o ${OBJECTDIR}/OledDriver.o
+OBJECTFILES=${OBJECTDIR}/Ascii.o ${OBJECTDIR}/BOARD.o ${OBJECTDIR}/bounce_adc.o ${OBJECTDIR}/bounce_buttons.o ${OBJECTDIR}/bounce_ec.o ${OBJECTDIR}/bounce_switch.o ${OBJECTDIR}/bounce_timers.o ${OBJECTDIR}/ButtonsTest.o ${OBJECTDIR}/Oled.o ${OBJECTDIR}/OledDriver.o ${OBJECTDIR}/Leds_Lab06.o ${OBJECTDIR}/Buttons.o
 
 # Source Files
-SOURCEFILES=Ascii.c BOARD.c bounce_adc.c bounce_buttons.c bounce_ec.c bounce_switch.c bounce_timers.c ButtonsTest.c Oled.c OledDriver.c
+SOURCEFILES=Ascii.c BOARD.c bounce_adc.c bounce_buttons.c bounce_ec.c bounce_switch.c bounce_timers.c ButtonsTest.c Oled.c OledDriver.c Leds_Lab06.c Buttons.c
 
 
 
@@ -167,6 +167,18 @@ ${OBJECTDIR}/OledDriver.o: OledDriver.c  .generated_files/flags/default/93c40f40
 	@${RM} ${OBJECTDIR}/OledDriver.o 
 	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/OledDriver.o.d" -o ${OBJECTDIR}/OledDriver.o OledDriver.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
 	
+${OBJECTDIR}/Leds_Lab06.o: Leds_Lab06.c  .generated_files/flags/default/9199051fa690c04f226957adc597c30e59c251ce .generated_files/flags/default/af031a62ccc0c18b099f063c5edfd8e7f9b606f2
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/Leds_Lab06.o.d 
+	@${RM} ${OBJECTDIR}/Leds_Lab06.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/Leds_Lab06.o.d" -o ${OBJECTDIR}/Leds_Lab06.o Leds_Lab06.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
+${OBJECTDIR}/Buttons.o: Buttons.c  .generated_files/flags/default/d5eb7449a7123d1df79ee388122256abff41bf95 .generated_files/flags/default/af031a62ccc0c18b099f063c5edfd8e7f9b606f2
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/Buttons.o.d 
+	@${RM} ${OBJECTDIR}/Buttons.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/Buttons.o.d" -o ${OBJECTDIR}/Buttons.o Buttons.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
 else
 ${OBJECTDIR}/Ascii.o: Ascii.c  .generated_files/flags/default/3959f3bfc75bb988cc316add9e2ddcef0e553af9 .generated_files/flags/default/af031a62ccc0c18b099f063c5edfd8e7f9b606f2
 	@${MKDIR} "${OBJECTDIR}" 
@@ -227,6 +239,18 @@ ${OBJECTDIR}/OledDriver.o: OledDriver.c  .generated_files/flags/default/b3e92e06
 	@${RM} ${OBJECTDIR}/OledDriver.o.d 
 	@${RM} ${OBJECTDIR}/OledDriver.o 
 	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/OledDriver.o.d" -o ${OBJECTDIR}/OledDriver.o OledDriver.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
+${OBJECTDIR}/Leds_Lab06.o: Leds_Lab06.c  .generated_files/flags/default/771c52a0a823f8cdc9c48889b2c4bc37f2ea85d5 .generated_files/flags/default/af031a62ccc0c18b099f063c5edfd8e7f9b606f2
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/Leds_Lab06.o.d 
+	@${RM} ${OBJECTDIR}/Leds_Lab06.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/Leds_Lab06.o.d" -o ${OBJECTDIR}/Leds_Lab06.o Leds_Lab06.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
+${OBJECTDIR}/Buttons.o: Buttons.c  .generated_files/flags/default/f285dd367c424b04dd9f411ecb34fdb295cc095c .generated_files/flags/default/af031a62ccc0c18b099f063c5edfd8e7f9b606f2
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/Buttons.o.d 
+	@${RM} ${OBJECTDIR}/Buttons.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/Buttons.o.d" -o ${OBJECTDIR}/Buttons.o Buttons.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
 	
 endif
 

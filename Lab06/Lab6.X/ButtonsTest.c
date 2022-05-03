@@ -94,7 +94,7 @@ void __ISR(_TIMER_1_VECTOR, ipl4auto) Timer1Handler(void) {
     /***************************************************************************************************
      * Your code goes in between this comment and the following one with asterisks.
      **************************************************************************************************/
-
+    Button = ButtonsCheckEvents();
 
     /***************************************************************************************************
      * Your code goes in between this comment and the preceding one with asterisks
