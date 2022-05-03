@@ -70,21 +70,21 @@ int main(void) {
         char set = LEDS_GET();
         if (TimerA.event == TRUE) {
             printf("A");
-            set ^= LED1;
+            set ^= LED1; //needs to XOR to bounce
             TimerA.event = FALSE;
-            TimerA.timeRemaining = Timer_A;
+            TimerA.timeRemaining = Timer_A; //this equals time
         }
         if (TimerB.event == TRUE) {
             printf("B");
-            set ^= LED2;
+            set ^= LED2; //needs to XOR to bounce
             TimerB.event = FALSE;
-            TimerB.timeRemaining = Timer_B;
+            TimerB.timeRemaining = Timer_B; //this equals time
         }
         if (TimerC.event == TRUE) {
             printf("C");
-            set ^= LED3;
+            set ^= LED3; //needs to XOR to bounce
             TimerC.event = FALSE;
-            TimerC.timeRemaining = Timer_C;
+            TimerC.timeRemaining = Timer_C; //this equals time
         }
         LEDS_SET(set);
     }

@@ -16,14 +16,14 @@
 
 // **** Declare any datatypes here ****
 
-#define LED1 0x01
-#define LED2 0x02
-#define LED3 0x04
-#define LED4 0x08
-#define LED5 0x10
-#define LED6 0x20
-#define LED7 0x40
-#define LED8 0x80
+#define LED1 0x01 //binary eq: 0000 0001
+#define LED2 0x02 //binary eq: 0000 0010
+#define LED3 0x04 //binary eq: 0000 0100
+#define LED4 0x08 //binary eq: 0000 1000
+#define LED5 0x10 //binary eq: 0001 0000
+#define LED6 0x20 //binary eq: 0010 0000
+#define LED7 0x40 //binary eq: 0100 0000
+#define LED8 0x80 //binary eq: 1000 0000
 
 #define Board_Timer 2
 
@@ -75,15 +75,15 @@ int main(void) {
         if (Timer1.event == TRUE) {
             Timer1.event = FALSE;
             Timer1.timeRemaining = Board_Timer * (SWITCH_STATES() + 1);
-            if (LED_NOW == LED8) {
+            if (LED_NOW == LED8) { //if led8 going to the right
                 dir = RIGHT;
-            } else if (LED_NOW == LED1) {
+            } else if (LED_NOW == LED1) { //if led1 going to left
                 dir = LEFT;
             }
             if (dir == LEFT) {
-                LED_NOW = LED_NOW << 1;
+                LED_NOW = LED_NOW << 1; //shift bit to the left
             } else if (dir == RIGHT) {
-                LED_NOW = LED_NOW >> 1;
+                LED_NOW = LED_NOW >> 1; //shift bit to the right
             }
             LEDS_SET(LED_NOW);
         }

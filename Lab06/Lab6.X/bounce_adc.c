@@ -73,15 +73,15 @@ int main(void) {
     OledInit();
     while (1) {
         if (adc_res.event == 1) {
-            percentage = (adc_res.voltage) / MAX;
+            percentage = (adc_res.voltage) / MAX; //dividing by 10
             if (percentage > maximum) {
                 percentage = maximum;
             }
             sprintf(string, "The Potentiometer's Value is: \n%3d%%",
                     adc_res.voltage, percentage);
-            OledDrawString(string);
+            OledDrawString(string); //to show on the oled screen
             OledUpdate();
-            adc_res.event = 0;
+            adc_res.event = 0; //makes event false
         }
     }
     /***************************************************************************************************
