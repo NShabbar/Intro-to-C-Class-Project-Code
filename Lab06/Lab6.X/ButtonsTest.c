@@ -21,10 +21,6 @@
 // **** Define global, module-level, or external variables here ****
 static uint8_t Button;
 static uint8_t prog = FALSE;
-static char Butt1[20] = "----";
-static char Butt2[20] = "----";
-static char Butt3[20] = "----";
-static char Butt4[20] = "----";
 
 // **** Declare function prototypes ****
 
@@ -51,55 +47,42 @@ int main(void) {
 
 
     printf("Please press some buttons!\n");
-    uint8_t status = BUTTON_EVENT_NONE;
+
     ButtonsInit();
 
     while (1) {
+        char Butt1[20] = "----";
+        char Butt2[20] = "----";
+        char Butt3[20] = "----";
+        char Butt4[20] = "----";
         if (prog == TRUE) {
-            if (Button == status) {
-                printf("Event: 4:%s 3:%s 2:%s 1:%s\n",
-                        Butt4, Butt3, Butt2, Butt1);
-            }
             if (Button & BUTTON_EVENT_1DOWN) {
                 strcpy(Butt1, "DOWN");
-                printf("Event: 4:%s 3:%s 2:%s 1:%s\n",
-                        Butt4, Butt3, Butt2, Butt1);
-            }
-            if (Button & BUTTON_EVENT_1UP) {
+            } else if (Button & BUTTON_EVENT_1UP) {
+                strcpy(Butt1, "UP");
                 strcpy(Butt1, "----");
-                printf("Event: 4:%s 3:%s 2:%s 1:%s\n",
-                        Butt4, Butt3, Butt2, Butt1);
             }
             if (Button & BUTTON_EVENT_2DOWN) {
                 strcpy(Butt2, "DOWN");
-                printf("Event: 4:%s 3:%s 2:%s 1:%s\n",
-                        Butt4, Butt3, Butt2, Butt1);
             }
-            if (Button & BUTTON_EVENT_2UP) {
+            else if (Button & BUTTON_EVENT_2UP) {
+                strcpy(Butt2, "UP");
                 strcpy(Butt2, "----");
-                printf("Event: 4:%s 3:%s 2:%s 1:%s\n",
-                        Butt4, Butt3, Butt2, Butt1);
             }
             if (Button & BUTTON_EVENT_3DOWN) {
                 strcpy(Butt3, "DOWN");
-                printf("Event: 4:%s 3:%s 2:%s 1:%s\n",
-                        Butt4, Butt3, Butt2, Butt1);
-            }
-            if (Button & BUTTON_EVENT_3UP) {
+            } else if (Button & BUTTON_EVENT_3UP) {
+                strcpy(Butt3, "UP");
                 strcpy(Butt3, "----");
-                printf("Event: 4:%s 3:%s 2:%s 1:%s\n",
-                        Butt4, Butt3, Butt2, Butt1);
             }
             if (Button & BUTTON_EVENT_4DOWN) {
                 strcpy(Butt4, "DOWN");
-                printf("Event: 4:%s 3:%s 2:%s 1:%s\n",
-                        Butt4, Butt3, Butt2, Butt1);
             }
-            if (Button & BUTTON_EVENT_4UP) {
+            else if (Button & BUTTON_EVENT_4UP) {
+                strcpy(Butt4, "UP");
                 strcpy(Butt4, "----");
-                printf("Event: 4:%s 3:%s 2:%s 1:%s\n",
-                        Butt4, Butt3, Butt2, Butt1);
             }
+            printf("EVENT: 4:%s 3:%s 2:%s 1:%s\n", Butt4, Butt3, Butt2, Butt1);
             prog = FALSE;
         }
     }

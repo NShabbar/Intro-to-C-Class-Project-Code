@@ -9,22 +9,19 @@
 //Microchip library items
 #include <xc.h>
 #include <sys/attribs.h>
-#include <GenericTypeDefs.h>
 
 //Variables in use
-static uint8_t debounce;
-uint8_t temp_status;
-static int prev_button1 = BUTTON_EVENT_1UP;
-static int prev_button2 = BUTTON_EVENT_2UP;
-static int prev_button3 = BUTTON_EVENT_3UP;
-static int prev_button4 = BUTTON_EVENT_4UP;
 
-struct Buttons {
-    uint8_t Butt1;
-    uint8_t Butt2;
-    uint8_t Butt3;
-    uint8_t Butt4;
-} status;
+enum {
+    UP = 1,
+    DOWN
+};
+static uint8_t debounce;
+static int prev_button1 = UP;
+static int prev_button2 = UP;
+static int prev_button3 = UP;
+static int prev_button4 = UP;
+static uint8_t prev_event;
 
 void ButtonsInit(void) {
     TRISD |= 0x00E0; //set to input
@@ -32,48 +29,56 @@ void ButtonsInit(void) {
 }
 
 uint8_t ButtonsCheckEvents(void) {
-    uint8_t buttonsState = BUTTON_STATES();
-    static uint8_t EVENT = 0;
+
     if (debounce == BUTTONS_DEBOUNCE_PERIOD) {
-        if ((prev_button1 = BUTTON_EVENT_1UP) && 
+        uint8_t buttonsState = BUTTON_STATES();
+        uint8_t EVENT = 0;
+        if ((prev_button1 == UP) &&
                 (buttonsState & BUTTON_STATE_1)) {
-            status.Butt1 = BUTTON_EVENT_1DOWN;
+            EVENT |= BUTTON_EVENT_1DOWN;
+            prev_button1 = DOWN;
         }
-        if ((prev_button2 = BUTTON_EVENT_2UP) && 
+        if ((prev_button2 == UP) &&
                 (buttonsState & BUTTON_STATE_2)) {
-            status.Butt2 = BUTTON_EVENT_2DOWN;
+            EVENT |= BUTTON_EVENT_2DOWN;
+            prev_button2 = DOWN;
         }
-        if ((prev_button3 = BUTTON_EVENT_3UP) && 
+        if ((prev_button3 == UP) &&
                 (buttonsState & BUTTON_STATE_3)) {
-            status.Butt3 = BUTTON_EVENT_3DOWN;
+            EVENT |= BUTTON_EVENT_3DOWN;
+            prev_button3 = DOWN;
         }
-        if ((prev_button4 = BUTTON_EVENT_4UP) && 
+        if ((prev_button4 == UP) &&
                 (buttonsState & BUTTON_STATE_4)) {
-            status.Butt4 = BUTTON_EVENT_4DOWN;
+            EVENT |= BUTTON_EVENT_4DOWN;
+            prev_button4 = DOWN;
         }
-        if ((prev_button1 = BUTTON_EVENT_1DOWN) && 
+        if ((prev_button1 = BUTTON_EVENT_1DOWN) &&
                 (buttonsState & BUTTON_STATE_1) == 0) {
-            status.Butt1 = BUTTON_EVENT_1UP;
+            EVENT |= BUTTON_EVENT_1UP;
+            prev_button1 = UP;
         }
-        if ((prev_button2 = BUTTON_EVENT_2DOWN) && 
+        if ((prev_button2 = BUTTON_EVENT_2DOWN) &&
                 (buttonsState & BUTTON_STATE_2) == 0) {
-            status.Butt2 = BUTTON_EVENT_2UP;
+            EVENT |= BUTTON_EVENT_2UP;
+            prev_button2 = UP;
         }
-        if ((prev_button3 = BUTTON_EVENT_3DOWN) && 
+        if ((prev_button3 = BUTTON_EVENT_3DOWN) &&
                 (buttonsState & BUTTON_STATE_3) == 0) {
-            status.Butt3 = BUTTON_EVENT_3UP;
+            EVENT |= BUTTON_EVENT_3UP;
+            prev_button3 = UP;
         }
-        if ((prev_button4 = BUTTON_EVENT_4DOWN) && 
+        if ((prev_button4 = BUTTON_EVENT_4DOWN) &&
                 (buttonsState & BUTTON_STATE_4) == 0) {
-            status.Butt4 = BUTTON_EVENT_4UP;
+            EVENT |= BUTTON_EVENT_4UP;
+            prev_button4 = UP;
         }
-        temp_status = status.Butt1 | status.Butt2 | status.Butt3 | status.Butt4;
-        if (temp_status == EVENT) {
-            return BUTTON_EVENT_NONE;
-        } else {
-            EVENT = temp_status;
-            debounce = 0;
+        debounce = 0;
+        if (EVENT != prev_event) {
+            prev_event = EVENT;
             return EVENT;
+        } else {
+            return BUTTON_EVENT_NONE;
         }
     } else {
         debounce++;
