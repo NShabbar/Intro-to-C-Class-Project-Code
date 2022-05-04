@@ -60,27 +60,23 @@ int main(void) {
                 strcpy(Butt1, "DOWN");
             } else if (Button & BUTTON_EVENT_1UP) {
                 strcpy(Butt1, "UP");
-                strcpy(Butt1, "----");
             }
             if (Button & BUTTON_EVENT_2DOWN) {
                 strcpy(Butt2, "DOWN");
             }
             else if (Button & BUTTON_EVENT_2UP) {
                 strcpy(Butt2, "UP");
-                strcpy(Butt2, "----");
             }
             if (Button & BUTTON_EVENT_3DOWN) {
                 strcpy(Butt3, "DOWN");
             } else if (Button & BUTTON_EVENT_3UP) {
-                strcpy(Butt3, "UP");
-                strcpy(Butt3, "----");
+                strcpy(Butt3, "UP");;
             }
             if (Button & BUTTON_EVENT_4DOWN) {
                 strcpy(Butt4, "DOWN");
             }
             else if (Button & BUTTON_EVENT_4UP) {
                 strcpy(Butt4, "UP");
-                strcpy(Butt4, "----");
             }
             printf("EVENT: 4:%s 3:%s 2:%s 1:%s\n", Butt4, Butt3, Butt2, Butt1);
             prog = FALSE;

@@ -53,22 +53,22 @@ uint8_t ButtonsCheckEvents(void) {
             EVENT |= BUTTON_EVENT_4DOWN;
             prev_button4 = DOWN;
         }
-        if ((prev_button1 = BUTTON_EVENT_1DOWN) &&
+        if ((prev_button1 = DOWN) &&
                 (buttonsState & BUTTON_STATE_1) == 0) {
             EVENT |= BUTTON_EVENT_1UP;
             prev_button1 = UP;
         }
-        if ((prev_button2 = BUTTON_EVENT_2DOWN) &&
+        if ((prev_button2 = DOWN) &&
                 (buttonsState & BUTTON_STATE_2) == 0) {
             EVENT |= BUTTON_EVENT_2UP;
             prev_button2 = UP;
         }
-        if ((prev_button3 = BUTTON_EVENT_3DOWN) &&
+        if ((prev_button3 = DOWN) &&
                 (buttonsState & BUTTON_STATE_3) == 0) {
             EVENT |= BUTTON_EVENT_3UP;
             prev_button3 = UP;
         }
-        if ((prev_button4 = BUTTON_EVENT_4DOWN) &&
+        if ((prev_button4 = DOWN) &&
                 (buttonsState & BUTTON_STATE_4) == 0) {
             EVENT |= BUTTON_EVENT_4UP;
             prev_button4 = UP;
