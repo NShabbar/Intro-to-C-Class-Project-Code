@@ -20,7 +20,12 @@
 
 // **** Define global, module-level, or external variables here ****
 static uint8_t Button;
-static uint8_t prog = FALSE;
+static uint8_t prog = TRUE;
+static char Butt1[20] = "----";
+static char Butt2[20] = "----";
+static char Butt3[20] = "----";
+static char Butt4[20] = "----";
+
 // **** Declare function prototypes ****
 
 int main(void) {
@@ -50,47 +55,60 @@ int main(void) {
     ButtonsInit();
 
     while (1) {
-        char Butt1[20] = "----";
-        char Butt2[20] = "----";
-        char Butt3[20] = "----";
-        char Butt4[20] = "----";
-
         if (prog == TRUE) {
             if (Button == status) {
-                printf("Event: 4:%s 3:%s 2:%s 1:%s\n", Butt4, Butt3, Butt2, Butt1);
+                strcpy(Butt1, "----");
+                strcpy(Butt2, "----");
+                strcpy(Butt3, "----");
+                strcpy(Butt4, "----");
+                printf("Event: 4:%s 3:%s 2:%s 1:%s\n",
+                        Butt4, Butt3, Butt2, Butt1);
             }
             if (Button & BUTTON_EVENT_1DOWN) {
                 strcpy(Butt1, "DOWN");
-                printf("Event: 4:%s 3:%s 2:%s 1:%s\n", Butt4, Butt3, Butt2, Butt1);
+                printf("Event: 4:%s 3:%s 2:%s 1:%s\n",
+                        Butt4, Butt3, Butt2, Butt1);
             } else if (Button & BUTTON_EVENT_1UP) {
                 strcpy(Butt1, "UP");
-                printf("Event: 4:%s 3:%s 2:%s 1:%s\n", Butt4, Butt3, Butt2, Butt1);
+                printf("Event: 4:%s 3:%s 2:%s 1:%s\n",
+                        Butt4, Butt3, Butt2, Butt1);
             }
             if (Button & BUTTON_EVENT_2DOWN) {
                 strcpy(Butt2, "DOWN");
-                printf("Event: 4:%s 3:%s 2:%s 1:%s\n", Butt4, Butt3, Butt2, Butt1);
+                printf("Event: 4:%s 3:%s 2:%s 1:%s\n",
+                        Butt4, Butt3, Butt2, Butt1);
             } else if (Button & BUTTON_EVENT_2UP) {
                 strcpy(Butt2, "UP");
-                printf("Event: 4:%s 3:%s 2:%s 1:%s\n", Butt4, Butt3, Butt2, Butt1);
+                printf("Event: 4:%s 3:%s 2:%s 1:%s\n",
+                        Butt4, Butt3, Butt2, Butt1);
             }
             if (Button & BUTTON_EVENT_3DOWN) {
                 strcpy(Butt3, "DOWN");
-                printf("Event: 4:%s 3:%s 2:%s 1:%s\n", Butt4, Butt3, Butt2, Butt1);
+                printf("Event: 4:%s 3:%s 2:%s 1:%s\n",
+                        Butt4, Butt3, Butt2, Butt1);
             } else if (Button & BUTTON_EVENT_3UP) {
                 strcpy(Butt3, "UP");
-                printf("Event: 4:%s 3:%s 2:%s 1:%s\n", Butt4, Butt3, Butt2, Butt1);
+                printf("Event: 4:%s 3:%s 2:%s 1:%s\n",
+                        Butt4, Butt3, Butt2, Butt1);
             }
             if (Button & BUTTON_EVENT_4DOWN) {
                 strcpy(Butt4, "DOWN");
-                printf("Event: 4:%s 3:%s 2:%s 1:%s\n", Butt4, Butt3, Butt2, Butt1);
+                printf("Event: 4:%s 3:%s 2:%s 1:%s\n",
+                        Butt4, Butt3, Butt2, Butt1);
             } else if (Button & BUTTON_EVENT_4UP) {
                 strcpy(Butt4, "UP");
-                printf("Event: 4:%s 3:%s 2:%s 1:%s\n", Butt4, Butt3, Butt2, Butt1);
+                printf("Event: 4:%s 3:%s 2:%s 1:%s\n",
+                        Butt4, Butt3, Butt2, Butt1);
             }
+            prog = TRUE;
         }
+    
     }
-
-
+    
+    Button = ButtonsCheckEvents();
+    if (Button != BUTTON_EVENT_NONE) {
+        prog = FALSE;
+    }
     /***************************************************************************************************
      * Your code goes in between this comment and the preceding one with asterisks
      **************************************************************************************************/
@@ -111,10 +129,7 @@ void __ISR(_TIMER_1_VECTOR, ipl4auto) Timer1Handler(void) {
     /***************************************************************************************************
      * Your code goes in between this comment and the following one with asterisks.
      **************************************************************************************************/
-    Button = ButtonsCheckEvents();
-    if (Button != BUTTON_EVENT_NONE) {
-        prog = TRUE;
-    }
+    
     /***************************************************************************************************
      * Your code goes in between this comment and the preceding one with asterisks
      **************************************************************************************************/
