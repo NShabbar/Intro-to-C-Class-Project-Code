@@ -1,12 +1,13 @@
-### Nadia Shabbar ###
-## Collaborators: ##
+## Nadia Shabbar ##
+
+### Collaborators: ###
 Tristen Miller, and Aidan the TA.
 
-# Summary: #
+### Summary: ###
 In this lab, we learned how to interact with the hardware with
 our coding, and how to interact multiple functions all together.
 
-# Approach: #
+### Approach: ###
 My approach to this lab was nonexistant. I struggled with this
 lab immensely, and in the end I don't think I even did the lab
 correctly, but it was still an interesting lab none the less.
