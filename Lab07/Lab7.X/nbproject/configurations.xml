@@ -10,6 +10,7 @@
       <itemPath>Buttons.h</itemPath>
       <itemPath>Leds.h</itemPath>
       <itemPath>OledDriver.h</itemPath>
+      <itemPath>Oled.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
