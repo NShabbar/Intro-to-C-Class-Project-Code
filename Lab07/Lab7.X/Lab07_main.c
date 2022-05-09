@@ -141,6 +141,9 @@ void updateOvenOLED(OvenData ovenData) {
             }
             break;
     }
+    OledClear(OLED_COLOR_BLACK);
+    OledDrawString(stringMain);
+    OledUpdate();
 }
 
 /*This function will execute your state machine.  
