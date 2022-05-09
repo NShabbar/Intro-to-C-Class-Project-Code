@@ -31,11 +31,13 @@
 
 
 // **** Set any local typedefs here ****
+
 typedef enum {
     SETUP, SELECTOR_CHANGE_PENDING, COOKING, RESET_PENDING
 } OvenState;
 
 //Making an OvenMode for broil, bake, toast.
+
 typedef enum {
     BROIL, BAKE, TOAST
 } OvenMode;
@@ -67,30 +69,92 @@ static uint16_t ButtonEvent;
 static uint16_t TimePassed;
 
 /*This function will update your OLED to reflect the state .*/
-void updateOvenOLED(OvenData ovenData){
+void updateOvenOLED(OvenData ovenData) {
     //update OLED here
     char stringMain[100];
-    switch(ovenData.Mode){
+    switch (ovenData.Mode) {
         case BROIL:
-            if (ovenData.state == COOKING)
+            if (ovenData.state == COOKING) {
+                sprintf(stringMain, "|%s%s%s%s| Mode: Broil\n|  "
+                        "|Time: %d:%02d\n|----|Temp: 500%sF\n|%s%s%s%s|", OVEN_TOP_ON,
+                        OVEN_TOP_ON, OVEN_TOP_ON, OVEN_TOP_ON,
+                        (ovenData.CookTimeRem / WINDOW) / 60,
+                        (ovenData.CookTimeRem / WINDOW) % 60,
+                        DEGREE_SYMBOL, OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF,
+                        OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF);
+            } else {
+                sprintf(stringMain, "|%s%s%s%s| Mode: Broil\n|  "
+                        "|Time: %d:%02d\n|----|Temp: 500%sF\n|%s%s%s%s|", OVEN_TOP_OFF,
+                        OVEN_TOP_OFF, OVEN_TOP_OFF, OVEN_TOP_OFF,
+                        (ovenData.CookTimeRem / WINDOW) / 60,
+                        (ovenData.CookTimeRem / WINDOW) % 60,
+                        DEGREE_SYMBOL, OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF,
+                        OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF);
+            }
+            break;
+        case BAKE:
+            if (ovenData.state == COOKING) {
+                sprintf(stringMain, "|%s%s%s%s| Mode: Bake\n|  "
+                        "|Time: %d:%02d\n|----|Temp: 500%sF\n|%s%s%s%s|", OVEN_TOP_ON,
+                        OVEN_TOP_ON, OVEN_TOP_ON, OVEN_TOP_ON,
+                        (ovenData.CookTimeRem / WINDOW) / 60,
+                        (ovenData.CookTimeRem / WINDOW) % 60,
+                        DEGREE_SYMBOL, OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF,
+                        OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF);
+            } else if (ovenData.state == SETUP) {
+                if (!TempChng) {
+                    sprintf(stringMain, "|%s%s%s%s| Mode: Bake\n|  "
+                            "|Time: %d:%02d\n|----|>Temp: 500%sF\n|%s%s%s%s|", OVEN_TOP_OFF,
+                            OVEN_TOP_OFF, OVEN_TOP_OFF, OVEN_TOP_OFF,
+                            (ovenData.CookTimeRem / WINDOW) / 60,
+                            (ovenData.CookTimeRem / WINDOW) % 60,
+                            DEGREE_SYMBOL, OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF,
+                            OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF);
+                } else {
+                    sprintf(stringMain, "|%s%s%s%s| Mode: Bake\n|  "
+                            "|Time: %d:%02d\n|----|Temp: 500%sF\n|%s%s%s%s|", OVEN_TOP_OFF,
+                            OVEN_TOP_OFF, OVEN_TOP_OFF, OVEN_TOP_OFF,
+                            (ovenData.CookTimeRem / WINDOW) / 60,
+                            (ovenData.CookTimeRem / WINDOW) % 60,
+                            DEGREE_SYMBOL, OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF,
+                            OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF);
+                }
+            }
+            break;
+        case TOAST:
+            if (ovenData.state == COOKING) {
+                sprintf(stringMain, "|%s%s%s%s| Mode: Toast\n|  "
+                        "|Time: %d:%02d\n|----|Temp: 500%sF\n|%s%s%s%s|", OVEN_TOP_ON,
+                        OVEN_TOP_ON, OVEN_TOP_ON, OVEN_TOP_ON,
+                        (ovenData.CookTimeRem / WINDOW) / 60,
+                        (ovenData.CookTimeRem / WINDOW) % 60,
+                        DEGREE_SYMBOL, OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF,
+                        OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF);
+            } else {
+                sprintf(stringMain, "|%s%s%s%s| Mode: Toast\n|  "
+                        "|Time: %d:%02d\n|----|Temp: 500%sF\n|%s%s%s%s|", OVEN_TOP_OFF,
+                        OVEN_TOP_OFF, OVEN_TOP_OFF, OVEN_TOP_OFF,
+                        (ovenData.CookTimeRem / WINDOW) / 60,
+                        (ovenData.CookTimeRem / WINDOW) % 60,
+                        DEGREE_SYMBOL, OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF,
+                        OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF);
+            }
+            break;
     }
 }
 
 /*This function will execute your state machine.  
  * It should ONLY run if an event flag has been set.*/
-void runOvenSM(void)
-{
+void runOvenSM(void) {
     //write your SM logic here.
 }
 
-
-int main()
-{
+int main() {
     BOARD_Init();
 
-     //initalize timers and timer ISRs:
+    //initalize timers and timer ISRs:
     // <editor-fold defaultstate="collapsed" desc="TIMER SETUP">
-    
+
     // Configure Timer 2 using PBCLK as input. We configure it using a 1:16 prescalar, so each timer
     // tick is actually at F_PB / 16 Hz, so setting PR2 to F_PB / 16 / 100 yields a .01s timer.
 
@@ -120,12 +184,12 @@ int main()
     IEC0bits.T3IE = 1; // turn the interrupt on;
 
     // </editor-fold>
-   
+
     printf("Welcome to CRUZID's Lab07 (Toaster Oven).  Compiled on %s %s.", __TIME__, __DATE__);
 
     //initialize state machine (and anything else you need to init) here
 
-    while (1){
+    while (1) {
         // Add main loop code here:
         // check for events
         // on event, run runOvenSM()
@@ -133,20 +197,16 @@ int main()
     };
 }
 
-
 /*The 5hz timer is used to update the free-running timer and to generate TIMER_TICK events*/
-void __ISR(_TIMER_3_VECTOR, ipl4auto) TimerInterrupt5Hz(void)
-{
+void __ISR(_TIMER_3_VECTOR, ipl4auto) TimerInterrupt5Hz(void) {
     // Clear the interrupt flag.
     IFS0CLR = 1 << 12;
 
     //add event-checking code here
 }
 
-
 /*The 100hz timer is used to check for button and ADC events*/
-void __ISR(_TIMER_2_VECTOR, ipl4auto) TimerInterrupt100Hz(void)
-{
+void __ISR(_TIMER_2_VECTOR, ipl4auto) TimerInterrupt100Hz(void) {
     // Clear the interrupt flag.
     IFS0CLR = 1 << 8;
 
