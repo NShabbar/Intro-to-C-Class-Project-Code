@@ -21,6 +21,13 @@
 // **** Set any macros or preprocessor directives here ****
 // Set a macro for resetting the timer, makes the code a little clearer.
 #define TIMER_2HZ_RESET() (TMR1 = 0)
+#define WINDOW 5
+#define addTEMP 300
+#define DEAFAULT_TEMP 350
+#define LONGPRESS 3
+#define LEDSOFF 0x00
+#define LEDSON 0xFF
+#define EIGHT 8
 
 
 // **** Set any local typedefs here ****
@@ -31,7 +38,13 @@ typedef enum {
 typedef struct {
     OvenState state;
     //add more members to this struct
+    
 } OvenData;
+
+//Making an OvenMode for broil, bake, toast.
+typedef enum {
+    BROIL, BAKE, TOAST
+} OvenMode;
 
 // **** Declare any datatypes here ****
 
