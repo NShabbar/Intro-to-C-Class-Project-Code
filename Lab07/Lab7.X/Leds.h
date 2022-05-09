@@ -18,7 +18,7 @@
  * After "calling" LEDS_INIT(), the other functions in this file can be used to manipulate the LED bar.
  */
 
-#define LEDS_INIT() /*  YOUR DEFINITION HERE   */
+#define LEDS_INIT() ({ TRISE = 0x00, LATE = 0x00;})/*  YOUR DEFINITION HERE   */
 
 
 /**
@@ -31,7 +31,7 @@
  * 
  * LEDS_SET should not change any LED pins to inputs.
  */
-#define LEDS_SET(newPattern) /*  YOUR DEFINITION HERE   */
+#define LEDS_SET(newPattern) (LATE = newPattern) /*  YOUR DEFINITION HERE   */
 
 
 /**
@@ -43,6 +43,6 @@
  * 
  * LEDS_GET() should not change the state of the LEDS, or any SFRs.
  */
-#define LEDS_GET() /*  YOUR DEFINITION HERE   */
+#define LEDS_GET() LATE; /*  YOUR DEFINITION HERE   */
 
 #endif // LEDS_H
