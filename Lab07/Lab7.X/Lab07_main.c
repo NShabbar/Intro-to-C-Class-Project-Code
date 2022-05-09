@@ -150,6 +150,18 @@ void updateOvenOLED(OvenData ovenData) {
  * It should ONLY run if an event flag has been set.*/
 void runOvenSM(void) {
     //write your SM logic here.
+    switch (Oven.state){
+        case SETUP:
+            if (ADC_change){
+                adc_val - (AdcRead() >> 2) + 1;
+                if(TempChng){
+                    Oven.Temperature = adc_val + addTEMP;
+                    if (Oven.Temperature > MaxTemp){
+                        Oven.Temperature = MaxTemp;
+                    }
+                }
+            }
+    }
 }
 
 int main() {
