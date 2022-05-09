@@ -35,16 +35,19 @@ typedef enum {
     SETUP, SELECTOR_CHANGE_PENDING, COOKING, RESET_PENDING
 } OvenState;
 
-typedef struct {
-    OvenState state;
-    //add more members to this struct
-    
-} OvenData;
-
 //Making an OvenMode for broil, bake, toast.
 typedef enum {
     BROIL, BAKE, TOAST
 } OvenMode;
+
+typedef struct {
+    OvenState state;
+    //add more members to this struct
+    OvenMode Mode;
+    uint16_t CookINIT;
+    uint16_t Temperature;
+    uint16_t CookTimeRem;
+} OvenData;
 
 // **** Declare any datatypes here ****
 
@@ -52,11 +55,25 @@ typedef enum {
 
 
 // **** Put any helper functions here ****
-
+static OvenData Oven;
+static uint16_t TempChng = 0;
+static uint16_t count = 0;
+static uint16_t stor;
+static uint16_t ADC_change = 0;
+static uint32_t adc_val;
+static uint16_t MaxTemp = 555;
+static uint16_t Ticker = 0;
+static uint16_t ButtonEvent;
+static uint16_t TimePassed;
 
 /*This function will update your OLED to reflect the state .*/
 void updateOvenOLED(OvenData ovenData){
     //update OLED here
+    char stringMain[100];
+    switch(ovenData.Mode){
+        case BROIL:
+            if (ovenData.state == COOKING)
+    }
 }
 
 /*This function will execute your state machine.  
