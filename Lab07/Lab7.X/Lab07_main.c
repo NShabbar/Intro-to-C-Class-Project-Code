@@ -75,81 +75,86 @@ void updateOvenOLED(OvenData ovenData) {
     switch (ovenData.Mode) {
         case BAKE:
             if (ovenData.state == COOKING) {
-                sprintf(stringMain, "|%s%s%s%s|   Mode: Bake\n"
-                        "|    |   Time: %d:%02d\n"
-                        "|----|   Temp: 500%sF\n"
-                        "|%s%s%s%s|", OVEN_TOP_ON,
+                sprintf(stringMain, "|%s%s%s%s%s|   Mode: Bake\n"
+                        "|     |   Time: %d:%02d\n"
+                        "|-----|   Temp: %d%sF\n"
+                        "|%s%s%s%s%s|", OVEN_TOP_ON, OVEN_TOP_ON,
                         OVEN_TOP_ON, OVEN_TOP_ON, OVEN_TOP_ON,
                         (ovenData.CookTimeRem / WINDOW) / 60,
                         (ovenData.CookTimeRem / WINDOW) % 60,
-                        DEGREE_SYMBOL, OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF,
-                        OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF);
+                        ovenData.Temperature, DEGREE_SYMBOL, OVEN_BOTTOM_OFF, 
+                        OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF,
+                        OVEN_BOTTOM_OFF);
             } else if (ovenData.state == SETUP) {
                 if (!TempChng) {
-                    sprintf(stringMain, "|%s%s%s%s|   Mode: Bake\n"
-                            "|    |   Time: %d:%02d\n"
-                            "|----| > Temp: 500%sF\n|%s%s%s%s|", OVEN_TOP_OFF,
-                            OVEN_TOP_OFF, OVEN_TOP_OFF, OVEN_TOP_OFF,
-                            (ovenData.CookTimeRem / WINDOW) / 60,
-                            (ovenData.CookTimeRem / WINDOW) % 60,
-                            DEGREE_SYMBOL, OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF,
-                            OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF);
+                    sprintf(stringMain, "|%s%s%s%s%s|   Mode: Bake\n"
+                        "|     |   Time: %d:%02d\n"
+                        "|-----|   Temp: %d%sF\n"
+                        "|%s%s%s%s%s|", OVEN_TOP_OFF, OVEN_TOP_OFF,
+                        OVEN_TOP_OFF, OVEN_TOP_OFF, OVEN_TOP_OFF,
+                        (ovenData.CookTimeRem / WINDOW) / 60,
+                        (ovenData.CookTimeRem / WINDOW) % 60,
+                        ovenData.Temperature, DEGREE_SYMBOL, OVEN_BOTTOM_OFF, 
+                        OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF,
+                        OVEN_BOTTOM_OFF);
                 } else {
-                    sprintf(stringMain, "|%s%s%s%s|   Mode: Bake\n"
-                            "|    |   Time: %d:%02d\n"
-                            "|----|   Temp: 500%sF\n"
-                            "|%s%s%s%s|", OVEN_TOP_OFF,
-                            OVEN_TOP_OFF, OVEN_TOP_OFF, OVEN_TOP_OFF,
-                            (ovenData.CookTimeRem / WINDOW) / 60,
-                            (ovenData.CookTimeRem / WINDOW) % 60,
-                            DEGREE_SYMBOL, OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF,
-                            OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF);
+                    sprintf(stringMain, "|%s%s%s%s%s|   Mode: Bake\n"
+                        "|      |   Time: %d:%02d\n"
+                        "|------|   Temp: %d%sF\n"
+                        "|%s%s%s%s%s|", OVEN_TOP_OFF, OVEN_TOP_OFF,
+                        OVEN_TOP_OFF, OVEN_TOP_OFF, OVEN_TOP_OFF,
+                        (ovenData.CookTimeRem / WINDOW) / 60,
+                        (ovenData.CookTimeRem / WINDOW) % 60,
+                        ovenData.Temperature, DEGREE_SYMBOL, OVEN_BOTTOM_OFF, 
+                        OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF,
+                        OVEN_BOTTOM_OFF);
                 }
             }
             break;
         case TOAST:
             if (ovenData.state == COOKING) {
-                sprintf(stringMain, "|%s%s%s%s|   Mode: Toast\n"
-                        "|    |   Time: %d:%02d\n"
-                        "|----|   Temp: 500%sF\n"
-                        "|%s%s%s%s|", OVEN_TOP_ON,
+                sprintf(stringMain, "|%s%s%s%s%s|   Mode: Toast\n"
+                        "|     |   Time: %d:%02d\n"
+                        "|-----|   Temp: %sF\n"
+                        "|%s%s%s%s%s|", OVEN_TOP_ON, OVEN_TOP_ON,
                         OVEN_TOP_ON, OVEN_TOP_ON, OVEN_TOP_ON,
                         (ovenData.CookTimeRem / WINDOW) / 60,
                         (ovenData.CookTimeRem / WINDOW) % 60,
                         DEGREE_SYMBOL, OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF,
-                        OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF);
+                        OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF);
             } else {
-                sprintf(stringMain, "|%s%s%s%s|   Mode: Toast\n"
-                        "|    |   Time: %d:%02d\n"
-                        "|----|   Temp: %sF\n|%s%s%s%s|", OVEN_TOP_OFF,
+                sprintf(stringMain, "|%s%s%s%s%s|   Mode: Toast\n"
+                        "|     |   Time: %d:%02d\n"
+                        "|-----|   Temp: %sF\n"
+                        "|%s%s%s%s%s|", OVEN_TOP_OFF, OVEN_TOP_OFF,
                         OVEN_TOP_OFF, OVEN_TOP_OFF, OVEN_TOP_OFF,
                         (ovenData.CookTimeRem / WINDOW) / 60,
                         (ovenData.CookTimeRem / WINDOW) % 60,
                         DEGREE_SYMBOL, OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF,
-                        OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF);
+                        OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF);
             }
             break;
         case BROIL:
             if (ovenData.state == COOKING) {
-                sprintf(stringMain, "|%s%s%s%s|   Mode: Broil\n"
-                        "|    |   Time: %d:%02d\n"
-                        "|----|   Temp: 500%sF\n"
-                        "|%s%s%s%s|", OVEN_TOP_ON,
+                sprintf(stringMain, "|%s%s%s%s%s|   Mode: Broil\n"
+                        "|     |   Time: %d:%02d\n"
+                        "|-----|   Temp: %sF\n"
+                        "|%s%s%s%s%s|", OVEN_TOP_ON, OVEN_TOP_ON,
                         OVEN_TOP_ON, OVEN_TOP_ON, OVEN_TOP_ON,
                         (ovenData.CookTimeRem / WINDOW) / 60,
                         (ovenData.CookTimeRem / WINDOW) % 60,
                         DEGREE_SYMBOL, OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF,
-                        OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF);
+                        OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF);
             } else {
-                sprintf(stringMain, "|%s%s%s%s|   Mode: Broil\n"
-                        "|    |   Time: %d:%02d\n"
-                        "|----|   Temp: 500%sF\n"
-                        "|%s%s%s%s|", OVEN_TOP_OFF,
+                sprintf(stringMain, "|%s%s%s%s%s|   Mode: Broil\n"
+                        "|     |   Time: %d:%02d\n"
+                        "|-----|   Temp: %sF\n"
+                        "|%s%s%s%s%s|", OVEN_TOP_OFF,OVEN_TOP_OFF,
                         OVEN_TOP_OFF, OVEN_TOP_OFF, OVEN_TOP_OFF,
                         (ovenData.CookTimeRem / WINDOW) / 60,
                         (ovenData.CookTimeRem / WINDOW) % 60,
                         DEGREE_SYMBOL, OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF,
-                        OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF);
+                        OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF);
             }
             break;
     }
@@ -165,7 +170,7 @@ void runOvenSM(void) {
     switch (Oven.state) {
         case SETUP:
             if (ADC_change) {
-                adc_val - (AdcRead() >> 2) + 1;
+                adc_val = (AdcRead() >> 2) + 1;
                 if (TempChng) {
                     Oven.Temperature = adc_val + addTEMP;
                     if (Oven.Temperature > MaxTemp) {
