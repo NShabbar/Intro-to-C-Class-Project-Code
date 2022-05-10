@@ -68,7 +68,7 @@ static uint16_t stor;
 static uint8_t ADC_change = 0;
 static uint32_t adc_val;
 static uint16_t MaxTemp = 555;
-static uint8_t Ticker = 0;
+static uint8_t TIMER_TICK = 0;
 static uint16_t ButtonEvent;
 static uint16_t TimePassed;
 
@@ -79,7 +79,7 @@ void updateOvenOLED(OvenData ovenData) {
     switch (ovenData.Mode) {
         case BAKE:
             if (ovenData.state == COOKING) {
-                sprintf(stringMain, "|%s%s%s%s%s|   Mode: Bake\n"
+                sprintf(stringMain, "|%s%s%s%s%s|   Mode: Bake \n"
                         "|     |   Time: %d:%02d\n"
                         "|-----|   Temp: %d%sF\n"
                         "|%s%s%s%s%s|", OVEN_TOP_ON, OVEN_TOP_ON,
@@ -93,7 +93,7 @@ void updateOvenOLED(OvenData ovenData) {
                 OledUpdate();
             } else if (ovenData.state == SETUP) {
                 if (Oven.input == TIME) {
-                    sprintf(stringMain, "|%s%s%s%s%s|   Mode: Bake\n"
+                    sprintf(stringMain, "|%s%s%s%s%s|   Mode: Bake \n"
                             "|     | > Time: %d:%02d\n"
                             "|-----|   Temp: %d%sF\n"
                             "|%s%s%s%s%s|", OVEN_TOP_OFF, OVEN_TOP_OFF,
@@ -106,7 +106,7 @@ void updateOvenOLED(OvenData ovenData) {
                     OledDrawString(stringMain);
                     OledUpdate();
                 } else {
-                    sprintf(stringMain, "|%s%s%s%s%s|   Mode: Bake\n"
+                    sprintf(stringMain, "|%s%s%s%s%s|   Mode: Bake \n"
                             "|     |   Time: %d:%02d\n"
                             "|-----| > Temp: %d%sF\n"
                             "|%s%s%s%s%s|", OVEN_TOP_OFF, OVEN_TOP_OFF,
@@ -125,24 +125,24 @@ void updateOvenOLED(OvenData ovenData) {
             if (ovenData.state == COOKING) {
                 sprintf(stringMain, "|%s%s%s%s%s|   Mode: Toast\n"
                         "|     |   Time: %d:%02d\n"
-                        "|-----|                \n"
+                        "|-----|              \n"
                         "|%s%s%s%s%s|", OVEN_TOP_ON, OVEN_TOP_ON,
                         OVEN_TOP_ON, OVEN_TOP_ON, OVEN_TOP_ON,
                         (ovenData.CookTimeRem / WINDOW) / 60,
                         (ovenData.CookTimeRem / WINDOW) % 60,
-                        DEGREE_SYMBOL, OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF,
+                        OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF,
                         OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF);
                 OledDrawString(stringMain);
                 OledUpdate();
             } else {
                 sprintf(stringMain, "|%s%s%s%s%s|   Mode: Toast\n"
                         "|     |   Time: %d:%02d\n"
-                        "|-----|                \n"
+                        "|-----|              \n"
                         "|%s%s%s%s%s|", OVEN_TOP_OFF, OVEN_TOP_OFF,
                         OVEN_TOP_OFF, OVEN_TOP_OFF, OVEN_TOP_OFF,
                         (ovenData.CookTimeRem / WINDOW) / 60,
                         (ovenData.CookTimeRem / WINDOW) % 60,
-                        DEGREE_SYMBOL, OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF,
+                        OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF,
                         OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF);
                 OledDrawString(stringMain);
                 OledUpdate();
@@ -231,7 +231,7 @@ void runOvenSM(void) {
             updateOvenOLED(Oven);
             break;
         case COOKING:
-            if (Ticker) {
+            if (TIMER_TICK) {
                 Oven.CookTimeRem--;
                 updateOvenOLED(Oven);
                 uint32_t NumLED = (Oven.CookTimeRem / (Oven.CookINIT / EIGHT))
@@ -244,7 +244,7 @@ void runOvenSM(void) {
                 }
             }
         case RESET_PENDING:
-            if (Ticker) {
+            if (TIMER_TICK) {
                 Oven.CookTimeRem -= 1;
                 if (Oven.CookTimeRem > 0) {
                     updateOvenOLED(Oven);
@@ -319,13 +319,13 @@ int main() {
 
     while (1) {
         // Add main loop code here:
-        if (ButtonEvent || Ticker || ADC_change) {
+        if (ButtonEvent || TIMER_TICK || ADC_change) {
             // check for events
             // on event, run runOvenSM()
             runOvenSM();
             // clear event flags
             ButtonEvent = BUTTON_EVENT_NONE;
-            Ticker = FALSE;
+            TIMER_TICK = FALSE;
             ADC_change = 0;
         }
     };
@@ -338,7 +338,7 @@ void __ISR(_TIMER_3_VECTOR, ipl4auto) TimerInterrupt5Hz(void) {
 
     //add event-checking code here
     count += 1;
-    Ticker = TRUE;
+    TIMER_TICK = TRUE;
 }
 
 /*The 100hz timer is used to check for button and ADC events*/
@@ -351,6 +351,5 @@ void __ISR(_TIMER_2_VECTOR, ipl4auto) TimerInterrupt100Hz(void) {
         adc_val = AdcRead();
         ADC_change = TRUE;
     }
-
     ButtonEvent = ButtonsCheckEvents();
 }
