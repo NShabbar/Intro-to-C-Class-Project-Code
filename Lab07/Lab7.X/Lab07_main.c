@@ -75,16 +75,20 @@ void updateOvenOLED(OvenData ovenData) {
     switch (ovenData.Mode) {
         case BROIL:
             if (ovenData.state == COOKING) {
-                sprintf(stringMain, "|%s%s%s%s| Mode: Broil\n|  "
-                        "|Time: %d:%02d\n|----|Temp: 500%sF\n|%s%s%s%s|", OVEN_TOP_ON,
+                sprintf(stringMain, "|%s%s%s%s|   Mode: Broil\n|  "
+                        "|    |   Time: %d:%02d\n"
+                        "|----|   Temp: 500%sF\n"
+                        "|%s%s%s%s|", OVEN_TOP_ON,
                         OVEN_TOP_ON, OVEN_TOP_ON, OVEN_TOP_ON,
                         (ovenData.CookTimeRem / WINDOW) / 60,
                         (ovenData.CookTimeRem / WINDOW) % 60,
                         DEGREE_SYMBOL, OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF,
                         OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF);
             } else {
-                sprintf(stringMain, "|%s%s%s%s| Mode: Broil\n|  "
-                        "|Time: %d:%02d\n|----|Temp: 500%sF\n|%s%s%s%s|", OVEN_TOP_OFF,
+                sprintf(stringMain, "|%s%s%s%s|   Mode: Broil\n|  "
+                        "|    |   Time: %d:%02d\n"
+                        "|----|   Temp: 500%sF\n"
+                        "|%s%s%s%s|", OVEN_TOP_OFF,
                         OVEN_TOP_OFF, OVEN_TOP_OFF, OVEN_TOP_OFF,
                         (ovenData.CookTimeRem / WINDOW) / 60,
                         (ovenData.CookTimeRem / WINDOW) % 60,
@@ -94,8 +98,10 @@ void updateOvenOLED(OvenData ovenData) {
             break;
         case BAKE:
             if (ovenData.state == COOKING) {
-                sprintf(stringMain, "|%s%s%s%s| Mode: Bake\n|  "
-                        "|Time: %d:%02d\n|----|Temp: 500%sF\n|%s%s%s%s|", OVEN_TOP_ON,
+                sprintf(stringMain, "|%s%s%s%s|   Mode: Bake\n|  "
+                        "|    |   Time: %d:%02d\n"
+                        "|----|   Temp: 500%sF\n"
+                        "|%s%s%s%s|", OVEN_TOP_ON,
                         OVEN_TOP_ON, OVEN_TOP_ON, OVEN_TOP_ON,
                         (ovenData.CookTimeRem / WINDOW) / 60,
                         (ovenData.CookTimeRem / WINDOW) % 60,
@@ -103,16 +109,19 @@ void updateOvenOLED(OvenData ovenData) {
                         OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF);
             } else if (ovenData.state == SETUP) {
                 if (!TempChng) {
-                    sprintf(stringMain, "|%s%s%s%s| Mode: Bake\n|  "
-                            "|Time: %d:%02d\n|----|>Temp: 500%sF\n|%s%s%s%s|", OVEN_TOP_OFF,
+                    sprintf(stringMain, "|%s%s%s%s|   Mode: Bake\n|  "
+                            "|    |   Time: %d:%02d\n"
+                            "|----| > Temp: 500%sF\n|%s%s%s%s|", OVEN_TOP_OFF,
                             OVEN_TOP_OFF, OVEN_TOP_OFF, OVEN_TOP_OFF,
                             (ovenData.CookTimeRem / WINDOW) / 60,
                             (ovenData.CookTimeRem / WINDOW) % 60,
                             DEGREE_SYMBOL, OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF,
                             OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF);
                 } else {
-                    sprintf(stringMain, "|%s%s%s%s| Mode: Bake\n|  "
-                            "|Time: %d:%02d\n|----|Temp: 500%sF\n|%s%s%s%s|", OVEN_TOP_OFF,
+                    sprintf(stringMain, "|%s%s%s%s|   Mode: Bake\n|  "
+                            "|    |   Time: %d:%02d\n"
+                            "|----|   Temp: 500%sF\n"
+                            "|%s%s%s%s|", OVEN_TOP_OFF,
                             OVEN_TOP_OFF, OVEN_TOP_OFF, OVEN_TOP_OFF,
                             (ovenData.CookTimeRem / WINDOW) / 60,
                             (ovenData.CookTimeRem / WINDOW) % 60,
@@ -123,16 +132,19 @@ void updateOvenOLED(OvenData ovenData) {
             break;
         case TOAST:
             if (ovenData.state == COOKING) {
-                sprintf(stringMain, "|%s%s%s%s| Mode: Toast\n|  "
-                        "|Time: %d:%02d\n|----|Temp: 500%sF\n|%s%s%s%s|", OVEN_TOP_ON,
+                sprintf(stringMain, "|%s%s%s%s|   Mode: Toast\n|  "
+                        "|    |   Time: %d:%02d\n"
+                        "|----|   Temp: 500%sF\n"
+                        "|%s%s%s%s|", OVEN_TOP_ON,
                         OVEN_TOP_ON, OVEN_TOP_ON, OVEN_TOP_ON,
                         (ovenData.CookTimeRem / WINDOW) / 60,
                         (ovenData.CookTimeRem / WINDOW) % 60,
                         DEGREE_SYMBOL, OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF,
                         OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF);
             } else {
-                sprintf(stringMain, "|%s%s%s%s| Mode: Toast\n|  "
-                        "|Time: %d:%02d\n|----|Temp: 500%sF\n|%s%s%s%s|", OVEN_TOP_OFF,
+                sprintf(stringMain, "|%s%s%s%s|   Mode: Toast\n|  "
+                        "|    |   Time: %d:%02d\n"
+                        "|----|   Temp: 500%sF\n|%s%s%s%s|", OVEN_TOP_OFF,
                         OVEN_TOP_OFF, OVEN_TOP_OFF, OVEN_TOP_OFF,
                         (ovenData.CookTimeRem / WINDOW) / 60,
                         (ovenData.CookTimeRem / WINDOW) % 60,
@@ -150,17 +162,86 @@ void updateOvenOLED(OvenData ovenData) {
  * It should ONLY run if an event flag has been set.*/
 void runOvenSM(void) {
     //write your SM logic here.
-    switch (Oven.state){
+    switch (Oven.state) {
         case SETUP:
-            if (ADC_change){
+            if (ADC_change) {
                 adc_val - (AdcRead() >> 2) + 1;
-                if(TempChng){
+                if (TempChng) {
                     Oven.Temperature = adc_val + addTEMP;
-                    if (Oven.Temperature > MaxTemp){
+                    if (Oven.Temperature > MaxTemp) {
                         Oven.Temperature = MaxTemp;
+                    } else {
+                        Oven.CookINIT = adc_val * WINDOW;
+                        Oven.CookTimeRem = Oven.CookINIT;
                     }
+                    updateOvenOLED(Oven);
                 }
             }
+            if (ButtonEvent & BUTTON_EVENT_3DOWN) {
+                stor = count;
+                Oven.state = SELECTOR_CHANGE_PENDING;
+            }
+            if (ButtonEvent & BUTTON_EVENT_4DOWN) {
+                stor = count;
+                updateOvenOLED(Oven);
+                Oven.state = COOKING;
+                LEDS_SET(LEDSON);
+            }
+            break;
+        case SELECTOR_CHANGE_PENDING:
+            if (ButtonEvent & BUTTON_EVENT_3UP) {
+                TimePassed = count - stor;
+                if (TimePassed < LONGPRESS) {
+                    if (Oven.Mode == 2) {
+                        Oven.Mode = 0;
+                    } else {
+                        Oven.Mode++;
+                    }
+                } else if (Oven.Mode == BAKE && TimePassed >= LONGPRESS) {
+                    if (TempChng == 1) {
+                        TempChng = 0;
+                    } else {
+                        TempChng = 1;
+                    }
+                }
+                Oven.state = SETUP;
+            }
+            updateOvenOLED(Oven);
+            break;
+        case COOKING:
+            if (Ticker) {
+                Oven.CookTimeRem--;
+                updateOvenOLED(Oven);
+                uint32_t NumLED = (Oven.CookTimeRem / (Oven.CookINIT / EIGHT))
+                        + 1;
+                LEDS_SET(LEDSON << (EIGHT - NumLED));
+                if (Oven.CookTimeRem == 0) {
+                    Oven.CookTimeRem = Oven.CookINIT;
+                    LEDS_SET(LEDSOFF);
+                    Oven.state = SETUP;
+                }
+            }
+        case RESET_PENDING:
+            if (Ticker) {
+                Oven.CookTimeRem -= 1;
+                if (Oven.CookTimeRem > 0) {
+                    updateOvenOLED(Oven);
+                } else {
+                    Oven.CookTimeRem = Oven.CookINIT;
+                    LEDS_SET(LEDSOFF);
+                }
+            }
+            if (ButtonEvent & BUTTON_EVENT_4UP) {
+                Oven.state = COOKING;
+            } else {
+                TimePassed = count - stor;
+                if (TimePassed >= LONGPRESS) {
+                    Oven.state = SETUP;
+                    updateOvenOLED(Oven);
+                    LEDS_SET(LEDSOFF);
+                }
+            }
+            break;
     }
 }
 
@@ -199,10 +280,31 @@ int main() {
     IEC0bits.T3IE = 1; // turn the interrupt on;
 
     // </editor-fold>
+    
+    T2CON = 0;
+    T2CONbits.TCKPS = 0b100;
+    PR2 = BOARD_GetPBClock() /16 / 100;
+    T2CONbits.ON = 1;
+    
+    IFS0bits.T2IF = 0;
+    IPC2bits.T2IP = 4;
+    IPC2bits.T2IS = 0;
+    IEC0bits.T2IE = 1;
+    
+    T3CON = 0;
+    T3CONbits.TCKPS = 0b111;
+    PR3 = BOARD_GetPBClock() /256/ 5;
+    T3CONbits.ON = 1;
+    
+    IFS0bits.T3IF = 0;
+    IPC3bits.T3IP = 4;
+    IPC3bits.T3IS = 0;
+    IEC0bits.T3IE = 1;
 
-    printf("Welcome to CRUZID's Lab07 (Toaster Oven).  Compiled on %s %s.", __TIME__, __DATE__);
+    printf("Welcome to nshabbar's Lab07 (Toaster Oven).  Compiled on %s %s.", __TIME__, __DATE__);
 
     //initialize state machine (and anything else you need to init) here
+    
 
     while (1) {
         // Add main loop code here:
