@@ -39,7 +39,7 @@ typedef enum {
 //Making an OvenMode for broil, bake, toast.
 
 typedef enum {
-    BROIL, BAKE, TOAST
+    BAKE, TOAST, BROIL
 } OvenMode;
 
 typedef struct {
@@ -73,29 +73,6 @@ void updateOvenOLED(OvenData ovenData) {
     //update OLED here
     char stringMain[100];
     switch (ovenData.Mode) {
-        case BROIL:
-            if (ovenData.state == COOKING) {
-                sprintf(stringMain, "|%s%s%s%s|   Mode: Broil\n"
-                        "|    |   Time: %d:%02d\n"
-                        "|----|   Temp: 500%sF\n"
-                        "|%s%s%s%s|", OVEN_TOP_ON,
-                        OVEN_TOP_ON, OVEN_TOP_ON, OVEN_TOP_ON,
-                        (ovenData.CookTimeRem / WINDOW) / 60,
-                        (ovenData.CookTimeRem / WINDOW) % 60,
-                        DEGREE_SYMBOL, OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF,
-                        OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF);
-            } else {
-                sprintf(stringMain, "|%s%s%s%s|   Mode: Broil\n"
-                        "|    |   Time: %d:%02d\n"
-                        "|----|   Temp: 500%sF\n"
-                        "|%s%s%s%s|", OVEN_TOP_OFF,
-                        OVEN_TOP_OFF, OVEN_TOP_OFF, OVEN_TOP_OFF,
-                        (ovenData.CookTimeRem / WINDOW) / 60,
-                        (ovenData.CookTimeRem / WINDOW) % 60,
-                        DEGREE_SYMBOL, OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF,
-                        OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF);
-            }
-            break;
         case BAKE:
             if (ovenData.state == COOKING) {
                 sprintf(stringMain, "|%s%s%s%s|   Mode: Bake\n"
@@ -144,7 +121,30 @@ void updateOvenOLED(OvenData ovenData) {
             } else {
                 sprintf(stringMain, "|%s%s%s%s|   Mode: Toast\n"
                         "|    |   Time: %d:%02d\n"
-                        "|----|   Temp: 500%sF\n|%s%s%s%s|", OVEN_TOP_OFF,
+                        "|----|   Temp: %sF\n|%s%s%s%s|", OVEN_TOP_OFF,
+                        OVEN_TOP_OFF, OVEN_TOP_OFF, OVEN_TOP_OFF,
+                        (ovenData.CookTimeRem / WINDOW) / 60,
+                        (ovenData.CookTimeRem / WINDOW) % 60,
+                        DEGREE_SYMBOL, OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF,
+                        OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF);
+            }
+            break;
+        case BROIL:
+            if (ovenData.state == COOKING) {
+                sprintf(stringMain, "|%s%s%s%s|   Mode: Broil\n"
+                        "|    |   Time: %d:%02d\n"
+                        "|----|   Temp: 500%sF\n"
+                        "|%s%s%s%s|", OVEN_TOP_ON,
+                        OVEN_TOP_ON, OVEN_TOP_ON, OVEN_TOP_ON,
+                        (ovenData.CookTimeRem / WINDOW) / 60,
+                        (ovenData.CookTimeRem / WINDOW) % 60,
+                        DEGREE_SYMBOL, OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF,
+                        OVEN_BOTTOM_OFF, OVEN_BOTTOM_OFF);
+            } else {
+                sprintf(stringMain, "|%s%s%s%s|   Mode: Broil\n"
+                        "|    |   Time: %d:%02d\n"
+                        "|----|   Temp: 500%sF\n"
+                        "|%s%s%s%s|", OVEN_TOP_OFF,
                         OVEN_TOP_OFF, OVEN_TOP_OFF, OVEN_TOP_OFF,
                         (ovenData.CookTimeRem / WINDOW) / 60,
                         (ovenData.CookTimeRem / WINDOW) % 60,
@@ -280,22 +280,22 @@ int main() {
     IEC0bits.T3IE = 1; // turn the interrupt on;
 
     // </editor-fold>
-    
+
     T2CON = 0;
     T2CONbits.TCKPS = 0b100;
-    PR2 = BOARD_GetPBClock() /16 / 100;
+    PR2 = BOARD_GetPBClock() / 16 / 100;
     T2CONbits.ON = 1;
-    
+
     IFS0bits.T2IF = 0;
     IPC2bits.T2IP = 4;
     IPC2bits.T2IS = 0;
     IEC0bits.T2IE = 1;
-    
+
     T3CON = 0;
     T3CONbits.TCKPS = 0b111;
-    PR3 = BOARD_GetPBClock() /256/ 5;
+    PR3 = BOARD_GetPBClock() / 256 / 5;
     T3CONbits.ON = 1;
-    
+
     IFS0bits.T3IF = 0;
     IPC3bits.T3IP = 4;
     IPC3bits.T3IS = 0;
@@ -316,11 +316,11 @@ int main() {
 
     while (1) {
         // Add main loop code here:
-        if (ButtonEvent || Ticker || ADC_change){
-        // check for events
-        // on event, run runOvenSM()
+        if (ButtonEvent || Ticker || ADC_change) {
+            // check for events
+            // on event, run runOvenSM()
             runOvenSM();
-        // clear event flags
+            // clear event flags
             ButtonEvent = BUTTON_EVENT_NONE;
             Ticker = FALSE;
             ADC_change = 0;
