@@ -156,4 +156,19 @@ int GameGetCurrentRoomDescription(char *desc){
     return strlen(desc);
 }
 
-uint8_t GameGetCurrentRoomExits(void);
+uint8_t GameGetCurrentRoomExits(void){
+    uint8_t exit = 0x00;
+    if(rooms.North){
+        exit |= GAME_ROOM_EXIT_NORTH_EXISTS;
+    }
+    if(rooms.South){
+        exit |= GAME_ROOM_EXIT_SOUTH_EXISTS;
+    }
+    if(rooms.West){
+        exit |= GAME_ROOM_EXIT_WEST_EXISTS;
+    }
+    if(rooms.East){
+        exit |= GAME_ROOM_EXIT_EAST_EXISTS;
+    }
+    return exit;
+}
