@@ -1,4 +1,3 @@
-//Game.c
 //Nadia Shabbar
 
 // **** Include libraries here ****
@@ -101,73 +100,68 @@ uint16_t MainRoom(int room_num) {
     return SUCCESS;
 }
 
-int GameGoNorth(void){
-    if (rooms.North != 0 && MainRoom(rooms.North) == SUCCESS){
+int GameGoNorth(void) {
+    if (rooms.North != 0 && MainRoom(rooms.North) == SUCCESS) {
         return SUCCESS;
-    }
-    else{
+    } else {
         return STANDARD_ERROR;
     }
 }
 
-int GameGoEast(void){
-    if (rooms.East != 0 && MainRoom(rooms.East) == SUCCESS){
+int GameGoEast(void) {
+    if (rooms.East != 0 && MainRoom(rooms.East) == SUCCESS) {
         return SUCCESS;
-    }
-    else{
+    } else {
         return STANDARD_ERROR;
     }
 }
 
-int GameGoSouth(void){
-    if (rooms.South != 0 && MainRoom(rooms.South) == SUCCESS){
+int GameGoSouth(void) {
+    if (rooms.South != 0 && MainRoom(rooms.South) == SUCCESS) {
         return SUCCESS;
-    }
-    else{
+    } else {
         return STANDARD_ERROR;
     }
 }
 
-int GameGoWest(void){
-    if (rooms.West != 0 && MainRoom(rooms.West) == SUCCESS){
+int GameGoWest(void) {
+    if (rooms.West != 0 && MainRoom(rooms.West) == SUCCESS) {
         return SUCCESS;
-    }
-    else{
+    } else {
         return STANDARD_ERROR;
     }
 }
 
-int GameInit(void){
-    if (MainRoom(STARTING_ROOM)){
+int GameInit(void) {
+    if (MainRoom(STARTING_ROOM)) {
         return SUCCESS;
-    }
-    else{
+    } else {
         return STANDARD_ERROR;
     }
 }
 
-int GameGetCurrentRoomTitle(char *title){
+int GameGetCurrentRoomTitle(char *title) {
     strcpy(title, rooms.Title);
     return strlen(title);
 }
 
-int GameGetCurrentRoomDescription(char *desc){
+int GameGetCurrentRoomDescription(char *desc) {
     strcpy(desc, rooms.Description);
     return strlen(desc);
 }
 
-uint8_t GameGetCurrentRoomExits(void){
+uint8_t GameGetCurrentRoomExits(void) {
     uint8_t exit = 0x00;
-    if(rooms.North){
+    if (rooms.North) {
         exit |= GAME_ROOM_EXIT_NORTH_EXISTS;
     }
-    if(rooms.South){
+    if (rooms.South) {
         exit |= GAME_ROOM_EXIT_SOUTH_EXISTS;
     }
-    if(rooms.West){
+    if (rooms.West) {
         exit |= GAME_ROOM_EXIT_WEST_EXISTS;
     }
-    if(rooms.East){
+    if (rooms.East) {
         exit |= GAME_ROOM_EXIT_EAST_EXISTS;
     }
     return exit;

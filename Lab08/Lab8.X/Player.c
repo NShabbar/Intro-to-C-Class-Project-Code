@@ -1,4 +1,3 @@
-//Player.c
 //Nadia Shabbar
 
 // **** Include libraries here ****
@@ -34,11 +33,11 @@ int AddToInventory(uint8_t item) {
     return STANDARD_ERROR;
 }
 
-int FindInInventory(uint8_t item){
+int FindInInventory(uint8_t item) {
     char Index = 0;
     int Item;
-    for (Item = Index; Item < (INVENTORY_SIZE); Item += 1){
-        if (Player.Inventory[Item] == item){ //Should hopefully store into inventory.
+    for (Item = Index; Item < (INVENTORY_SIZE); Item += 1) {
+        if (Player.Inventory[Item] == item) { //Should hopefully store into inventory.
             return SUCCESS;
         }
     }
