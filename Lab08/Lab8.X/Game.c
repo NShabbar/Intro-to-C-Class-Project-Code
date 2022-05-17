@@ -12,7 +12,7 @@
 #include "UNIXBOARD.h"
 
 //Extra assisting functions
-uint16_t StartingRoom(int room_num);
+uint16_t MainRoom(int room_num);
 static FILE *file;
 static uint8_t counter_check, item_check, item_count;
 static uint8_t game_read, game_contain, item_required, item_contain;
@@ -27,7 +27,7 @@ struct Room {
     uint8_t East;
 } rooms;
 
-uint16_t StartingRoom(int room_num) {
+uint16_t MainRoom(int room_num) {
     item_contain = 0, item_required = 0, game_read = 0, game_contain = 0;
     counter_check = 0, item_check = 0, item_count = 0;
     uint8_t desc;
@@ -101,15 +101,50 @@ uint16_t StartingRoom(int room_num) {
     return SUCCESS;
 }
 
-int GameGoNorth(void);
+int GameGoNorth(void){
+    if (rooms.North != 0 && MainRoom(rooms.North) == SUCCESS){
+        return SUCCESS;
+    }
+    else{
+        return STANDARD_ERROR;
+    }
+}
 
-int GameGoEast(void);
+int GameGoEast(void){
+    if (rooms.East != 0 && MainRoom(rooms.East) == SUCCESS){
+        return SUCCESS;
+    }
+    else{
+        return STANDARD_ERROR;
+    }
+}
 
-int GameGoSouth(void);
+int GameGoSouth(void){
+    if (rooms.South != 0 && MainRoom(rooms.South) == SUCCESS){
+        return SUCCESS;
+    }
+    else{
+        return STANDARD_ERROR;
+    }
+}
 
-int GameGoWest(void);
+int GameGoWest(void){
+    if (rooms.West != 0 && MainRoom(rooms.West) == SUCCESS){
+        return SUCCESS;
+    }
+    else{
+        return STANDARD_ERROR;
+    }
+}
 
-int GameInit(void);
+int GameInit(void){
+    if (MainRoom(STARTING_ROOM)){
+        return SUCCESS;
+    }
+    else{
+        return STANDARD_ERROR;git 
+    }
+}
 
 int GameGetCurrentRoomTitle(char *title);
 
