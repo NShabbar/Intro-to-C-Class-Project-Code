@@ -21,9 +21,9 @@ struct Room {
     char Description[GAME_MAX_ROOM_DESC_LENGTH + 1];
     char Title[GAME_MAX_ROOM_TITLE_LENGTH + 1];
     uint8_t North;
+    uint8_t East;
     uint8_t South;
     uint8_t West;
-    uint8_t East;
 } rooms;
 
 uint16_t MainRoom(int room_num) {
@@ -54,7 +54,8 @@ uint16_t MainRoom(int room_num) {
                     item_count -= 1;
                 }
             }
-        }
+        } //Utilize fseek(file, amount to skip, SEEK_CUR) to skip.
+        //
         descr = fgetc(file);
         fread(rooms.Description, descr, 1, file);
         rooms.Description[descr] = '\0';
@@ -70,9 +71,9 @@ uint16_t MainRoom(int room_num) {
             counter_check = TRUE;
         }
         rooms.North = fgetc(file);
+        rooms.East = fgetc(file);
         rooms.South = fgetc(file);
         rooms.West = fgetc(file);
-        rooms.East = fgetc(file);
     }
     if (counter_check == TRUE) {
         game_read = fgetc(file);
@@ -92,9 +93,13 @@ uint16_t MainRoom(int room_num) {
             item_count -= 1;
         }
         rooms.North = fgetc(file);
-        rooms.South = fgetc(file);
-        rooms.West = fgetc(file);
+        printf("%d\n", rooms.North);
         rooms.East = fgetc(file);
+        printf("%d\n", rooms.East);
+        rooms.South = fgetc(file);
+        printf("%d\n", rooms.South);
+        rooms.West = fgetc(file);
+        printf("%d\n", rooms.West);
     }
     fclose(file);
     return SUCCESS;
@@ -151,18 +156,30 @@ int GameGetCurrentRoomDescription(char *desc) {
 }
 
 uint8_t GameGetCurrentRoomExits(void) {
-    uint8_t exit = 0x00;
+    uint8_t exits = 0x00;
     if (rooms.North) {
-        exit |= GAME_ROOM_EXIT_NORTH_EXISTS;
+        exits |= GAME_ROOM_EXIT_NORTH_EXISTS;
     }
-    if (rooms.South) {
-        exit |= GAME_ROOM_EXIT_SOUTH_EXISTS;
-    }
-    if (rooms.West) {
-        exit |= GAME_ROOM_EXIT_WEST_EXISTS;
+    else if (exits & GAME_ROOM_EXIT_NORTH_EXISTS){
+        exits &= ~GAME_ROOM_EXIT_NORTH_EXISTS;
     }
     if (rooms.East) {
-        exit |= GAME_ROOM_EXIT_EAST_EXISTS;
+        exits |= GAME_ROOM_EXIT_EAST_EXISTS;
     }
-    return exit;
+    else if (exits & GAME_ROOM_EXIT_EAST_EXISTS){
+        exits &= ~GAME_ROOM_EXIT_EAST_EXISTS;
+    }
+    if (rooms.South) {
+        exits |= GAME_ROOM_EXIT_SOUTH_EXISTS;
+    }
+    else if (exits & GAME_ROOM_EXIT_SOUTH_EXISTS){
+        exits &= ~GAME_ROOM_EXIT_SOUTH_EXISTS;
+    }
+    if (rooms.West) {
+        exits |= GAME_ROOM_EXIT_WEST_EXISTS;
+    }
+    else if (exits & GAME_ROOM_EXIT_WEST_EXISTS){
+        exits &= ~GAME_ROOM_EXIT_WEST_EXISTS;
+    }
+    return exits;
 }
