@@ -30,7 +30,7 @@ struct Room {
 uint16_t MainRoom(int room_num) {
     item_contain = 0, item_required = 0, game_read = 0, game_contain = 0;
     counter_check = 0, item_check = 0, item_count = 0;
-    uint8_t desc;
+    uint8_t descr;
 
     sprintf(string, "RoomFiles/room%d.txt", room_num);
     file = fopen(string, "rb");
@@ -56,9 +56,9 @@ uint16_t MainRoom(int room_num) {
                 }
             }
         }
-        desc = fgetc(file);
-        fread(rooms.Description, desc, 1, file);
-        rooms.Description[desc] = '\0';
+        descr = fgetc(file);
+        fread(rooms.Description, descr, 1, file);
+        rooms.Description[descr] = '\0';
 
         game_contain = fgetc(file);
         item_count = game_contain;
@@ -85,7 +85,7 @@ uint16_t MainRoom(int room_num) {
                 item_count -= 1;
             }
         }
-        desc = fgetc(file);
+        descr = fgetc(file);
         item_count = game_contain;
         while (item_count > 0) {
             item_contain = fgetc(file);
@@ -142,12 +142,18 @@ int GameInit(void){
         return SUCCESS;
     }
     else{
-        return STANDARD_ERROR;git 
+        return STANDARD_ERROR;
     }
 }
 
-int GameGetCurrentRoomTitle(char *title);
+int GameGetCurrentRoomTitle(char *title){
+    strcpy(title, rooms.Title);
+    return strlen(title);
+}
 
-int GameGetCurrentRoomDescription(char *desc);
+int GameGetCurrentRoomDescription(char *desc){
+    strcpy(desc, rooms.Description);
+    return strlen(desc);
+}
 
 uint8_t GameGetCurrentRoomExits(void);
