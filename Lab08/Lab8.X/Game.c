@@ -18,7 +18,7 @@ static uint8_t game_read, game_contain, item_required, item_contain;
 static char string[25];
 
 struct Room {
-    char Description[GAME_MAX_ROOM_DESC_LENGTH + 1];
+    char description[GAME_MAX_ROOM_DESC_LENGTH + 1];
     char Title[GAME_MAX_ROOM_TITLE_LENGTH + 1];
     uint8_t North;
     uint8_t East;
@@ -27,9 +27,14 @@ struct Room {
 } rooms;
 
 uint16_t MainRoom(int room_num) {
-    item_contain = 0, item_required = 0, game_read = 0, game_contain = 0;
-    counter_check = 0, item_check = 0, item_count = 0;
-    uint8_t descr;
+    item_contain = 0;
+    item_required = 0;
+    game_read = 0;
+    game_contain = 0;
+    counter_check = 0;
+    item_check = 0;
+    item_count = 0;
+    uint8_t descript;
 
     sprintf(string, "RoomFiles/room%d.txt", room_num);
     file = fopen(string, "rb");
@@ -38,9 +43,9 @@ uint16_t MainRoom(int room_num) {
     }
 
     fseek(file, 3, SEEK_SET);
-    int titles = fgetc(file);
-    fread(rooms.Title, titles, 1, file);
-    rooms.Title[titles] = '\0';
+    int titleS = fgetc(file);
+    fread(rooms.Title, titleS, 1, file);
+    rooms.Title[titleS] = '\0';
 
     if (counter_check == FALSE) {
         game_read = fgetc(file);
@@ -56,9 +61,9 @@ uint16_t MainRoom(int room_num) {
             }
         } //Utilize fseek(file, amount to skip, SEEK_CUR) to skip.
         //
-        descr = fgetc(file);
-        fread(rooms.Description, descr, 1, file);
-        rooms.Description[descr] = '\0';
+        descript = fgetc(file);
+        fread(rooms.description, descript, 1, file);
+        rooms.description[descript] = '\0';
 
         game_contain = fgetc(file);
         item_count = game_contain;
@@ -78,28 +83,32 @@ uint16_t MainRoom(int room_num) {
     if (counter_check == TRUE) {
         game_read = fgetc(file);
         if (game_read > 0) {
-            item_required = fgetc(file);
-            if (FindInInventory(item_required) != SUCCESS) {
-                return STANDARD_ERROR;
-            } else {
-                item_count -= 1;
+            item_count = game_read;
+            if (item_count > 0) {
+                item_required = fgetc(file);
+                if (FindInInventory(item_required) != SUCCESS) {
+                    return STANDARD_ERROR;
+                } else {
+                    item_count -= 1;
+                }
             }
         }
-        descr = fgetc(file);
+        
+        descript = fgetc(file);
+        fread(rooms.description, descript, 1, file);
+        rooms.description[descript] = '\0';
+        game_contain = fgetc(file);
         item_count = game_contain;
+        
         while (item_count > 0) {
             item_contain = fgetc(file);
             AddToInventory(item_contain);
             item_count -= 1;
         }
         rooms.North = fgetc(file);
-        printf("%d\n", rooms.North);
         rooms.East = fgetc(file);
-        printf("%d\n", rooms.East);
         rooms.South = fgetc(file);
-        printf("%d\n", rooms.South);
         rooms.West = fgetc(file);
-        printf("%d\n", rooms.West);
     }
     fclose(file);
     return SUCCESS;
@@ -151,7 +160,7 @@ int GameGetCurrentRoomTitle(char *title) {
 }
 
 int GameGetCurrentRoomDescription(char *desc) {
-    strcpy(desc, rooms.Description);
+    strcpy(desc, rooms.description);
     return strlen(desc);
 }
 
@@ -160,26 +169,14 @@ uint8_t GameGetCurrentRoomExits(void) {
     if (rooms.North) {
         exits |= GAME_ROOM_EXIT_NORTH_EXISTS;
     }
-    else if (exits & GAME_ROOM_EXIT_NORTH_EXISTS){
-        exits &= ~GAME_ROOM_EXIT_NORTH_EXISTS;
-    }
     if (rooms.East) {
         exits |= GAME_ROOM_EXIT_EAST_EXISTS;
-    }
-    else if (exits & GAME_ROOM_EXIT_EAST_EXISTS){
-        exits &= ~GAME_ROOM_EXIT_EAST_EXISTS;
     }
     if (rooms.South) {
         exits |= GAME_ROOM_EXIT_SOUTH_EXISTS;
     }
-    else if (exits & GAME_ROOM_EXIT_SOUTH_EXISTS){
-        exits &= ~GAME_ROOM_EXIT_SOUTH_EXISTS;
-    }
     if (rooms.West) {
         exits |= GAME_ROOM_EXIT_WEST_EXISTS;
-    }
-    else if (exits & GAME_ROOM_EXIT_WEST_EXISTS){
-        exits &= ~GAME_ROOM_EXIT_WEST_EXISTS;
     }
     return exits;
 }

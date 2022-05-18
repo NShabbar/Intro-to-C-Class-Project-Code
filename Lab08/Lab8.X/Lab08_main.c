@@ -61,8 +61,8 @@ int main() {
         if (exits & GAME_ROOM_EXIT_WEST_EXISTS) {
             printf("WEST. \n");
         }
-        printf("\nPress one of the following keys: [n, s, w, e, q]\n "
-                "(North, South, West, East, and Quit)\n");
+        printf("\nPress one of the following keys: [n, e, s, w, q]\n "
+                "(North, East, South, West, and Quit)\n");
         input = getchar();
         printf("User's input: %c\n", input);
         if (getchar() != '\n') {
@@ -73,24 +73,25 @@ int main() {
                 printf("Invalid Input. No exits or entrance in that direction.");
             }
         }
-        if (input == 'e' || input == 'E') {
+        else if (input == 'e' || input == 'E') {
             if (!GameGoEast()) {
                 printf("Invalid Input. No exits or entrance in that direction.");
             }
         }
-        if (input == 's' || input == 'S') {
+        else if (input == 's' || input == 'S') {
             if (!GameGoSouth()) {
                 printf("Invalid Input. No exits or entrance in that direction.");
             }
         }
-        if (input == 'w' || input == 'W') {
+        else if (input == 'w' || input == 'W') {
             if (!GameGoWest()) {
                 printf("Invalid Input. No exits or entrance in that direction.");
             }
         }
-        if (input == 'q' || input == 'Q') {
+        else if (input == 'q' || input == 'Q') {
             printf("You've lost the will to continue. "
                     "The world goes black around you.\n");
+            exit(SUCCESS);
         } else {
             printf("Invalid entry. Please select a correct entry.\n");
         }
