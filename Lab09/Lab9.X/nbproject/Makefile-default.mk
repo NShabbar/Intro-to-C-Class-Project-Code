@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=Ascii.c BOARD.c CircularBuffer.c FieldOled.c Lab09_main.c Oled.c OledDriver.c Uart1.c AgentTest.c MessageTest.c NegotiationTest.c FieldTest.c Agent.c Message.c Negotiation.c
+SOURCEFILES_QUOTED_IF_SPACED=Ascii.c BOARD.c CircularBuffer.c FieldOled.c Lab09_main.c Oled.c OledDriver.c Uart1.c AgentTest.c MessageTest.c NegotiationTest.c FieldTest.c Agent.c Message.c Negotiation.c Field.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/Ascii.o ${OBJECTDIR}/BOARD.o ${OBJECTDIR}/CircularBuffer.o ${OBJECTDIR}/FieldOled.o ${OBJECTDIR}/Lab09_main.o ${OBJECTDIR}/Oled.o ${OBJECTDIR}/OledDriver.o ${OBJECTDIR}/Uart1.o ${OBJECTDIR}/AgentTest.o ${OBJECTDIR}/MessageTest.o ${OBJECTDIR}/NegotiationTest.o ${OBJECTDIR}/FieldTest.o ${OBJECTDIR}/Agent.o ${OBJECTDIR}/Message.o ${OBJECTDIR}/Negotiation.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/Ascii.o.d ${OBJECTDIR}/BOARD.o.d ${OBJECTDIR}/CircularBuffer.o.d ${OBJECTDIR}/FieldOled.o.d ${OBJECTDIR}/Lab09_main.o.d ${OBJECTDIR}/Oled.o.d ${OBJECTDIR}/OledDriver.o.d ${OBJECTDIR}/Uart1.o.d ${OBJECTDIR}/AgentTest.o.d ${OBJECTDIR}/MessageTest.o.d ${OBJECTDIR}/NegotiationTest.o.d ${OBJECTDIR}/FieldTest.o.d ${OBJECTDIR}/Agent.o.d ${OBJECTDIR}/Message.o.d ${OBJECTDIR}/Negotiation.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/Ascii.o ${OBJECTDIR}/BOARD.o ${OBJECTDIR}/CircularBuffer.o ${OBJECTDIR}/FieldOled.o ${OBJECTDIR}/Lab09_main.o ${OBJECTDIR}/Oled.o ${OBJECTDIR}/OledDriver.o ${OBJECTDIR}/Uart1.o ${OBJECTDIR}/AgentTest.o ${OBJECTDIR}/MessageTest.o ${OBJECTDIR}/NegotiationTest.o ${OBJECTDIR}/FieldTest.o ${OBJECTDIR}/Agent.o ${OBJECTDIR}/Message.o ${OBJECTDIR}/Negotiation.o ${OBJECTDIR}/Field.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/Ascii.o.d ${OBJECTDIR}/BOARD.o.d ${OBJECTDIR}/CircularBuffer.o.d ${OBJECTDIR}/FieldOled.o.d ${OBJECTDIR}/Lab09_main.o.d ${OBJECTDIR}/Oled.o.d ${OBJECTDIR}/OledDriver.o.d ${OBJECTDIR}/Uart1.o.d ${OBJECTDIR}/AgentTest.o.d ${OBJECTDIR}/MessageTest.o.d ${OBJECTDIR}/NegotiationTest.o.d ${OBJECTDIR}/FieldTest.o.d ${OBJECTDIR}/Agent.o.d ${OBJECTDIR}/Message.o.d ${OBJECTDIR}/Negotiation.o.d ${OBJECTDIR}/Field.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/Ascii.o ${OBJECTDIR}/BOARD.o ${OBJECTDIR}/CircularBuffer.o ${OBJECTDIR}/FieldOled.o ${OBJECTDIR}/Lab09_main.o ${OBJECTDIR}/Oled.o ${OBJECTDIR}/OledDriver.o ${OBJECTDIR}/Uart1.o ${OBJECTDIR}/AgentTest.o ${OBJECTDIR}/MessageTest.o ${OBJECTDIR}/NegotiationTest.o ${OBJECTDIR}/FieldTest.o ${OBJECTDIR}/Agent.o ${OBJECTDIR}/Message.o ${OBJECTDIR}/Negotiation.o
+OBJECTFILES=${OBJECTDIR}/Ascii.o ${OBJECTDIR}/BOARD.o ${OBJECTDIR}/CircularBuffer.o ${OBJECTDIR}/FieldOled.o ${OBJECTDIR}/Lab09_main.o ${OBJECTDIR}/Oled.o ${OBJECTDIR}/OledDriver.o ${OBJECTDIR}/Uart1.o ${OBJECTDIR}/AgentTest.o ${OBJECTDIR}/MessageTest.o ${OBJECTDIR}/NegotiationTest.o ${OBJECTDIR}/FieldTest.o ${OBJECTDIR}/Agent.o ${OBJECTDIR}/Message.o ${OBJECTDIR}/Negotiation.o ${OBJECTDIR}/Field.o
 
 # Source Files
-SOURCEFILES=Ascii.c BOARD.c CircularBuffer.c FieldOled.c Lab09_main.c Oled.c OledDriver.c Uart1.c AgentTest.c MessageTest.c NegotiationTest.c FieldTest.c Agent.c Message.c Negotiation.c
+SOURCEFILES=Ascii.c BOARD.c CircularBuffer.c FieldOled.c Lab09_main.c Oled.c OledDriver.c Uart1.c AgentTest.c MessageTest.c NegotiationTest.c FieldTest.c Agent.c Message.c Negotiation.c Field.c
 
 
 
@@ -197,6 +197,12 @@ ${OBJECTDIR}/Negotiation.o: Negotiation.c  .generated_files/flags/default/c94c80
 	@${RM} ${OBJECTDIR}/Negotiation.o 
 	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/Negotiation.o.d" -o ${OBJECTDIR}/Negotiation.o Negotiation.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
 	
+${OBJECTDIR}/Field.o: Field.c  .generated_files/flags/default/fbd8312186b967acc3fb27a9e011fbb44e088ed5 .generated_files/flags/default/af031a62ccc0c18b099f063c5edfd8e7f9b606f2
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/Field.o.d 
+	@${RM} ${OBJECTDIR}/Field.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/Field.o.d" -o ${OBJECTDIR}/Field.o Field.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
 else
 ${OBJECTDIR}/Ascii.o: Ascii.c  .generated_files/flags/default/83cb3a8c2ae10e1f7a64a344f62c25027e9874d4 .generated_files/flags/default/af031a62ccc0c18b099f063c5edfd8e7f9b606f2
 	@${MKDIR} "${OBJECTDIR}" 
@@ -287,6 +293,12 @@ ${OBJECTDIR}/Negotiation.o: Negotiation.c  .generated_files/flags/default/72595c
 	@${RM} ${OBJECTDIR}/Negotiation.o.d 
 	@${RM} ${OBJECTDIR}/Negotiation.o 
 	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/Negotiation.o.d" -o ${OBJECTDIR}/Negotiation.o Negotiation.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
+${OBJECTDIR}/Field.o: Field.c  .generated_files/flags/default/63f4392c90651c08d0f4954dfdca6421ed202337 .generated_files/flags/default/af031a62ccc0c18b099f063c5edfd8e7f9b606f2
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/Field.o.d 
+	@${RM} ${OBJECTDIR}/Field.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/Field.o.d" -o ${OBJECTDIR}/Field.o Field.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
 	
 endif
 

@@ -30,8 +30,8 @@ NegotiationOutcome NegotiateCoinFlip(NegotiationData A, NegotiationData B) {
         count += ((Result >> i) & HEX);
     }
     if (count % TWO) {
-        return TAILS;
-    } else {
         return HEADS;
+    } else {
+        return TAILS;
     }
 }
