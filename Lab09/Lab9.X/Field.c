@@ -39,7 +39,11 @@ void FieldInit(Field *own_field, Field * opp_field) {
     for (int i = 0; i <= FIELD_COLS; i++) {
         for (int ii = 0; ii <= FIELD_ROWS; ii++) {
             own_field->grid[ii][i] = FIELD_SQUARE_EMPTY;
-            opp_field->grid[ii][i] = FIELD_SQUARE_UNKNOWN;
+        }
+    }
+    for (int k = 0; k <= FIELD_COLS; k++){
+        for( int l = 0; l <= FIELD_ROWS; l++){
+            opp_field -> grid[l][k] = FIELD_SQUARE_UNKNOWN;
         }
     }
     opp_field->smallBoatLives = FIELD_BOAT_SIZE_SMALL;

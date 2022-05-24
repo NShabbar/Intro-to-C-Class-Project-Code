@@ -58,7 +58,6 @@ int Message_ParseMessage(const char* payload,
                 message_event->type = BB_EVENT_ERROR;
                 return STANDARD_ERROR;
             }
-
             if (pl_part == 1) {
                 message_event->param0 = atoi(token); //converts string to int.
                 pl_part = 2;
