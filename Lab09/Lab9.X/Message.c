@@ -11,6 +11,9 @@ typedef enum {
     cs, //This is 2
 } part;
 
+
+
+
 static part mess_part = start;
 static char decode_cs[MESSAGE_CHECKSUM_LEN]; //Checksum
 static char decode_pl[MESSAGE_MAX_PAYLOAD_LEN]; //Payload
@@ -25,6 +28,7 @@ uint8_t Message_CalculateChecksum(const char* payload) {
     }
     return checksum; //Might have to add a null character to the end.
 }
+
 
 int Message_ParseMessage(const char* payload,
         const char* checksum_string, BB_Event * message_event) {
@@ -41,19 +45,24 @@ int Message_ParseMessage(const char* payload,
             if (strlen(checksum_string) != 2) {
                 return STANDARD_ERROR;
             }
-            if (strcmp(token, "CHA") == 0  && Message_CalculateChecksum(payload) == atoi(checksum_string)) { //Search for CHA in token.
+            int test = Message_CalculateChecksum(payload);
+            int num = (int)strtol(checksum_string, NULL, 16);
+            if (test != num){
+                return STANDARD_ERROR;
+            }
+            if (strcmp(token, "CHA") == 0) { //Search for CHA in token.
                 pl_part = 1;
                 message_event -> type = BB_EVENT_CHA_RECEIVED;
-            } else if (strcmp(token, "ACC") == 0  && Message_CalculateChecksum(payload) == atoi(checksum_string)) { //Search for ACC in token.
+            } else if (strcmp(token, "ACC") == 0) { //Search for ACC in token.
                 pl_part = 1;
                 message_event -> type = BB_EVENT_ACC_RECEIVED;
-            } else if (strcmp(token, "REV") == 0  && Message_CalculateChecksum(payload) == atoi(checksum_string)) { //Search for REV in token.
+            } else if (strcmp(token, "REV") == 0) { //Search for REV in token.
                 pl_part = 1;
                 message_event -> type = BB_EVENT_REV_RECEIVED;
-            } else if (strcmp(token, "SHO") == 0  && Message_CalculateChecksum(payload) == atoi(checksum_string)) { //Search for SHO in token.
+            } else if (strcmp(token, "SHO") == 0) { //Search for SHO in token.
                 pl_part = 1;
                 message_event -> type = BB_EVENT_SHO_RECEIVED;
-            } else if (strcmp(token, "RES") == 0  && Message_CalculateChecksum(payload) == atoi(checksum_string)) { //Search for RES in token.
+            } else if (strcmp(token, "RES") == 0) { //Search for RES in token.
                 pl_part = 1;
                 message_event -> type = BB_EVENT_RES_RECEIVED;
             } else {
@@ -61,12 +70,21 @@ int Message_ParseMessage(const char* payload,
                     message_event->type = BB_EVENT_ERROR;
                     return STANDARD_ERROR;
                 } else if (pl_part == 1) {
+                    if(atoi(token) == 0 && *token != '0'){
+                        return STANDARD_ERROR; 
+                    }
                     message_event->param0 = atoi(token); //converts string to int.
                     pl_part = 2;
                 } else if (pl_part == 2) {
+                    if(atoi(token) == 0 && *token != '0'){
+                        return STANDARD_ERROR; 
+                    }
                     message_event->param1 = atoi(token); //converts string to int.
                     pl_part = 3;
                 } else if (pl_part == 3) {
+                    if(atoi(token) == 0 && *token != '0'){
+                        return STANDARD_ERROR; 
+                    }
                     message_event->param2 = atoi(token); //converts string to int.
                     pl_part = 4;
                 } else {
@@ -108,7 +126,8 @@ int Message_Decode(unsigned char char_in, BB_Event * decoded_message_event) {
             }
             break;
         case pl:
-            if ((char_in >= 48 && char_in <= 57) || (char_in >= 65 && char_in <= 90) || char_in == 44) { //Is Payload in either of these ranges?
+            if ((char_in >= 48 && char_in <= 57) || (char_in >= 65 && char_in <= 90) || char_in == 44) {
+                printf("%d\n", char_in);//Is Payload in either of these ranges?
                 decode_pl[decode_count] = char_in;
                 decode_count++;
             } else if (char_in == '*') { //Is Payload '*' for end?

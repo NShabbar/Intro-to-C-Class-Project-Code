@@ -34,12 +34,13 @@ int main()
         BB_Event event;
         if (!Message_ParseMessage("ACC, this is a message", "7B", &event)) {
             parseTests++;
+
         } else {
             printf("Message_ParseMessage Failed to catch invalid message format\n");
         }
 
         totalParseTests++;
-        if (Message_ParseMessage("SHO,5,6", "54", &event)) {
+        if (Message_ParseMessage("SHO,5,6", "57", &event)) {
             if (event.type == BB_EVENT_SHO_RECEIVED && event.param0 == 5 && event.param1 == 6) {
                 parseTests++;
             } else {
@@ -70,7 +71,7 @@ int main()
             printf("test4 failed\n");
         }
         totalParseTests++;
-        if (Message_ParseMessage("RES,5,7,1", "69", &event)) {
+        if (Message_ParseMessage("RES,5,7,1", "5B", &event)) {
             if (event.type == BB_EVENT_RES_RECEIVED && event.param0 == 5 && event.param1 == 7 && event.param2 == RESULT_HIT) {
                 parseTests++;
             } else {
