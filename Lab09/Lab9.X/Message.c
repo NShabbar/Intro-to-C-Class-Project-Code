@@ -38,40 +38,42 @@ int Message_ParseMessage(const char* payload,
     token = strtok(encode_pl, ",");
 
     while (token != NULL) {
-        if (strcmp(token, "CHA") == 0) { //Search for CHA in token.
-            pl_part = 1;
-            message_event -> type = BB_EVENT_CHA_RECEIVED;
-        } else if (strcmp(token, "ACC") == 0) { //Search for ACC in token.
-            pl_part = 1;
-            message_event -> type = BB_EVENT_ACC_RECEIVED;
-        } else if (strcmp(token, "REV") == 0) { //Search for REV in token.
-            pl_part = 1;
-            message_event -> type = BB_EVENT_REV_RECEIVED;
-        } else if (strcmp(token, "SHO") == 0) { //Search for SHO in token.
-            pl_part = 1;
-            message_event -> type = BB_EVENT_SHO_RECEIVED;
-        } else if (strcmp(token, "RES") == 0) { //Search for RES in token.
-            pl_part = 1;
-            message_event -> type = BB_EVENT_RES_RECEIVED;
-        } else {
-            if (pl_part < 1) {
-                message_event->type = BB_EVENT_ERROR;
+            if (strlen(checksum_string) != 2) {
                 return STANDARD_ERROR;
             }
-            if (pl_part == 1) {
-                message_event->param0 = atoi(token); //converts string to int.
-                pl_part = 2;
-            } else if (pl_part == 2) {
-                message_event->param1 = atoi(token); //converts string to int.
-                pl_part = 3;
-            } else if (pl_part == 3) {
-                message_event->param2 = atoi(token); //converts string to int.
-                pl_part = 4;
+            if (strcmp(token, "CHA") == 0  && Message_CalculateChecksum(payload) == atoi(checksum_string)) { //Search for CHA in token.
+                pl_part = 1;
+                message_event -> type = BB_EVENT_CHA_RECEIVED;
+            } else if (strcmp(token, "ACC") == 0  && Message_CalculateChecksum(payload) == atoi(checksum_string)) { //Search for ACC in token.
+                pl_part = 1;
+                message_event -> type = BB_EVENT_ACC_RECEIVED;
+            } else if (strcmp(token, "REV") == 0  && Message_CalculateChecksum(payload) == atoi(checksum_string)) { //Search for REV in token.
+                pl_part = 1;
+                message_event -> type = BB_EVENT_REV_RECEIVED;
+            } else if (strcmp(token, "SHO") == 0  && Message_CalculateChecksum(payload) == atoi(checksum_string)) { //Search for SHO in token.
+                pl_part = 1;
+                message_event -> type = BB_EVENT_SHO_RECEIVED;
+            } else if (strcmp(token, "RES") == 0  && Message_CalculateChecksum(payload) == atoi(checksum_string)) { //Search for RES in token.
+                pl_part = 1;
+                message_event -> type = BB_EVENT_RES_RECEIVED;
             } else {
-                message_event->type = BB_EVENT_ERROR; //converts string to int.
-                return STANDARD_ERROR;
+                if (pl_part < 1) {
+                    message_event->type = BB_EVENT_ERROR;
+                    return STANDARD_ERROR;
+                } else if (pl_part == 1) {
+                    message_event->param0 = atoi(token); //converts string to int.
+                    pl_part = 2;
+                } else if (pl_part == 2) {
+                    message_event->param1 = atoi(token); //converts string to int.
+                    pl_part = 3;
+                } else if (pl_part == 3) {
+                    message_event->param2 = atoi(token); //converts string to int.
+                    pl_part = 4;
+                } else {
+                    message_event->type = BB_EVENT_ERROR;
+                    return STANDARD_ERROR;
+                }
             }
-        }
         token = strtok(NULL, ",");
     }
     return SUCCESS;
@@ -118,7 +120,6 @@ int Message_Decode(unsigned char char_in, BB_Event * decoded_message_event) {
                 return STANDARD_ERROR;
             }
             break;
-
         case cs:
             if ((char_in >= 48 && char_in <= 57) || (char_in >= 65 && char_in <= 70)) { //Is Checksum in these ranges?
                 decode_cs[decode_count] = char_in;

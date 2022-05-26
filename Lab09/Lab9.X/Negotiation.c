@@ -35,3 +35,11 @@ NegotiationOutcome NegotiateCoinFlip(NegotiationData A, NegotiationData B) {
         return TAILS;
     }
 }
+
+NegotiationData NegotiateGenerateAGivenB(NegotiationData B){
+    int cheat_code = NegotiationOutcome NegotiateCoinFlip(NegotiationData A, NegotiationData B);
+    if (cheat_code == A){
+        cheat_code = B
+    }
+    return cheat_code;
+}
