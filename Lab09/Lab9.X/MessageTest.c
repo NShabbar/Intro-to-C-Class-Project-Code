@@ -11,8 +11,7 @@
 #include "BattleBoats.h"
 #include "Field.h"
 
-int main()
-{
+int main() {
     //Test CalculateChecksum:
     {
         uint8_t calcTests = 0;
@@ -61,7 +60,7 @@ int main()
         }
 
         totalParseTests++;
-        if (Message_ParseMessage("REV,122", "5c", &event)) {
+        if (Message_ParseMessage("REV,122", "5C", &event)) {
             if (event.type == BB_EVENT_REV_RECEIVED && event.param0 == 122) {
                 parseTests++;
             } else {
@@ -85,10 +84,10 @@ int main()
         if (Message_ParseMessage("RES,1,0,3", "5A", &event)) {
             if (event.type == BB_EVENT_RES_RECEIVED && event.param0 == 1 && event.param1 == 0 && event.param2 == 3) {
                 parseTests++;
-            }else{
+            } else {
                 printf("test6 Failed\n");
             }
-        }else{
+        } else {
             printf("test6 failed\n");
         }
         totalParseTests++;
@@ -194,7 +193,17 @@ int main()
             printf("Did not decode to message type BB_EVENT_REV_RECEIVED\n");
         }
         totalDecodeTests++;
+        char test3[] = "%CHA,Not a Valid input";
+        for (int i = 0; i != strlen(test3); i++) {
+            Message_Decode(test3[i], &event);
+        }
+        if (event.type == BB_EVENT_ERROR) {
+            decodeTests++;
+
+        } else {
+            printf("Did not return error when invalid string input\n");
+        }
+        totalDecodeTests++;
         printf("Message_Decode passed:(%d/%d)\n", decodeTests, totalDecodeTests);
     }
-
 }

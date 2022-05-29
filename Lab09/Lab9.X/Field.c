@@ -55,7 +55,7 @@ void FieldInit(Field *own_field, Field * opp_field)
 
 SquareStatus FieldGetSquareStatus(const Field *f, uint8_t row, uint8_t col)
 {
-    if (row > FIELD_ROWS || col > FIELD_COLS) {
+    if (row >= FIELD_ROWS || col >= FIELD_COLS) {
         return FIELD_SQUARE_INVALID;
     } else {
         return f->grid[row][col];
@@ -264,76 +264,99 @@ uint8_t FieldAIPlaceAllBoats(Field *own_field)
 
 GuessData FieldAIDecideGuess(const Field *opp_field)
 {
+
     static uint8_t lsRow;
     static uint8_t lsCol;
     static uint8_t lhRow;
     static uint8_t lhCol;
     static uint8_t boats;
-    static uint8_t size;
+    //static uint8_t size;
+    int counter = 0;
     GuessData guess;
-    if (boats != FieldGetBoatStates(opp_field)) {
-        boats = FieldGetBoatStates(opp_field);
-        //Set the minium spacing between shots:
-        if (boats & FIELD_BOAT_STATUS_SMALL) {
-            size = FIELD_BOAT_SIZE_SMALL - 1;
-        } else if (boats & FIELD_BOAT_STATUS_MEDIUM) {
-            size = FIELD_BOAT_SIZE_MEDIUM - 1;
-        } else if (boats & FIELD_BOAT_STATUS_LARGE) {
-            size = FIELD_BOAT_SIZE_LARGE - 1;
-        } else if (boats & FIELD_BOAT_STATUS_HUGE) {
-            size = FIELD_BOAT_SIZE_HUGE - 1;
-        }
+    do {
+        if (boats != FieldGetBoatStates(opp_field)) {
+            boats = FieldGetBoatStates(opp_field);
+            //Set the minium spacing between shots:
+            /* if (boats & FIELD_BOAT_STATUS_SMALL) {
+                 size = FIELD_BOAT_SIZE_SMALL - 1;
+             } else if (boats & FIELD_BOAT_STATUS_MEDIUM) {
+                 size = FIELD_BOAT_SIZE_MEDIUM - 1;
+             } else if (boats & FIELD_BOAT_STATUS_LARGE) {
+                 size = FIELD_BOAT_SIZE_LARGE - 1;
+             } else if (boats & FIELD_BOAT_STATUS_HUGE) {
+                 size = FIELD_BOAT_SIZE_HUGE - 1;
+             }*/
 
-        lhRow = 20; //Totally arbitray number, just need something out of bounds
-        lhCol = 20;
-        lsRow = 20;
-        lsCol = 20;
-    }
-    if (FieldGetSquareStatus(opp_field, lsRow, lsCol) != FIELD_SQUARE_HIT
-            && FieldGetSquareStatus(opp_field, lhRow, lhCol) != FIELD_SQUARE_HIT) { //If we missed 
-        //our last shot and have no recorded hits
+            lhRow = FIELD_ROWS + 20; //Totally arbitray number, just need something out of bounds
+            lhCol = FIELD_COLS + 20;
+            lsRow = FIELD_ROWS + 20;
+            lsCol = FIELD_COLS + 20;
+        }
+        if (FieldGetSquareStatus(opp_field, lsRow, lsCol) != FIELD_SQUARE_HIT
+                && FieldGetSquareStatus(opp_field, lhRow, lhCol) != FIELD_SQUARE_HIT) { //If we missed 
+            //our last shot and have no recorded hits
+            do {
+                guess.row = rand() % FIELD_ROWS;
+                guess.col = rand() % FIELD_COLS;
+
+                //Keep making random guesses until we guess somewhere SIZE away from other known values
+            } while ((FieldGetSquareStatus(opp_field, guess.row + 1, guess.col) != FIELD_SQUARE_UNKNOWN &&
+                    FieldGetSquareStatus(opp_field, guess.row - 1, guess.col) != FIELD_SQUARE_UNKNOWN) ||
+                    (FieldGetSquareStatus(opp_field, guess.row, guess.col + 1) != FIELD_SQUARE_UNKNOWN
+                    && FieldGetSquareStatus(opp_field, guess.row, guess.col - 1) != FIELD_SQUARE_UNKNOWN));
+
+
+        } else if (FieldGetSquareStatus(opp_field, lsRow, lsCol) == FIELD_SQUARE_HIT) {
+            //If our last shot is a hit:
+            lhRow = lsRow;
+            lhCol = lsCol;
+            if (FieldGetSquareStatus(opp_field, lhRow + 1, lhCol) == FIELD_SQUARE_UNKNOWN) {
+                guess.row = lhRow + 1;
+                guess.col = lhCol;
+            } else if (FieldGetSquareStatus(opp_field, lhRow, lhCol + 1) == FIELD_SQUARE_UNKNOWN) {
+                guess.row = lhRow;
+                guess.col = lhCol + 1;
+            } else if (FieldGetSquareStatus(opp_field, lhRow - 1, lhCol) == FIELD_SQUARE_UNKNOWN) {
+                guess.row = lhRow - 1;
+                guess.col = lhCol;
+            } else if (FieldGetSquareStatus(opp_field, lhRow, lhCol - 1) == FIELD_SQUARE_UNKNOWN) {
+                guess.row = lhRow;
+                guess.col = lhCol - 1;
+            }
+        } else if (FieldGetSquareStatus(opp_field, lhRow, lhCol) == FIELD_SQUARE_HIT
+                && FieldGetSquareStatus(opp_field, lsRow, lsCol) != FIELD_SQUARE_HIT) { //We previously
+            //hit, but not with the most recent shot
+            if (FieldGetSquareStatus(opp_field, lhRow + 1, lhCol) == FIELD_SQUARE_UNKNOWN) {
+                guess.row = lhRow + 1;
+                guess.col = lhCol;
+            } else if (FieldGetSquareStatus(opp_field, lhRow, lhCol + 1) == FIELD_SQUARE_UNKNOWN) {
+                guess.row = lhRow;
+                guess.col = lhCol + 1;
+            } else if (FieldGetSquareStatus(opp_field, lhRow - 1, lhCol) == FIELD_SQUARE_UNKNOWN) {
+                guess.row = lhRow - 1;
+                guess.col = lhCol;
+            } else if (FieldGetSquareStatus(opp_field, lhRow, lhCol - 1) == FIELD_SQUARE_UNKNOWN) {
+                guess.row = lhRow;
+                guess.col = lhCol - 1;
+            }
+
+        }
+        counter++;
+        if (counter >=10) {//Sometimes gets stuck in a loop. this should fix it.
+            break;
+        }
+    } while (FieldGetSquareStatus(opp_field, guess.row, guess.col) != FIELD_SQUARE_UNKNOWN);
+    if (counter >= 10) {
+        counter = 0;
         do {
             guess.row = rand() % FIELD_ROWS;
             guess.col = rand() % FIELD_COLS;
 
-            //Keep making random guesses until we guess somewhere SIZE away from other known values
-        } while ((guess.row + size != FIELD_SQUARE_UNKNOWN && guess.row - size != FIELD_SQUARE_UNKNOWN) ||
-                (guess.col + size != FIELD_SQUARE_UNKNOWN && guess.col - size != FIELD_SQUARE_UNKNOWN));
+            //Keep making random guesses until we guess somewhere next to a known hit 
+            //This is because it got stuck if it started in the middle of a ship and hit went to one
+            //end, but not the other
 
-
-    } else if (FieldGetSquareStatus(opp_field, lsRow, lsCol) == FIELD_SQUARE_HIT) {
-        //If our last shot is a hit:
-        lhRow = lsRow;
-        lhCol = lsCol;
-        if (FieldGetSquareStatus(opp_field, lhRow + 1, lhCol) == FIELD_SQUARE_UNKNOWN) {
-            guess.row = lhRow + 1;
-            guess.col = lhCol;
-        } else if (FieldGetSquareStatus(opp_field, lhRow, lhCol + 1) == FIELD_SQUARE_UNKNOWN) {
-            guess.row = lhRow;
-            guess.col = lhCol + 1;
-        } else if (FieldGetSquareStatus(opp_field, lhRow - 1, lhCol) == FIELD_SQUARE_UNKNOWN) {
-            guess.row = lhRow - 1;
-            guess.col = lhCol;
-        } else if (FieldGetSquareStatus(opp_field, lhRow, lhCol - 1) == FIELD_SQUARE_UNKNOWN) {
-            guess.row = lhRow;
-            guess.col = lhCol - 1;
-        }
-    } else if (FieldGetSquareStatus(opp_field, lhRow, lhCol) == FIELD_SQUARE_HIT
-            && FieldGetSquareStatus(opp_field, lsRow, lsCol) != FIELD_SQUARE_HIT) { //We previously
-        //hit, but not with the most recent shot
-        if (FieldGetSquareStatus(opp_field, lhRow + 1, lhCol) == FIELD_SQUARE_UNKNOWN) {
-            guess.row = lhRow + 1;
-            guess.col = lhCol;
-        } else if (FieldGetSquareStatus(opp_field, lhRow, lhCol + 1) == FIELD_SQUARE_UNKNOWN) {
-            guess.row = lhRow;
-            guess.col = lhCol + 1;
-        } else if (FieldGetSquareStatus(opp_field, lhRow - 1, lhCol) == FIELD_SQUARE_UNKNOWN) {
-            guess.row = lhRow - 1;
-            guess.col = lhCol;
-        } else if (FieldGetSquareStatus(opp_field, lhRow, lhCol - 1) == FIELD_SQUARE_UNKNOWN) {
-            guess.row = lhRow;
-            guess.col = lhCol - 1;
-        }
+        } while (FieldGetSquareStatus(opp_field, guess.row, guess.col) != FIELD_SQUARE_UNKNOWN);
 
     }
     lsRow = guess.row;
