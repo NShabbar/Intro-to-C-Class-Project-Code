@@ -79,41 +79,36 @@ int main() {
     printf("\nTesting for FieldRegisterEnemyAttack.\n");
     GuessData guess_6 = {.row = 3, .col = 5, .result = RESULT_HIT};
     SquareStatus test_6 = FieldRegisterEnemyAttack(&own_field, &guess_6);
-    if(test_6 == FIELD_SQUARE_SMALL_BOAT && FieldGetSquareStatus(&own_field, 3, 5) == FIELD_SQUARE_HIT){
+    if (test_6 == FIELD_SQUARE_SMALL_BOAT && FieldGetSquareStatus(&own_field, 3, 5) == FIELD_SQUARE_HIT) {
         printf("Test 6 passed.\n");
-    }
-    else{
+    } else {
         printf("Test 6 failed.\n");
     }
     printf("\nTesting for FieldUpdateKnowledge.\n");
     GuessData guess_7 = {.row = 3, .col = 5, .result = RESULT_MISS};
     SquareStatus test_7 = FieldUpdateKnowledge(&opp_field, &guess_7);
-    if((test_7 = FIELD_SQUARE_UNKNOWN) && (FieldGetSquareStatus(&opp_field, 3, 5) == FIELD_SQUARE_MISS)){
+    if ((test_7 = FIELD_SQUARE_UNKNOWN) && (FieldGetSquareStatus(&opp_field, 3, 5) == FIELD_SQUARE_MISS)) {
         printf("Test 7 passed.\n");
-    }
-    else{
+    } else {
         printf("Test 7 failed.\n");
     }
     printf("\nTesting for FieldGetBoatStates.\n");
-    if (FieldGetBoatStates(&own_field) == 0x01){
+    if (FieldGetBoatStates(&own_field) == 0x01) {
         printf("Test 8 passed.\n");
-    }
-    else{
+    } else {
         printf("Test 8 failed.\n");
     }
     printf("\nTesting for FieldAIPlaceAllBoats.\n");
-    if (FieldAIPlaceAllBoats(&own_field) == SUCCESS){
+    if (FieldAIPlaceAllBoats(&own_field) == SUCCESS) {
         printf("Test 9 passed.\n");
-    }
-    else{
+    } else {
         printf("Test 9 failed.\n");
     }
     printf("\nTesting FieldAIDecideGuess.\n");
     GuessData guess_10 = FieldAIDecideGuess(&opp_field);
-    if((guess_10.col <FIELD_COLS && guess_10.col >=0) && (guess_10.row >= 0 &&guess_10.row < FIELD_ROWS)){
+    if ((guess_10.col < FIELD_COLS && guess_10.col >= 0) && (guess_10.row >= 0 && guess_10.row < FIELD_ROWS)) {
         printf("Test 10 passed.\n");
-    }
-    else{
+    } else {
         printf("Test to failed.\n");
     }
     return 0;

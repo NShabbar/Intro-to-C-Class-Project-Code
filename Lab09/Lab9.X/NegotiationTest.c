@@ -12,8 +12,8 @@ int main()
 {
     //Test NegotiationHash()
     {
-        uint8_t hashTests=0;
-        uint8_t totalHashTests=0;
+        uint8_t hashTests = 0;
+        uint8_t totalHashTests = 0;
         if (NegotiationHash(10) == 100) {
             hashTests++;
         } else {
@@ -36,42 +36,42 @@ int main()
     }
     //Test NegotiationVerify()
     {
-        uint8_t verifyTests=0;
-        uint8_t totalVerifyTests=0;
-        if(NegotiationVerify(12345,43182)){
+        uint8_t verifyTests = 0;
+        uint8_t totalVerifyTests = 0;
+        if (NegotiationVerify(12345, 43182)) {
             verifyTests++;
         }
         totalVerifyTests++;
-        if(NegotiationVerify(3,9)){
+        if (NegotiationVerify(3, 9)) {
             verifyTests++;
         }
         totalVerifyTests++;
-        if(!NegotiationVerify(10,101)){
+        if (!NegotiationVerify(10, 101)) {
             verifyTests++;
-        }else{
+        } else {
             printf("NegotiationVerify did not catch cheating!\n");
         }
         totalVerifyTests++;
-        if(!NegotiationVerify(12345,43181)){
+        if (!NegotiationVerify(12345, 43181)) {
             verifyTests++;
-        }else{
+        } else {
             printf("NegotiationVerify did not catch cheating!\n");
         }
         totalVerifyTests++;
-        printf("NegotiationVerify() passed:(%d/%d)\n",verifyTests,totalVerifyTests);
+        printf("NegotiationVerify() passed:(%d/%d)\n", verifyTests, totalVerifyTests);
     }
     //Tests NegotiateCoinFlip:
     {
-        uint8_t coinTests=0;
-        uint8_t totalCoinTests=0;
-        if(NegotiateCoinFlip(0b0110,0b1001)==TAILS){
+        uint8_t coinTests = 0;
+        uint8_t totalCoinTests = 0;
+        if (NegotiateCoinFlip(0b0110, 0b1001) == TAILS) {
             coinTests++;
         }
         totalCoinTests++;
-        if(NegotiateCoinFlip(0b1110,0b1111)==HEADS){
+        if (NegotiateCoinFlip(0b1110, 0b1111) == HEADS) {
             coinTests++;
         }
         totalCoinTests++;
-        printf("NegotiateCoinFlip() passed:(%d/%d)\n",coinTests,totalCoinTests);
+        printf("NegotiateCoinFlip() passed:(%d/%d)\n", coinTests, totalCoinTests);
     }
 }

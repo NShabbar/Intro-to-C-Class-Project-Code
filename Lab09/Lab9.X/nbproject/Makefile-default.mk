@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=Ascii.c BOARD.c CircularBuffer.c Uart1.c Message.c MessageTest.c
+SOURCEFILES_QUOTED_IF_SPACED=Ascii.c BOARD.c CircularBuffer.c Message.c MessageTest.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/Ascii.o ${OBJECTDIR}/BOARD.o ${OBJECTDIR}/CircularBuffer.o ${OBJECTDIR}/Uart1.o ${OBJECTDIR}/Message.o ${OBJECTDIR}/MessageTest.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/Ascii.o.d ${OBJECTDIR}/BOARD.o.d ${OBJECTDIR}/CircularBuffer.o.d ${OBJECTDIR}/Uart1.o.d ${OBJECTDIR}/Message.o.d ${OBJECTDIR}/MessageTest.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/Ascii.o ${OBJECTDIR}/BOARD.o ${OBJECTDIR}/CircularBuffer.o ${OBJECTDIR}/Message.o ${OBJECTDIR}/MessageTest.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/Ascii.o.d ${OBJECTDIR}/BOARD.o.d ${OBJECTDIR}/CircularBuffer.o.d ${OBJECTDIR}/Message.o.d ${OBJECTDIR}/MessageTest.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/Ascii.o ${OBJECTDIR}/BOARD.o ${OBJECTDIR}/CircularBuffer.o ${OBJECTDIR}/Uart1.o ${OBJECTDIR}/Message.o ${OBJECTDIR}/MessageTest.o
+OBJECTFILES=${OBJECTDIR}/Ascii.o ${OBJECTDIR}/BOARD.o ${OBJECTDIR}/CircularBuffer.o ${OBJECTDIR}/Message.o ${OBJECTDIR}/MessageTest.o
 
 # Source Files
-SOURCEFILES=Ascii.c BOARD.c CircularBuffer.c Uart1.c Message.c MessageTest.c
+SOURCEFILES=Ascii.c BOARD.c CircularBuffer.c Message.c MessageTest.c
 
 
 
@@ -125,12 +125,6 @@ ${OBJECTDIR}/CircularBuffer.o: CircularBuffer.c  .generated_files/flags/default/
 	@${RM} ${OBJECTDIR}/CircularBuffer.o 
 	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/CircularBuffer.o.d" -o ${OBJECTDIR}/CircularBuffer.o CircularBuffer.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
 	
-${OBJECTDIR}/Uart1.o: Uart1.c  .generated_files/flags/default/728fb1a9236b6ab35e9fde8c1aab8036ed0c9b2 .generated_files/flags/default/af031a62ccc0c18b099f063c5edfd8e7f9b606f2
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/Uart1.o.d 
-	@${RM} ${OBJECTDIR}/Uart1.o 
-	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/Uart1.o.d" -o ${OBJECTDIR}/Uart1.o Uart1.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
-	
 ${OBJECTDIR}/Message.o: Message.c  .generated_files/flags/default/d1c19de05b0d27b7e6f5d9789aa797a4066c3681 .generated_files/flags/default/af031a62ccc0c18b099f063c5edfd8e7f9b606f2
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/Message.o.d 
@@ -161,12 +155,6 @@ ${OBJECTDIR}/CircularBuffer.o: CircularBuffer.c  .generated_files/flags/default/
 	@${RM} ${OBJECTDIR}/CircularBuffer.o.d 
 	@${RM} ${OBJECTDIR}/CircularBuffer.o 
 	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/CircularBuffer.o.d" -o ${OBJECTDIR}/CircularBuffer.o CircularBuffer.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
-	
-${OBJECTDIR}/Uart1.o: Uart1.c  .generated_files/flags/default/2e9a2d81b13d85c0f0695447af07fa75877c6c0b .generated_files/flags/default/af031a62ccc0c18b099f063c5edfd8e7f9b606f2
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/Uart1.o.d 
-	@${RM} ${OBJECTDIR}/Uart1.o 
-	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/Uart1.o.d" -o ${OBJECTDIR}/Uart1.o Uart1.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
 	
 ${OBJECTDIR}/Message.o: Message.c  .generated_files/flags/default/4a8ca4333b0ddcfd34c89d31784b8ff8c96dc86f .generated_files/flags/default/af031a62ccc0c18b099f063c5edfd8e7f9b606f2
 	@${MKDIR} "${OBJECTDIR}" 

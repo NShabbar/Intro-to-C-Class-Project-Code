@@ -38,10 +38,15 @@ NegotiationOutcome NegotiateCoinFlip(NegotiationData A, NegotiationData B) {
     }
 }
 
-NegotiationData NegotiateGenerateAGivenB(NegotiationData B){
-    int cheat_code = NegotiationOutcome NegotiateCoinFlip(NegotiationData A, NegotiationData B);
-    if (cheat_code == A){
-        cheat_code = B
+NegotiationData NegotiateGenerateAGivenB(NegotiationData B) {
+    int count = 1;
+    int cheat_code = 0;
+    while (1) {
+        count++;
+        cheat_code = NegotiationHash(count);
+        if (NegotiateCoinFlip(count, B) == HEADS && cheat_code == result) {
+            break;
+        }
     }
-    return cheat_code;
+    return count;
 }

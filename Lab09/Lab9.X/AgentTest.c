@@ -13,53 +13,61 @@
 #include "FieldOled.h"
 #include "Negotiation.h"
 #include "Oled.h"
+#include "OledDriver.h"
+#include "Uart1.h"
+#include "Buttons.h"
+#include "CircularBuffer.h"
+#include "Ascii.h"
 
 int main() {
     AgentInit();
-
+    BB_Event input;
+    input.type = BB_EVENT_START_BUTTON;
     printf("Testing the AgentRun Function.\n");
-    test_1 = AgentRun(BB_EVENT_START_BUTTON);
-    if (test_1 != MESSAGE_CHA) {
+    Message test_1 = AgentRun(input);
+    if (test_1.type != MESSAGE_CHA) {
         printf("Test 1 failed.\n");
     } else {
         printf("Test 1 passed.\n");
     }
-    test_2 = AgentRun(BB_EVENT_CHA_RECEIVED);
-    if (test_2 != MESSAGE_ACC) {
+    input.type = BB_EVENT_CHA_RECEIVED;
+    Message test_2 = AgentRun(input);
+    if (test_2.type != MESSAGE_ACC) {
         printf("Test 2 failed.\n");
-    } else if (test_2 != MESSAGE_NONE) {
+    } else if (test_2.type != MESSAGE_NONE) {
         printf("Test 2 failed.\n");
     } else {
         printf("Test 2 passed.\n");
     }
-    test_3 = AgentRun(BB_EVENT_ACC_RECEIVED);
-    if (test_3 != MESSAGE_REV) {
+    input.type = BB_EVENT_ACC_RECEIVED;
+    Message test_3 = AgentRun(input);
+    if (test_3.type != MESSAGE_REV) {
         printf("Test 3 failed.\n");
     } else {
         printf("Test 3 passed.\n");
     }
-    test_4 = AgentRun(BB_EVENT_REV_RECEIVED);
-    if (test_4 != MESSAGE_NONE) {
-        prinft("Test 4 failed.\n");
-    } else if (test_4 != MESSAGE_SHO) {
+    input.type = BB_EVENT_REV_RECEIVED;
+    Message test_4 = AgentRun(input);
+    if (test_4.type != MESSAGE_NONE) {
+        printf("Test 4 failed.\n");
+    } else if (test_4.type != MESSAGE_SHO) {
         printf("Test 4 failed.\n");
     } else {
         printf("Test 4 passed.\n");
     }
-    test_5 = AgentRun(BB_EVENT_RES_RECEIVED);
-    if (test_5 != MESSAGE_NONE) {
+    input.type = BB_EVENT_RES_RECEIVED;
+    Message test_5 = AgentRun(input);
+    if (test_5.type != MESSAGE_NONE) {
         printf("Test 5 failed.\n");
     } else {
         printf("Test 5 passed.\n");
     }
-    test_6 = AgentRun(BB_EVENT_SHO_RECEIVED);
-    if (test_6 != MESSAGE_RES) {
+    input.type = BB_EVENT_SHO_RECEIVED;
+    Message test_6 = AgentRun(input);
+    if (test_6.type != MESSAGE_RES) {
         printf("Test 6 failed.\n");
     } else {
         printf("Test 6 passed.\n");
     }
-
-
-    return (EXIT_SUCCESS);
 }
 

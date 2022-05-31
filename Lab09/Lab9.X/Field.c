@@ -342,7 +342,7 @@ GuessData FieldAIDecideGuess(const Field *opp_field)
 
         }
         counter++;
-        if (counter >=10) {//Sometimes gets stuck in a loop. this should fix it.
+        if (counter >= 10) {//Sometimes gets stuck in a loop. this should fix it.
             break;
         }
     } while (FieldGetSquareStatus(opp_field, guess.row, guess.col) != FIELD_SQUARE_UNKNOWN);

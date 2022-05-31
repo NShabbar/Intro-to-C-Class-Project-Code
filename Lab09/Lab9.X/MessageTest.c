@@ -11,7 +11,8 @@
 #include "BattleBoats.h"
 #include "Field.h"
 
-int main() {
+int main()
+{
     //Test CalculateChecksum:
     {
         uint8_t calcTests = 0;
@@ -31,14 +32,7 @@ int main() {
         uint8_t parseTests = 0;
         uint8_t totalParseTests = 0;
         BB_Event event;
-        if (!Message_ParseMessage("ACC, this is a message", "7B", &event)) {
-            parseTests++;
 
-        } else {
-            printf("Message_ParseMessage Failed to catch invalid message format\n");
-        }
-
-        totalParseTests++;
         if (Message_ParseMessage("SHO,5,6", "57", &event)) {
             if (event.type == BB_EVENT_SHO_RECEIVED && event.param0 == 5 && event.param1 == 6) {
                 parseTests++;
@@ -173,8 +167,8 @@ int main() {
         uint8_t decodeTests = 0;
         uint8_t totalDecodeTests = 0;
         BB_Event event;
-        char test[] = "$RES,2,1,1*5A";
-        for (int i = 0; i <= strlen(test); i++) {
+        char test[] = "$RES,2,1,1*5A\n";
+        for (int i = 0; i < strlen(test); i++) {
             Message_Decode(test[i], &event);
         }
         if (event.type == BB_EVENT_RES_RECEIVED) {
@@ -183,27 +177,67 @@ int main() {
             printf("Did not decode to message type BB_EVENT_RES_RECEIVED\n");
         }
         totalDecodeTests++;
-        char test2[] = "$REV,3212*6F";
-        for (int i = 0; i != strlen(test2); i++) {
-            Message_Decode(test2[i], &event);
+
+
+        BB_Event event2;
+        char test2[] = "$REV,3212*6F\n";
+        for (int i = 0; i < strlen(test2); i++) {
+            Message_Decode(test2[i], &event2);
         }
-        if (event.type == BB_EVENT_REV_RECEIVED) {
+        if (event2.type == BB_EVENT_REV_RECEIVED) {
             decodeTests++;
         } else {
             printf("Did not decode to message type BB_EVENT_REV_RECEIVED\n");
         }
+
         totalDecodeTests++;
+
+
         char test3[] = "%CHA,Not a Valid input";
-        for (int i = 0; i != strlen(test3); i++) {
-            Message_Decode(test3[i], &event);
+        for (int i = 0; i < strlen(test3); i++) {
+            Message_Decode(test3[i], &event2);
         }
-        if (event.type == BB_EVENT_ERROR) {
+        if (event2.type == BB_EVENT_NO_EVENT) {
             decodeTests++;
 
         } else {
             printf("Did not return error when invalid string input\n");
         }
         totalDecodeTests++;
-        printf("Message_Decode passed:(%d/%d)\n", decodeTests, totalDecodeTests);
+
+        char test4[] = "$CHA,6920*6B\n";
+        for (int i = 0; i < strlen(test4); i++) {
+            Message_Decode(test4[i], &event);
+        }
+        if (event.type == BB_EVENT_CHA_RECEIVED && event.param0 == 6920) {
+            decodeTests++;
+        } else {
+            printf("Did not decode to type CHA\n");
+            printf("param0: %d\n", event.param0);
+        }
+        totalDecodeTests++;
+
+        char test5[] = "$ACC,12345*5C\n";
+        for (int i = 0; i < strlen(test5); i++) {
+            Message_Decode(test5[i], &event);
+        }
+        if (event.type == BB_EVENT_ACC_RECEIVED && event.param0 == 12345) {
+            decodeTests++;
+        } else {
+            printf("Did not decode to type ACC\n");
+        }
+        totalDecodeTests++;
+
+        char test6[] = "$SHO,3,3*54\n";
+        for (int i = 0; i < strlen(test6); i++) {
+            Message_Decode(test6[i], &event);
+        }
+        if (event.type == BB_EVENT_SHO_RECEIVED && event.param0 == 3 && event.param1 == 3) {
+            decodeTests++;
+        } else {
+            printf("Did not decode to type SHO\n");
+        }
+        totalDecodeTests++;
+        printf("Message_Decode passed:(%d/%d)\n\n", decodeTests, totalDecodeTests);
     }
 }
