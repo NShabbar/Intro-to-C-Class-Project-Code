@@ -30,6 +30,7 @@ static Message message;
 static Field myField;
 static Field oppField;
 static NegotiationData B;
+static uint8_t cheatingFlag;
 
 void AgentInit(void)
 {
@@ -38,6 +39,7 @@ void AgentInit(void)
     A = 0;
     Asharp = 0;
     message.type = MESSAGE_NONE;
+    cheatingFlag = FALSE;
 
 }
 
@@ -72,6 +74,21 @@ Message AgentRun(BB_Event event)
                 OledDrawString(disp);
                 OledUpdate();
                 return message;
+            } else if (event.type == BB_EVENT_EAST_BUTTON) {
+                cheatingFlag = TRUE;
+                A = rand() & SIXTEEN_BITS; //Get a 16 bit number for A, going to be replaced later
+                Asharp = NegotiationHash(A);
+                message.type = MESSAGE_CHA;
+                message.param0 = Asharp;
+                FieldInit(&myField, &oppField);
+                FieldAIPlaceAllBoats(&myField);
+                agentState = AGENT_STATE_CHALLENGING;
+                bufferClear = FALSE;
+                sprintf(disp, "Cheating\n\?\?\?=A\n%d=hash_A", Asharp);
+                OledClear(OLED_COLOR_BLACK);
+                OledDrawString(disp);
+                OledUpdate();
+
             } else if (event.type == BB_EVENT_CHA_RECEIVED) {
 
                 B = rand() & SIXTEEN_BITS;
@@ -91,10 +108,15 @@ Message AgentRun(BB_Event event)
             break;
         case AGENT_STATE_CHALLENGING:
             if (event.type == BB_EVENT_ACC_RECEIVED) {
+                B = event.param0;
+                if(cheatingFlag==TRUE){
+                    A=NegotiateGenerateAGivenB(B);
+                    cheatingFlag=FALSE;
+                }
                 message.type = MESSAGE_REV;
                 message.param0 = A;
-                B = event.param0;
-                NegotiationOutcome outcome = NegotiateCoinFlip(Asharp, B);
+                
+                NegotiationOutcome outcome = NegotiateCoinFlip(A, B);
                 if (outcome == HEADS) {
                     FieldOledDrawScreen(&myField, &oppField, FIELD_OLED_TURN_MINE, turnCounter);
                     agentState = AGENT_STATE_WAITING_TO_SEND;
