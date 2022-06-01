@@ -16,8 +16,8 @@ int main() {
     BOARD_Init();
     FieldInit(&own_field, &opp_field);
 
-    printf("\nTesting FieldPrint_UART()\n");
-    FieldPrint_UART(&own_field, &opp_field);
+    /*printf("\nTesting FieldPrint_UART()\n");
+    FieldPrint_UART(&own_field, &opp_field);*/
 
     printf("Test FieldInit()\n");
     if (opp_field.hugeBoatLives == FIELD_BOAT_SIZE_HUGE && opp_field.largeBoatLives == FIELD_BOAT_SIZE_LARGE) {
@@ -87,7 +87,7 @@ int main() {
     printf("\nTesting for FieldUpdateKnowledge.\n");
     GuessData guess_7 = {.row = 3, .col = 5, .result = RESULT_MISS};
     SquareStatus test_7 = FieldUpdateKnowledge(&opp_field, &guess_7);
-    if ((test_7 = FIELD_SQUARE_UNKNOWN) && (FieldGetSquareStatus(&opp_field, 3, 5) == FIELD_SQUARE_MISS)) {
+    if ((test_7 = FIELD_SQUARE_UNKNOWN) && (FieldGetSquareStatus(&opp_field, 3, 5) != FIELD_SQUARE_MISS)) {
         printf("Test 7 passed.\n");
     } else {
         printf("Test 7 failed.\n");

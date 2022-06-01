@@ -263,7 +263,7 @@
         <property key="stack-smashing" value=""/>
         <property key="wpo-lto" value="false"/>
       </C32Global>
-      <item path="Field.c" ex="true" overriding="false">
+      <item path="Field.c" ex="false" overriding="false">
         <C32>
         </C32>
         <C32-AR>
@@ -279,7 +279,7 @@
         <C32Global>
         </C32Global>
       </item>
-      <item path="FieldOled.c" ex="true" overriding="false">
+      <item path="FieldOled.c" ex="false" overriding="false">
         <C32>
         </C32>
         <C32-AR>
@@ -295,7 +295,7 @@
         <C32Global>
         </C32Global>
       </item>
-      <item path="FieldTest.c" ex="true" overriding="false">
+      <item path="FieldTest.c" ex="false" overriding="false">
         <C32>
         </C32>
         <C32-AR>
@@ -327,7 +327,7 @@
         <C32Global>
         </C32Global>
       </item>
-      <item path="Message.c" ex="false" overriding="false">
+      <item path="Message.c" ex="true" overriding="false">
         <C32>
         </C32>
         <C32-AR>
@@ -343,7 +343,7 @@
         <C32Global>
         </C32Global>
       </item>
-      <item path="MessageTest.c" ex="false" overriding="false">
+      <item path="MessageTest.c" ex="true" overriding="false">
         <C32>
         </C32>
         <C32-AR>
@@ -391,7 +391,7 @@
         <C32Global>
         </C32Global>
       </item>
-      <item path="Oled.c" ex="true" overriding="false">
+      <item path="Oled.c" ex="false" overriding="false">
         <C32>
         </C32>
         <C32-AR>
@@ -407,7 +407,7 @@
         <C32Global>
         </C32Global>
       </item>
-      <item path="OledDriver.c" ex="true" overriding="false">
+      <item path="OledDriver.c" ex="false" overriding="false">
         <C32>
         </C32>
         <C32-AR>
@@ -437,7 +437,7 @@
         <property key="oscillator.rcfrequency" value="250"/>
         <property key="oscillator.rcfrequencyunit" value="Kilo"/>
         <property key="periphADC1.altscl" value="false"/>
-        <property key="periphADC1.minTacq" value=""/>
+        <property key="periphADC1.minTacq" value="132"/>
         <property key="periphADC1.tacqunits" value="microseconds"/>
         <property key="periphADC2.altscl" value="false"/>
         <property key="periphADC2.minTacq" value=""/>
@@ -1367,7 +1367,7 @@
                   value=""/>
         <property key="warningmessagebreakoptions.warningmessages" value="holdstate"/>
       </Tool>
-      <item path="Uart1.c" ex="true" overriding="false">
+      <item path="Uart1.c" ex="false" overriding="false">
         <C32>
         </C32>
         <C32-AR>
