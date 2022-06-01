@@ -16,41 +16,39 @@ enum {
     RIGHT,
 };
 
-void FieldPrint_UART(Field *own_field, Field * opp_field)
-{
-    printf("Own Field:\n");
-    for (int i = 0; i < FIELD_ROWS; i++) {
-        for (int ii = 0; ii < FIELD_COLS; ii++) {
-            printf("%d ", own_field->grid[i][ii]);
+void FieldPrint_UART(Field *own_field, Field * opp_field){
+    printf("\nOwn Field\n");
+    for (int i = 0; i < FIELD_ROWS; i++){
+        for (int j = 0; j < FIELD_COLS; j++) {
+            printf("%d", own_field->grid[i][j]);
         }
         printf("\n");
     }
-    printf("\nOpponent's Field:\n");
-    for (int i = 0; i < FIELD_ROWS; i++) {
-        for (int ii = 0; ii < FIELD_COLS; ii++) {
-            printf("%d ", opp_field->grid[i][ii]);
+    printf("\nOpponent Field\n");
+    for (int m = 0; m < FIELD_ROWS; m++){
+        for (int n = 0; n < FIELD_COLS; n++) {
+            printf("%d", opp_field->grid[m][n]);
         }
         printf("\n");
     }
 }
 
-void FieldInit(Field *own_field, Field * opp_field)
-{
-    for (int i = 0; i <= FIELD_COLS; i++) {
-        for (int ii = 0; ii <= FIELD_ROWS; ii++) {
-            own_field->grid[ii][i] = FIELD_SQUARE_EMPTY;
+void FieldInit(Field *own_field, Field * opp_field) {
+    for (int i = 0; i < FIELD_ROWS; i++) {
+        for (int j = 0; j < FIELD_COLS; j++) {
+            own_field->grid[i][j] = FIELD_SQUARE_EMPTY;
         }
     }
-    for (int i = 0; i <= FIELD_COLS; i++) {
-        for (int ii = 0; ii <= FIELD_ROWS; ii++) {
-            opp_field->grid[ii][i] = FIELD_SQUARE_UNKNOWN;
+
+    for (int m = 0; m < FIELD_ROWS; m++) {
+        for (int n = 0; n < FIELD_COLS; n++) {
+            opp_field->grid[m][n] = FIELD_SQUARE_UNKNOWN;
         }
     }
-    opp_field->smallBoatLives = FIELD_BOAT_SIZE_SMALL;
-    opp_field->mediumBoatLives = FIELD_BOAT_SIZE_MEDIUM;
-    opp_field->largeBoatLives = FIELD_BOAT_SIZE_LARGE;
     opp_field->hugeBoatLives = FIELD_BOAT_SIZE_HUGE;
-    return;
+    opp_field->largeBoatLives = FIELD_BOAT_SIZE_LARGE;
+    opp_field->mediumBoatLives = FIELD_BOAT_SIZE_MEDIUM;
+    opp_field->smallBoatLives = FIELD_BOAT_SIZE_SMALL;
 }
 
 SquareStatus FieldGetSquareStatus(const Field *f, uint8_t row, uint8_t col)
